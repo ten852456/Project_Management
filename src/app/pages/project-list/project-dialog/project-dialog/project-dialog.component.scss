@@ -1,0 +1,23 @@
+.close {
+    background-color: #2B92F9;
+    color: aliceblue;
+    margin-left: 675px;
+    font-size: 18px;
+    position: absolute;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    .mat-form-field {
+        width: 715px;
+        padding-bottom: 3px;
+    }
+}
+
+.create {
+    background-color: #2B92F9;
+    color: aliceblue;
+    margin-left: 642px;
+}

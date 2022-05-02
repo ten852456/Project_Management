@@ -1,0 +1,24 @@
+<div>
+    <button mat-mini-fab mat-dialog-close class="close"> x </button>
+    <h1 mat-dialog-title style="padding-bottom: 10px;">Create New Project</h1>
+</div>
+
+<form class="example-form">
+    <mat-form-field appearance="outline">
+        <mat-label>Project title</mat-label>
+        <input matInput placeholder="Add project name here..." value="New Project">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Add project description here...">
+        <mat-hint>please fill project description</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Git repository</mat-label>
+        <input matInput placeholder="Add project git repository url here...">
+    </mat-form-field>
+</form>
+
+<button mat-raised-button class="create"> Create </button>

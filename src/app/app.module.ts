@@ -10,13 +10,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule} from '@angular/material/list'
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from "@angular/material/dialog";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +31,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
