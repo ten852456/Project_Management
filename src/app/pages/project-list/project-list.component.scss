@@ -3,3 +3,35 @@
     margin-left: 93%;
     margin-top: 15px;
 }
+table {
+    width: 100%;
+    text-align: center !important;
+}
+
+.mat-sort-header-container {
+    justify-content: center;
+}
+
+.mat-header-cell {
+    text-align: center !important;
+}
+
+.mat-menu-costom1,
+.mat-menu-costom2 {
+    width: 2px;
+}
+
+.table-project {
+    padding: 40px;
+    padding-top: 0px;
+}
+
+.google-drive-icon {
+    width: 30px;
+    cursor: pointer;
+}
+
+.selected-menu {
+    font-size: 15px;
+    padding-left: 40px;
+}
