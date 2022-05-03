@@ -1,4 +1,4 @@
-<button mat-fab class="add" (click)="openDialog()" >
+<button mat-fab class="add" (click)="openDialog()">
     <p style="font-size: 22px;"> + </p>
 </button><br>
 
@@ -8,8 +8,18 @@
         <mat-option value="completed">Completed</mat-option>
     </mat-select>
 </mat-form-field>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> search </mat-label>
+        <input matInput>
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</form>
+
 <br><br>
-<div class="table-project">
+
+<div class="table-project" *ngIf="selected == 'inprocess'">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Position Column -->
         <ng-container matColumnDef="Name">
