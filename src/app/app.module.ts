@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,8 +17,9 @@ import { ProjectListComponent } from './pages/project-list/project-list.componen
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
+import { LoginComponent } from './pages/login/login.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +30,8 @@ import { TokenInterceptorService } from './services/authentication/token-interce
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     {
