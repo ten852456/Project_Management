@@ -47,7 +47,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ProjectListComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
-  
+
   displayedColumns: string[] = ['Name', 'Members', 'Due Date', 'symbol'];
   dataSource = ELEMENT_DATA;
 
@@ -59,5 +59,6 @@ export class ProjectListComponent implements OnInit {
   openDialog() {
     this.dialog.open(ProjectDialogComponent, {width: '50%'});
   }
+
 
 }
