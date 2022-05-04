@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   message = '';
+  params = new HttpParams().set('__template', 'card.dialog');
 
   constructor(
   private http: HttpClient,
@@ -15,10 +16,11 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8000/api/user')
+    this.http.get('http://localhost:8080/api/card/1',{ params: this.params })
     .subscribe({
       next: (res: any) => {
-        this.message = `Hi ${res.progile}`;
+        let data = res.data;
+        this.message = `Hi ${data.title}`;
       },
       error: () => {
         this.router.navigate(['/login']);
