@@ -11,5 +11,5 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }
