@@ -6,31 +6,35 @@
     ProjectManagement
   </mat-toolbar-row>
 </mat-toolbar>
-  
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened="true">
-      <mat-nav-list>
-        <button mat-button class="menu-button" style="float: left;" [routerLink]="['/home']">
-          <mat-icon>person</mat-icon>
-          &nbsp;Personal Board</button>
 
-        <button mat-button class="menu-button"style="float: left;"[routerLink]="['/time']">
-          <mat-icon>alarm_add</mat-icon>
-          &nbsp;Spent Time</button>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <button mat-button class="menu-button" style="float: left;" [routerLink]="['/home']" class="current">
+        <mat-icon>person</mat-icon>
+        &nbsp;Personal Board
+      </button>
 
-        <button mat-button class="menu-button"style="float: left;"[routerLink]="['/list']">
-          <mat-icon>list</mat-icon>
-          &nbsp;Project List</button>
+      <button mat-button class="menu-button" style="float: left;" [routerLink]="['/time']">
+        <mat-icon>alarm_add</mat-icon>
+        &nbsp;Spent Time
+      </button>
 
-        <button mat-button class="menu-button"style="float: left;"[routerLink]="['/help']">
-          <mat-icon>file_copy</mat-icon>
-          &nbsp;Projects</button>
+      <button mat-button class="menu-button" style="float: left;" [routerLink]="['/list']">
+        <mat-icon>list</mat-icon>
+        &nbsp;Project List
+      </button>
 
-      </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content>
-          <div class="content mat-elevation-z8">
-            <router-outlet></router-outlet>
-          </div>
-      </mat-sidenav-content>
-  </mat-sidenav-container>
+      <button mat-button class="menu-button" style="float: left;" [routerLink]="['/help']">
+        <mat-icon>file_copy</mat-icon>
+        &nbsp;Projects
+      </button>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
