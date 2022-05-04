@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 export interface PeriodicElement {
   name: string;
-  position: number;
+  position: string;
   weight: number;
   symbol: string;
   symbolic: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'k', weight: 1.0079, symbol: 'H', symbolic: 'W' },
+  { position: 'testcard1', name: 'k', weight: 1.0079, symbol: 'H', symbolic: 'W' },
 
 ];
 
