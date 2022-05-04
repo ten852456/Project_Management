@@ -1,6 +1,6 @@
 <div>
     <button mat-mini-fab mat-dialog-close class="close"> x </button>
-    <h1 mat-dialog-title style="padding: 5px; padding-bottom: 5px;">Create New Project</h1>
+    <h1 mat-dialog-title style="padding: 5px; padding-bottom: 5px;">Create New Project</h1><br>
 </div>
 
 <form class="example-form">
@@ -8,10 +8,10 @@
         <mat-label>Project title</mat-label>
         <input matInput placeholder="Add project name here..." value="New Project">
     </mat-form-field>
-  
-    <mat-form-field appearance="outline">
+   
+    <mat-form-field appearance="outline" style="padding-bottom: 10px;">
         <mat-label>Description</mat-label>
-        <input matInput placeholder="Add project description here...">
+        <textarea matInput placeholder="Add project description here..."></textarea>
         <mat-hint>please fill project description</mat-hint>
     </mat-form-field>
 
