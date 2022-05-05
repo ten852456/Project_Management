@@ -6,6 +6,7 @@ import { ProjectListComponent } from './pages/project-list/project-list.componen
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { LoginComponent } from './pages/login/login.component';
 
+
 const routes: Routes = [
   {
     path: '',
