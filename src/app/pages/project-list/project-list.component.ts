@@ -75,11 +75,11 @@ export class ProjectListComponent implements OnInit {
   }
 
 
-  addProject() {
-    this.http.post('http://localhost:8080/api/task', this.form.getRawValue(), {withCredentials: true})
-      .subscribe((res: any) => {
-        this.message = JSON.stringify(res);
-      });
-  }
+  // addProject() {
+  //   this.http.post('http://localhost:8080/api/task', this.form.getRawValue(), {withCredentials: true})
+  //     .subscribe((res: any) => {
+  //       this.message = JSON.stringify(res);
+  //     });
+  // }
   
 }
