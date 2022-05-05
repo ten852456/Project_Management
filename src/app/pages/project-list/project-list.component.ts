@@ -38,6 +38,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
 
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-project-list',
@@ -45,8 +47,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
+  message = '';
+  form!: FormGroup;
 
-  constructor(public dialog: MatDialog) { }
+  constructor( private formBuilder: FormBuilder,
+    private http: HttpClient,
+    public dialog: MatDialog) { }
 
   displayedColumns: string[] = ['Name', 'Members', 'Due Date', 'symbol'];
   dataSource = ELEMENT_DATA;
@@ -54,6 +60,14 @@ export class ProjectListComponent implements OnInit {
   selected = 'inprocess';
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      startDate: '',
+      title: '',
+      finishDate: '',
+      sprint: {id : '1'},
+      estimatedDays: '',
+      description:''
+    });
   }
 
   openDialog() {
@@ -61,4 +75,11 @@ export class ProjectListComponent implements OnInit {
   }
 
 
+  addProject() {
+    this.http.post('http://localhost:8080/api/task', this.form.getRawValue(), {withCredentials: true})
+      .subscribe((res: any) => {
+        this.message = JSON.stringify(res);
+      });
+  }
+  
 }

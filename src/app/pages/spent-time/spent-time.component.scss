@@ -1,8 +1,12 @@
 table {
     width: 100%;
-
 }
 
+.table-spent-time {
+    th, td {
+        text-align: center;
+    }
+}
 
 .mat-button-toggle-group {
     float: right;
