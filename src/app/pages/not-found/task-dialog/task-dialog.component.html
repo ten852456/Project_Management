@@ -1,0 +1,40 @@
+<button mat-mini-fab mat-dialog-close class="close"> x </button>
+
+<div>
+    <main class="form-signin">
+        <form class="example-form" [formGroup]="form" (submit)="addTask()">
+            <h1 class="h3 mb-3 fw-normal">Create New Task</h1>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Task title</mat-label>
+                <input formControlName="title" type="text" class="form-control" matInput placeholder="Task title">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" formControlName="startDate" class="form-control">
+                    <input matEndDate placeholder="End date" formControlName="finishDate" class="form-control">
+                </mat-date-range-input>
+                <mat-hint></mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Estimated days</mat-label>
+                <input formControlName="estimatedDays" type="text" class="form-control" matInput
+                    placeholder="Estimated days">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" type="text" class="form-control" matInput
+                    placeholder="Description"></textarea>
+            </mat-form-field><br>
+
+            <button mat-raised-button class="create" type="submit"> Create </button>
+        </form>
+    </main>
+</div>
+<h3>{{message}}</h3>
