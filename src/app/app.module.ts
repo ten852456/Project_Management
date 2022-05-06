@@ -21,6 +21,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
@@ -57,6 +58,7 @@ import { TokenInterceptorService } from './services/authentication/token-interce
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSortModule,
   ],
   providers: [
     {

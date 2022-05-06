@@ -1,48 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDialogComponent } from './project-dialog/project-dialog/project-dialog.component';
 import { ApiServiceService } from 'src/app/api-service.service';
 
+
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss']
+  styleUrls: ['./project-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProjectListComponent implements OnInit {
 
-  projectsIncompleted:any;
 
-  projectsCompleted:any;
+
+  projects:any;
+  displayedColumns: string[] = ['title', 'completed', 'dueDate', 'Drive'];
+  selected = '?completed=false';
+
+
 
   constructor(
     private api: ApiServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
     ) { }
 
-  displayedColumns: string[] = ['Name', 'Members', 'Due Date', 'symbol'];
-
-  selected = 'inprocess';
-
-  incompleted= '?completed=false';
-  completed= '?completed=true';
-
   ngOnInit(): void {
-
-    this.getProjectsIncompleted();
-
-    this.getProjectsCompleted();
+    this.getProjects();
   }
+
 
   openDialog() {
     this.dialog.open(ProjectDialogComponent, {width: '50%'});
   }
 
-  getProjectsIncompleted(){
-    this.api.getProject(this.incompleted).subscribe((res: any) => { this.projectsIncompleted = res});
+
+  getProjects():any{
+    this.api.getProject(this.selected).subscribe((res:any) =>{this.projects = res.data});
   }
 
-  getProjectsCompleted(){
-    this.api.getProject(this.completed).subscribe((res: any) => { this.projectsCompleted = res});
-  }
 
 }
+
+
+
