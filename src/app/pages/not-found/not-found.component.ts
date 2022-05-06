@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiServiceService } from 'src/app/api-service.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
@@ -8,29 +8,13 @@ import { ApiServiceService } from 'src/app/api-service.service';
 })
 export class NotFoundComponent implements OnInit {
 
-  tasks: any[] = [];
-
-  display:boolean = false;
-
-  displayBasic: boolean = false;
-
-  showBasicDialog() {
-    this.displayBasic = true;
-  }
-
-  hideBasicDialog() {
-    this.displayBasic = false;
-  }
-
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // this.getTasks();
   }
 
-  // getTasks(): void {
-  //   this.apiService.getTasks()
-  //   .subscribe(tasks => this.tasks = tasks)
-  // }
-
+  openDialog() {
+    this.dialog.open(TaskDialogComponent, {width: '50%'});
+  }
 }
