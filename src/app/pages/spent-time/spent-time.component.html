@@ -1,23 +1,18 @@
 <div class="group">
-    <mat-form-field appearance="outline" class="example-form-field">
+    <mat-form-field appearance="fill" style="position: absolute;">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="datepicker">
-
+        <input matInput [matDatepicker]="datepicker" [value]="selectedValue">
         <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-        <mat-datepicker #datepicker>
-            <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-            </mat-datepicker-actions>
-        </mat-datepicker>
+        <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
 
-
-    <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle value="bold" (click)="showDTable()">Daily</mat-button-toggle>
-        <mat-button-toggle value="italic" (click)="showWTable()">Weekly</mat-button-toggle>
-        <mat-button-toggle value="underline" (click)="showPTable()">Project</mat-button-toggle>
-    </mat-button-toggle-group>
+    <div class="datepicker-footer" #datepickerFooter>
+        <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="bold" (click)="showDTable()">Daily</mat-button-toggle>
+            <mat-button-toggle value="italic" (click)="showWTable()">Weekly</mat-button-toggle>
+            <mat-button-toggle value="underline" (click)="showPTable()">Project</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
 
     <div class="table-spent-time">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

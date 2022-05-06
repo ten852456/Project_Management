@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { MatDatepicker } from "@angular/material/datepicker";
 export interface PeriodicElement {
   name: string;
   specs: number;
@@ -18,17 +19,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './spent-time.component.html',
   styleUrls: ['./spent-time.component.scss']
 })
-export class SpentTimeComponent {
+export class SpentTimeComponent implements OnInit {
+
+  @ViewChild('datepickerFooter', { static: false })
+  datepickerFooter!: ElementRef;
+  @ViewChild('datepicker', { static: false })
+  datepicker!: MatDatepicker<any>;
 
   displayedColumns: string[] = ['name', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
   dataSource = ELEMENT_DATA;
+
   constructor() { }
+
+  selectedValue : Date | null = null;
 
   ngOnInit(): void {
   }
 
   showDTable(): void {
     console.log("RuN");
+    this.selectedValue = new Date();
+    this.datepicker.close();
   }
   showPTable(): void {
     console.log("project");
