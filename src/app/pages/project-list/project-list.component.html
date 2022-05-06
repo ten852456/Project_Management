@@ -20,7 +20,7 @@
 <br><br>
 
 <div class="table-project">
-    <table mat-table [dataSource]="projects | filter:searchText " class="mat-elevation-z8">
+    <table mat-table [dataSource]="sortByDueDate | filter:searchText " class="mat-elevation-z8">
         <!-- Position Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Name </th>

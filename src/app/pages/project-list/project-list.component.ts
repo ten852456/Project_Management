@@ -42,6 +42,11 @@ export class ProjectListComponent implements OnInit {
   }
 
 
+  get sortByDueDate() {
+    return this.projects.sort((a: any, b: any) => {
+      return <any>new Date(a.dueDate) - <any>new Date(b.dueDate);
+    });
+  }
 }
 
 
