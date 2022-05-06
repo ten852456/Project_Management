@@ -12,7 +12,7 @@
 <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> search </mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </form>
@@ -20,7 +20,7 @@
 <br><br>
 
 <div class="table-project">
-    <table mat-table [dataSource]="projects" class="mat-elevation-z8">
+    <table mat-table [dataSource]="projects | filter:searchText " class="mat-elevation-z8">
         <!-- Position Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Name </th>

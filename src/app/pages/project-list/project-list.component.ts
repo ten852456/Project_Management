@@ -15,7 +15,7 @@ import { ApiServiceService } from 'src/app/api-service.service';
 export class ProjectListComponent implements OnInit {
 
 
-
+  searchText: any;
   projects:any;
   displayedColumns: string[] = ['title', 'completed', 'dueDate', 'Drive'];
   selected = '?completed=false';

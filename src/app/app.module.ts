@@ -23,6 +23,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
@@ -59,6 +61,7 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
     ReactiveFormsModule,
     HttpClientModule,
     MatSortModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     {
