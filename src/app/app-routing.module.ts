@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
     component: SpentTimeComponent,
   },
   {
+    path: 'manage-time',
+    component: ManageTimeComponent,
+  },
+  {
     path: 'help',
     component: NotFoundComponent,
   },
@@ -43,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

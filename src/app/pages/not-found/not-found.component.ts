@@ -14,6 +14,7 @@ export class NotFoundComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    // this.getTasks();
   }
 
   openDialog() {

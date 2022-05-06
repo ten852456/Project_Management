@@ -22,15 +22,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: '',
-      password: ''
+      username: 'u1',
+      password: '1234'
     });
   }
 
   submit() {
+    console.log(this.form.getRawValue());
     this.http.post('http://localhost:8080/api/login', this.form.getRawValue(), {withCredentials: true})
       .subscribe((res: any) => {
-        TokenInterceptorService.accessToken = res.access_token;
+        TokenInterceptorService.accessToken = res.access_token,console.log(1);
 
         this.router.navigate(['/']);
       });
