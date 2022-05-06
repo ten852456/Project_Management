@@ -3,77 +3,44 @@
 </button><br>
 
 <mat-form-field appearance="fill" class="selected-menu">
-    <mat-select [(value)]="selected">
-        <mat-option value="inprocess">In-Process</mat-option>
-        <mat-option value="completed">Completed</mat-option>
+    <mat-select [(value)]="selected" (selectionChange)="getProjects()">
+        <mat-option value="?completed=false">In-Process</mat-option>
+        <mat-option value="?completed=true">Completed</mat-option>
     </mat-select>
 </mat-form-field>
 
 <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> search </mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </form>
 
 <br><br>
 
-<div class="table-project" *ngIf="selected == 'inprocess'">
-    <table mat-table [dataSource]="projectsIncompleted.data" class="mat-elevation-z8">
+<div class="table-project">
+    <table mat-table [dataSource]="sortByDueDate | filter:searchText " class="mat-elevation-z8">
         <!-- Position Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element">{{element.title}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="Members">
+        <ng-container matColumnDef="completed">
             <th mat-header-cell *matHeaderCellDef> Members </th>
             <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="Due Date">
+        <ng-container matColumnDef="dueDate">
             <th mat-header-cell *matHeaderCellDef> Due Date </th>
             <td mat-cell *matCellDef="let element"> {{element.dueDate | date: 'dd/MM/yy'}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Symbol </th>
-            <td mat-cell *matCellDef="let element">
-                <img src='..\..\..\assets\image\google-drive.png' class="google-drive-icon">
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-</div>
-
-<div class="table-project" *ngIf="selected == 'completed'">
-    <table mat-table [dataSource]="projectsCompleted.data" class="mat-elevation-z8">
-        <!-- Position Column -->
-        <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element">{{element.title}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="Members">
-            <th mat-header-cell *matHeaderCellDef> Members </th>
-            <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="Due Date">
-            <th mat-header-cell *matHeaderCellDef> Due Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.dueDate | date: 'dd/MM/yy'}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
+        <ng-container matColumnDef="Drive">
             <th mat-header-cell *matHeaderCellDef> Symbol </th>
             <td mat-cell *matCellDef="let element">
                 <img src='..\..\..\assets\image\google-drive.png' class="google-drive-icon">
