@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 
 
+
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -38,8 +40,10 @@ import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 
   imports: [
     BrowserModule,
+ 
     AppRoutingModule,
     BrowserAnimationsModule,
+    StoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
