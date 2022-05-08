@@ -14,16 +14,17 @@
         </mat-button-toggle-group>
     </div>
 
-    <div class="table-spent-time">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="dailyPage" *ngIf = "this.check == 1">
+        <div>
+        <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
             <!-- Position Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> TestProject </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef >kk </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
             </ng-container>
 
             <!-- Name Column -->
@@ -31,7 +32,7 @@
                 <th mat-header-cell *matHeaderCellDef> Specs </th>
                 <td mat-cell *matCellDef="let element">
                     <mat-form-field appearance="outline" class="spentTime">
-                        <input matInput>
+                        <input matInput [(ngModel)]="element.specs">
                     </mat-form-field>
                 </td>
             </ng-container>
@@ -41,7 +42,7 @@
                 <th mat-header-cell *matHeaderCellDef> Implement </th>
                 <td mat-cell *matCellDef="let element">
                     <mat-form-field appearance="outline" class="spentTime">
-                        <input matInput>
+                        <input matInput [(ngModel)]="element.implement">
                     </mat-form-field>
                 </td>
             </ng-container>
@@ -51,7 +52,7 @@
                 <th mat-header-cell *matHeaderCellDef> Fix Specs </th>
                 <td mat-cell *matCellDef="let element">
                     <mat-form-field appearance="outline" class="spentTime">
-                        <input matInput>
+                        <input matInput [(ngModel)]="element.fixingSpecs">
                     </mat-form-field>
                 </td>
             </ng-container>
@@ -60,7 +61,7 @@
                 <th mat-header-cell *matHeaderCellDef> Fix Implement </th>
                 <td mat-cell *matCellDef="let element">
                     <mat-form-field appearance="outline" class="spentTime">
-                        <input matInput>
+                        <input matInput [(ngModel)]="element.fixingImplement" >
                     </mat-form-field>
                 </td>
             </ng-container>
@@ -69,6 +70,59 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;  "></tr>
         </table>
     </div>
+    </div>
+
+    <div class="weeklyPage" *ngIf = "check == 2" >
+        <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef > Test1</th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="specs">
+                <th mat-header-cell *matHeaderCellDef> Specs </th>
+                <td mat-cell *matCellDef="let element">
+                        {{element.specs}}
+                </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="implement">
+                <th mat-header-cell *matHeaderCellDef> Implement </th>
+                <td mat-cell *matCellDef="let element">
+                    
+                       {{element.implement}}
+                  
+                </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fixingSpecs">
+                <th mat-header-cell *matHeaderCellDef> Fix Specs </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.fixingSpecs}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fixingImplement">
+                <th mat-header-cell *matHeaderCellDef> Fix Implement </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.fixingImplement}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;  "></tr>
+            
+        </table>
+    </div>
+  
 
 
 </div>
