@@ -24,9 +24,11 @@ export class ManageTimeComponent implements OnInit {
   datepickerFooter!: ElementRef;
   @ViewChild('datepicker', { static: false })
   datepicker!: MatDatepicker<any>;
-  
+
   displayedColumns: string[] = ['name', 'specs','implement', 'fixingSpecs', 'fixingImplement'];
   dataSource = ELEMENT_DATA;
+
+  searchText: any;
 
   constructor() { }
 
