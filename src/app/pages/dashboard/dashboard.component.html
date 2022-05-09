@@ -1,2 +1,54 @@
-<p>dashboard works!</p>
-<h3>{{message}}</h3>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
+    </button>
+    ProjectManagement
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" (click)="logout()">
+      <mat-icon class='material-icons-outlined'>logout</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <button mat-button class="menu-button" style="float: left;" (click)="gotoDashboard()">
+        <mat-icon>person</mat-icon>
+        &nbsp;Personal Board
+      </button>
+
+      <button mat-button class="menu-button" style="float: left;" (click)="gotoSpentTime()">
+        <mat-icon>alarm_add</mat-icon>
+        &nbsp;Spent Time
+      </button>
+
+      <button mat-button class="menu-button" style="float: left;" (click)="gotoProjectList()">
+        <mat-icon>list</mat-icon>
+        &nbsp;Project List
+      </button>
+
+      <button mat-button class="menu-button" style="float: left;" (click)="gotoProject()">
+        <mat-icon>file_copy</mat-icon>
+        &nbsp;Projects
+      </button>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+
+      <div *ngIf="spentTime">
+        <app-spent-time></app-spent-time>
+      </div>
+      <div *ngIf="projectList">
+        <app-project-list></app-project-list>
+      </div>
+      <div *ngIf="project">
+        <app-not-found></app-not-found>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
