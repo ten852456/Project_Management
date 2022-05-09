@@ -1,10 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatDatepicker } from "@angular/material/datepicker";
 import { SpentTimeService } from './spent-time.service';
-
-export interface PeriodicElement {
-  name: string;
-}
 export interface testCard {
   title: string;
   specs: number;
