@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
+
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -40,8 +42,10 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
 
   imports: [
     BrowserModule,
+ 
     AppRoutingModule,
     BrowserAnimationsModule,
+    StoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,

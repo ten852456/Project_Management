@@ -1,13 +1,13 @@
+<h1 mat-dialog-title class="h3 mb-3 fw-normal">Create New Task</h1>
+
 <mat-dialog-actions align="end">
     <button mat-dialog-title mat-mini-fab mat-dialog-close class="close"> x </button>
 </mat-dialog-actions>
 
-<div>
+<mat-dialog-content>
     <main class="form-signin">
         <form class="example-form" [formGroup]="form" (submit)="addTask()">
-            <h1 class="h3 mb-3 fw-normal">Create New Task</h1>
-
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" style="padding-top: 30px;">
                 <mat-label>Task title</mat-label>
                 <input formControlName="title" type="text" class="form-control" matInput placeholder="Task title">
             </mat-form-field><br>
@@ -34,11 +34,10 @@
                 <textarea formControlName="description" type="text" class="form-control" matInput
                     placeholder="Description"></textarea>
             </mat-form-field><br>
-
-            <mat-dialog-actions align="end">
-                <button mat-raised-button class="create" (click)="addTask()" mat-dialog-close> Create </button>
-            </mat-dialog-actions>
         </form>
     </main>
-</div>
-<h3>{{message}}</h3>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" type="submit"> Create </button>
+</mat-dialog-actions>

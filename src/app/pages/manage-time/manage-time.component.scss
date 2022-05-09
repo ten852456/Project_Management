@@ -1,15 +1,13 @@
 .mat-button-toggle-group {
     float: right;
     padding: 5px 5px;
-
 }
 
 .mat-form-field {
     padding-right: 20px;
     width: 180px;
-    height: 100px;
+ 
 }
-
 
 .mat-header-row {
     background-color: hsla(234, 51%, 50%, 0.308);
@@ -17,9 +15,11 @@
 }
 
 .group {
-    padding: 10px;
+    padding: 20px;
+    padding-top: 0px;
     margin: 20px;
 }
+
 table {
     width: 100%;
     text-align: center !important;
