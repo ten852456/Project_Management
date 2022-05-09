@@ -7,8 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+
+  constructor(
+
+    private router: Router) {}
 
 
   title = 'Project_Management';
+
 }
