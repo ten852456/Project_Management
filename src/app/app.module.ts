@@ -21,6 +21,9 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
@@ -30,12 +33,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
-import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
-
+import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent],
-
 
   imports: [
     BrowserModule,
@@ -59,6 +60,8 @@ import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSortModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     {
