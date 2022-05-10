@@ -1,20 +1,20 @@
 <div class="group">
-    <mat-form-field appearance="fill" style="position: absolute;">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="datepicker" [value]="selectedValue">
-        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-        <mat-datepicker #datepicker></mat-datepicker>
-    </mat-form-field>
-
-    <div class="datepicker-footer" #datepickerFooter>
-        <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle value="bold" (click)="showDailyTable()">Daily</mat-button-toggle>
-            <mat-button-toggle value="italic" (click)="showWeeklyTable()">Weekly</mat-button-toggle>
-            <mat-button-toggle value="underline" (click)="showProjectTable()">Project</mat-button-toggle>
-        </mat-button-toggle-group>
-    </div>
 
     <div class="dailyPage" *ngIf = "this.check == 1">
+        <mat-form-field appearance="fill" style="position: absolute;">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="datepicker" [value]="selectedValue">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+        
+        <div class="datepicker-footer" #datepickerFooter>
+            <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="bold" (click)="showDailyTable()">Daily</mat-button-toggle>
+                <mat-button-toggle value="italic" (click)="showWeeklyTable()">Weekly</mat-button-toggle>
+                <mat-button-toggle value="underline" (click)="showProjectTable()">Project</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
         <div>
             <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
 
@@ -73,6 +73,24 @@
     </div>
 
     <div class="weeklyPage" *ngIf = "check == 2" >
+        <mat-form-field appearance="fill" style="position: absolute;">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date" />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        
+        <div class="datepicker-footer" #datepickerFooter>
+            <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="bold" (click)="showDailyTable()">Daily</mat-button-toggle>
+                <mat-button-toggle value="italic" (click)="showWeeklyTable()">Weekly</mat-button-toggle>
+                <mat-button-toggle value="underline" (click)="showProjectTable()">Project</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+
         <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.

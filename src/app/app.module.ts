@@ -23,10 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCommonModule } from '@angular/material/core';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
-
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
@@ -42,7 +41,6 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
 
   imports: [
     BrowserModule,
- 
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule,
@@ -53,8 +51,8 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
     MatDividerModule,
     MatListModule,
     MatInputModule,
-    MatNativeDateModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonToggleModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -66,8 +64,11 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
     HttpClientModule,
     MatSortModule,
     Ng2SearchPipeModule,
+    MatCommonModule,
   ],
-  providers: [
+  providers: [ 
+    MatDatepickerModule,
+    MatNativeDateModule, 
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

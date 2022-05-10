@@ -5,8 +5,12 @@ tr {
 
 .mat-button-toggle-group {
     float: right;
-    padding: 5px 5px;
+    margin-bottom: 20px;
+}
 
+.mat-button-toggle-checked {
+  background-color: #2B92F9!important;
+  color: aliceblue !important;
 }
 
 .mat-form-field {

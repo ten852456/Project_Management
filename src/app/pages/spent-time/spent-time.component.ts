@@ -1,6 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { MatDatepicker } from "@angular/material/datepicker";
 import { SpentTimeService } from './spent-time.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
+import { MatDateRangePicker } from '@angular/material/datepicker';
+
 export interface testCard {
   title: string;
   specs: number;
@@ -16,14 +20,17 @@ export interface testProject {
 @Component({
   selector: 'app-spent-time',
   templateUrl: './spent-time.component.html',
-  styleUrls: ['./spent-time.component.scss']
+  styleUrls: ['./spent-time.component.scss'],
 })
-export class SpentTimeComponent implements OnInit {
+
+export class SpentTimeComponent<D> implements OnInit{
 
   @ViewChild('datepickerFooter', { static: false })
   datepickerFooter!: ElementRef;
   @ViewChild('datepicker', { static: false })
   datepicker!: MatDatepicker<any>;
+  private dateAdapter!: DateAdapter<D>;
+  private picker!: MatDateRangePicker<D>
 
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
@@ -33,11 +40,16 @@ export class SpentTimeComponent implements OnInit {
   sumImplement !: number;
   sumFixingSpecs !: number;
   sumFixingImplement !: number;
-  check !:number;
+  check !: number;
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
   
   displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
    
-  constructor(private spentTimeService : SpentTimeService,) { }
+  constructor(private spentTimeService : SpentTimeService) { }
 
   ngOnInit(): void {
     this.showTable();
@@ -72,10 +84,36 @@ export class SpentTimeComponent implements OnInit {
 
   showWeeklyTable(): void {
     this.check = 2;
+    const [start, end] = this.calculateDateRange();
+    this.picker.select(start);
+    this.picker.select(end);
+    this.picker.close();
   }
   
   showProjectTable(): void {
 
+  }
+
+  private get today(): D {
+    const today = this.dateAdapter.getValidDateOrNull(new Date());
+    if (today === null) {
+      throw new Error('date creation failed');
+    }
+    return today;
+  }
+
+  private calculateDateRange(): [start: D, end: D] {
+    const today = this.today;
+    return this.calculateWeek(today);
+  }
+
+  private calculateWeek(forDay: D): [start: D, end: D] {
+    const deltaStart = this.dateAdapter.getFirstDayOfWeek() - this.dateAdapter.getDayOfWeek(forDay);
+    const start = this.dateAdapter.addCalendarDays(forDay, deltaStart);
+    const end = this.dateAdapter.addCalendarDays(start, 6);
+    console.log(start);
+    console.log(end);
+    return [start, end];
   }
 
 }
