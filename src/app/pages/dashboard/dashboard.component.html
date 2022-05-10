@@ -15,7 +15,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
-      <button mat-button class="menu-button" style="float: left;" (click)="gotoDashboard()">
+      <button mat-button class="menu-button" style="float: left;" (click)="gotoPersonalboard()">
         <mat-icon>person</mat-icon>
         &nbsp;Personal Board
       </button>
@@ -40,6 +40,9 @@
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
 
+      <div *ngIf="personalboard">
+        <app-personal-board></app-personal-board>
+      </div>
       <div *ngIf="spentTime">
         <app-spent-time></app-spent-time>
       </div>
@@ -52,3 +55,5 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<h3>Hello World</h3>

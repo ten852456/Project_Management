@@ -37,8 +37,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
+import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent],
 
   imports: [
     BrowserModule,
