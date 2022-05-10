@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  dashboard:boolean = true;
+  personalboard:boolean = true;
   spentTime:boolean = false;
   projectList:boolean = false;
   project:boolean = false;
@@ -20,26 +20,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  gotoDashboard(){
-    this.dashboard = true;
+  gotoPersonalboard(){
+    this.personalboard = true;
     this.spentTime = false;
     this.project = false;
     this.projectList = false;
   }
   gotoSpentTime(){
-    this.dashboard = false;
+    this.personalboard = false;
     this.spentTime = true;
     this.project = false;
     this.projectList = false;
   }
   gotoProjectList(){
-    this.dashboard = false;
+    this.personalboard = false;
     this.spentTime = false;
     this.project = false;
     this.projectList = true;
   }  
   gotoProject(){
-    this.dashboard = false;
+    this.personalboard = false;
     this.spentTime = false;
     this.project = true;
     this.projectList = false;
