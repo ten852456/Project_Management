@@ -1,31 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  message = '';
-  params = new HttpParams().set('__template', 'card.dialog');
+  personalboard:boolean = true;
+  spentTime:boolean = false;
+  projectList:boolean = false;
+  project:boolean = false;
 
   constructor(
-  private http: HttpClient,
-  private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8080/api/card/1',{ params: this.params })
-    .subscribe({
-      next: (res: any) => {
-        let data = res.data;
-        this.message = `Hi ${data.title}`;
-      },
-      error: () => {
-        this.router.navigate(['/login']);
-      }
-    });
+
+  }
+  gotoPersonalboard(){
+    this.personalboard = true;
+    this.spentTime = false;
+    this.project = false;
+    this.projectList = false;
+  }
+  gotoSpentTime(){
+    this.personalboard = false;
+    this.spentTime = true;
+    this.project = false;
+    this.projectList = false;
+  }
+  gotoProjectList(){
+    this.personalboard = false;
+    this.spentTime = false;
+    this.project = false;
+    this.projectList = true;
+  }  
+  gotoProject(){
+    this.personalboard = false;
+    this.spentTime = false;
+    this.project = true;
+    this.projectList = false;
   }
 
+
+  logout(){
+    TokenInterceptorService.accessToken = '';
+    this.router.navigate(['/login']);
+
+  }
 }

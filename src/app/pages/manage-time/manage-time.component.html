@@ -7,22 +7,22 @@
     </mat-form-field>
 
     <div class="datepicker-footer" #datepickerFooter>
-        <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style" >
+        <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
             <mat-button-toggle value="bold" (click)="showDTable()">Daily</mat-button-toggle>
             <mat-button-toggle value="italic" (click)="showWTable()">Weekly</mat-button-toggle>
             <mat-button-toggle value="underline" (click)="showPTable()">Project</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
 
-    <mat-form-field appearance="outline" style = "float: right;">
+    <mat-form-field appearance="outline" style="float: right;">
         <mat-label>Search Project</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
         <mat-icon matSuffix>search</mat-icon>
-       
-      </mat-form-field>
-      
+
+    </mat-form-field>
+
     <div class="table-spent-time">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource | filter:searchText  " class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

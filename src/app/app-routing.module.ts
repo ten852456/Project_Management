@@ -6,6 +6,7 @@ import { ProjectListComponent } from './pages/project-list/project-list.componen
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
+import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent,
+  },
+  {
+    path: 'personal-board',
+    component: PersonalBoardComponent,
   },
 ];
 

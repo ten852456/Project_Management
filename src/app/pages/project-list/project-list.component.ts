@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProjectDialogComponent } from './project-dialog/project-dialog/project-dialog.component';
 import { ApiServiceService } from 'src/app/api-service.service';
 
-
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
