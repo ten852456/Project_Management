@@ -30,10 +30,21 @@
         &nbsp;Project List
       </button>
 
-      <button mat-button class="menu-button" style="float: left;" (click)="gotoProject()">
+      
+      <button mat-button class="menu-button" style="float: left;" 
+      >
         <mat-icon>file_copy</mat-icon>
         &nbsp;Projects
-      </button>
+        <mat-icon style="font-size: 38px;" [inline]="true" (click)="showproject()">arrow_drop_down</mat-icon>
+    </button>
+    <div *ngIf="showPL">
+      <div *ngFor="let d of data">
+        <button class="nav-link"
+        mat-button class="menu-button"
+        (click)="gotoProject(d.title)"
+        >{{d.title}}</button>
+      </div>
+    </div>
 
     </mat-nav-list>
   </mat-sidenav>
