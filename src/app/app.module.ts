@@ -15,7 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from "@angular/material/dialog";
@@ -37,8 +37,9 @@ import { TokenInterceptorService } from './services/authentication/token-interce
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
+import { MemberComponent } from './member/member.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent],
 
   imports: [
     BrowserModule,
@@ -74,7 +75,8 @@ import { PersonalBoardComponent } from './pages/personal-board/personal-board.co
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],
 })
