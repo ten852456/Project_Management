@@ -24,6 +24,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
 import { LoginComponent } from './pages/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, DashboardComponent, SpentTimeComponent, LoginComponent,ProjectDialogComponent,ManageTimeComponent,TaskDialogComponent, ProjectListComponent],
   imports: [
@@ -42,7 +47,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatTableModule,
     MatDialogModule,
-    
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    FormsModule,
   ],
   providers: [
     {
