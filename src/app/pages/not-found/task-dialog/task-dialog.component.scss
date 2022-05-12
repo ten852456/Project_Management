@@ -1,8 +1,6 @@
-.close {
+.create {
     background-color: #2B92F9;
     color: aliceblue;
-    font-size: 18px;
-    position: absolute;
 }
 
 .example-form {
@@ -14,13 +12,14 @@
     }
 }
 
-.create {
+.close {
     background-color: #2B92F9;
     color: aliceblue;
+    font-size: 18px;
+    position: absolute;
 }
 
-.mat-hint{
-    color: red!important;
-    // opacity: 1!important;
+h1 {
+    position: absolute;
+    padding: 5px;
 }
-

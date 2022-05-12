@@ -1,5 +1,4 @@
 .add {
-    background-color: #2B92F9;
     margin-left: 93%;
     margin-top: 20px;
     position: absolute;
@@ -36,4 +35,11 @@ table {
 .selected-menu {
     font-size: 15px;
     padding-left: 40px;
+    float: left;
+}
+
+.example-form {
+    float: left;
+    padding-left: 40px;
+    font-size: 15px;
 }

@@ -12,7 +12,8 @@ import { MatListModule} from '@angular/material/list'
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table'  
-
+import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
+import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
@@ -24,7 +25,7 @@ import { TokenInterceptorService } from './services/authentication/token-interce
 import { LoginComponent } from './pages/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, LoginComponent,ProjectDialogComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, SpentTimeComponent, LoginComponent,ProjectDialogComponent,ManageTimeComponent,TaskDialogComponent, ProjectListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatTableModule,
     MatDialogModule,
+    
   ],
   providers: [
     {
