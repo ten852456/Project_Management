@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDatepicker, MatDateRangeSelectionStrategy, DateRange, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
+import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
 import { SpentTimeService } from './spent-time.service';
 import { DateAdapter } from '@angular/material/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface testCard {
   title: string;
@@ -27,12 +28,14 @@ export interface testProject {
   ],
 })
 
-export class SpentTimeComponent<D> implements MatDateRangeSelectionStrategy<D>{
+export class SpentTimeComponent<D> {
 
   @ViewChild('datepickerFooter', { static: false })
   datepickerFooter!: ElementRef;
   @ViewChild('datepicker', { static: false })
   datepicker!: MatDatepicker<any>;
+  @ViewChild('picker', { static: false })
+  picker!: MatDateRangePicker<any>;
 
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
@@ -45,25 +48,34 @@ export class SpentTimeComponent<D> implements MatDateRangeSelectionStrategy<D>{
   check !: number;
 
   displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
-  picker!: DateRange<D>;
-   
-  constructor(private spentTimeService : SpentTimeService, private _dateAdapter: DateAdapter<D>,) { }
 
-  selectionFinished(date: D | null): DateRange<D> {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+   
+  constructor(private spentTimeService : SpentTimeService, private _dateAdapter: DateAdapter<D>) { }
+
+  private get today() : D {
+    const date = this._dateAdapter.getValidDateOrNull(new Date());
+    if (date === null) {
+      throw new Error('date creation failed');
+    }
+    return date;
+  }
+
+  selectionFinished(date: D): [start: D, end: D] {
     return this._createWeeklyRange(date);
   }
-  createPreview(activeDate: D | null): DateRange<D> {
+  createPreview(activeDate: D): [start: D, end: D] {
     return this._createWeeklyRange(activeDate);
   }
 
-  private _createWeeklyRange(date: D | null) : DateRange<D> {
-    if(date) {
+  private _createWeeklyRange(date: D) : [start: D, end: D] {
       const datestart = this._dateAdapter.getFirstDayOfWeek() - this._dateAdapter.getDayOfWeek(date);
       const start = this._dateAdapter.addCalendarDays(date, datestart);
       const end = this._dateAdapter.addCalendarDays(start, 6);
-      return new DateRange<D>(start, end);
-    }
-    return new DateRange<D>(null, null);
+      return [start, end];
   }
 
   ngOnInit(): void {
@@ -92,7 +104,6 @@ export class SpentTimeComponent<D> implements MatDateRangeSelectionStrategy<D>{
 
     this.selectedValue = new Date();
     this.datepicker.close();
-    console.log(this.selectedValue);
     
     /*console.log(this.results.data[0].project.displayText);
     console.log(this.results.data[0].title);*/
@@ -100,9 +111,12 @@ export class SpentTimeComponent<D> implements MatDateRangeSelectionStrategy<D>{
 
   showWeeklyTable(): void {
     this.check = 2;
-    const date = this._dateAdapter.getValidDateOrNull(new Date());
-    this.picker = this.selectionFinished(date);
-    console.log(this.picker);
+    
+    const date = this.today;
+    const [start, end] = this.selectionFinished(date);
+    this.picker.select(start);
+    this.picker.select(end);
+    this.picker.close();
   }
   
   showProjectTable(): void {
