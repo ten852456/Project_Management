@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCommonModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -38,8 +39,9 @@ import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 import { MemberComponent } from './pages/member/member.component';
+import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent, CardDialogComponent],
 
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { MemberComponent } from './pages/member/member.component';
     MatSortModule,
     Ng2SearchPipeModule,
     MatCommonModule,
+    DragDropModule,
   ],
   providers: [ 
     MatDatepickerModule,
