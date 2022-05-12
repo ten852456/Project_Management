@@ -37,7 +37,7 @@ import { TokenInterceptorService } from './services/authentication/token-interce
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
-import { MemberComponent } from './member/member.component';
+import { MemberComponent } from './pages/member/member.component';
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent],
 
