@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -43,7 +44,7 @@ import { PersonalBoardComponent } from './pages/personal-board/personal-board.co
 
   imports: [
     BrowserModule,
- 
+
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule,
@@ -67,6 +68,7 @@ import { PersonalBoardComponent } from './pages/personal-board/personal-board.co
     HttpClientModule,
     MatSortModule,
     Ng2SearchPipeModule,
+    DragDropModule,
   ],
   providers: [
     {
