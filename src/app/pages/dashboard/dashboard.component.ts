@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,15 +15,34 @@ export class DashboardComponent implements OnInit {
   project:boolean = false;
   manageTime:boolean = false;
   member:boolean = false;
+  showPL:boolean = false;
+  data:any;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
+    this.countProjectList();
 
   }
-  gotoPersonalboard() {
+  countProjectList(){
+    this.http.get('http://localhost:8080/api/project')
+    .subscribe((res:any)=> {
+      this.data = res.data;
+      console.log(this.data);
+ 
+    })
+  }
+  showproject(){
+    if (this.showPL = false)
+    this.showPL = true
+    else this.showPL = false;
+  }
+
+
+  gotoDashboard(){
     this.personalboard = true;
     this.spentTime = false;
     this.project = false;
@@ -46,7 +66,8 @@ export class DashboardComponent implements OnInit {
     this.manageTime = false;
     this.member = false;
   }  
-  gotoProject() {
+  gotoProject(Projectname:string){
+    console.log(Projectname);
     this.personalboard = false;
     this.spentTime = false;
     this.project = true;

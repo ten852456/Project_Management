@@ -14,7 +14,7 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened="true">
         <mat-nav-list>
-            <button mat-button class="personalboard" style="float: left;" (click)="gotoPersonalboard()">
+            <button mat-button class="personalboard" style="float: left;" (click)="gotoDashboard()">
                 <mat-icon>person</mat-icon>
                 &nbsp;Personal Board
             </button>
@@ -29,10 +29,21 @@
                 &nbsp;Project List
             </button>
 
-            <button mat-button class="project" style="float: left;" (click)="gotoProject()">
-                <mat-icon>file_copy</mat-icon>
-                &nbsp;Projects
-            </button>
+      
+      <button mat-button class="menu-button" style="float: left;" 
+      >
+        <mat-icon>file_copy</mat-icon>
+        &nbsp;Projects
+        <mat-icon style="font-size: 38px;" [inline]="true" (click)="showproject()">arrow_drop_down</mat-icon>
+    </button>
+    <div >
+      <div *ngFor="let d of data">
+        <button class="nav-link"
+        mat-button class="menu-button"
+        (click)="gotoProject(d.title)"
+        >{{d.title}}</button>
+      </div>
+    </div>
 
             <button mat-button class="managetime" (click)="gotoManageTime()">
                 <mat-icon>alarm</mat-icon>
