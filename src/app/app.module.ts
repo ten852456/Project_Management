@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +29,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
-import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -40,6 +38,7 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 import { MemberComponent } from './pages/member/member.component';
 import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
+import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent, CardDialogComponent],
 
@@ -47,7 +46,6 @@ import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -71,9 +69,9 @@ import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
     MatCommonModule,
     DragDropModule,
   ],
-  providers: [ 
+  providers: [
     MatDatepickerModule,
-    MatNativeDateModule, 
+    MatNativeDateModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
