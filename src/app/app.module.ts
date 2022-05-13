@@ -38,9 +38,22 @@ import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 import { MemberComponent } from './pages/member/member.component';
+import { MemberDialogComponent } from './pages/member/member-dialog/member-dialog.component';
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent],
-
+  declarations: [
+    AppComponent, 
+    NotFoundComponent, 
+    DashboardComponent, 
+    ProjectListComponent, 
+    SpentTimeComponent, 
+    ProjectDialogComponent, 
+    LoginComponent, 
+    ManageTimeComponent, 
+    TaskDialogComponent, 
+    PersonalBoardComponent, 
+    MemberComponent, 
+    MemberDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
