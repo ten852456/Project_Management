@@ -19,7 +19,24 @@ mat-divider {
     margin-top: 16px;
     margin-bottom: 16px;
     background-color: rgba(255, 255, 255, 0.5);
-  }
-  .example-spacer {
+}
+  
+.example-spacer {
     flex: 1 1 auto;
-  }
+}
+
+button {
+    padding: 5px;
+}
+
+.managetime {
+    position:absolute;
+    left: 4%; 
+    bottom: 55px;
+}
+
+.member {
+    position: absolute;
+    left: 4%;
+    bottom: 10px;
+}

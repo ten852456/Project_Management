@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   spentTime:boolean = false;
   projectList:boolean = false;
   project:boolean = false;
+  manageTime:boolean = false;
+  member:boolean = false;
   showPL:boolean = false;
   data:any;
 
@@ -25,9 +27,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.countProjectList();
 
-  }
-  gotoPersonalboard(){
-    this.personalboard = true;
   }
   countProjectList(){
     this.http.get('http://localhost:8080/api/project')
@@ -45,33 +44,57 @@ export class DashboardComponent implements OnInit {
 
 
   gotoDashboard(){
-    this.dashboard = true;
+    this.personalboard = true;
     this.spentTime = false;
     this.project = false;
     this.projectList = false;
+    this.manageTime = false;
+    this.member = false;
   }
-  gotoSpentTime(){
+  gotoSpentTime() {
     this.personalboard = false;
     this.spentTime = true;
     this.project = false;
     this.projectList = false;
+    this.manageTime = false;
+    this.member = false;
   }
-  gotoProjectList(){
+  gotoProjectList() {
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
     this.projectList = true;
+    this.manageTime = false;
+    this.member = false;
   }
   gotoProject(Projectname:string){
     console.log(Projectname);
-    this.dashboard = false;
+    this.personalboard = false;
     this.spentTime = false;
     this.project = true;
     this.projectList = false;
+    this.manageTime = false;
+    this.member = false;
+  }
+  gotoManageTime() {
+    this.personalboard = false;
+    this.spentTime = false;
+    this.project = false;
+    this.projectList = false;
+    this.manageTime = true;
+    this.member = false;
+  }
+  gotoMember() {
+    this.personalboard = false;
+    this.spentTime = false;
+    this.project = false;
+    this.projectList = false;
+    this.manageTime = false;
+    this.member = true;
   }
 
 
-  logout(){
+  logout() {
     TokenInterceptorService.accessToken = '';
     this.router.navigate(['/login']);
 

@@ -3,6 +3,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
+import { MatDialog } from '@angular/material/dialog';
+
+import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
 
 
 @Component({
@@ -20,7 +23,8 @@ export class PersonalBoardComponent implements OnInit {
   board!: Board;
 
   constructor(
-    private api: ApiServiceService
+    private api: ApiServiceService,
+    public dialog: MatDialog,
   ) {
 
   }
@@ -66,6 +70,10 @@ export class PersonalBoardComponent implements OnInit {
     this.board.columns.forEach(column =>  {
         column.cards.forEach(x => x.status = column.status)
    });
+  }
+
+  openDialog() {
+    this.dialog.open(CardDialogComponent, {width: '50%'});
   }
 
   // getCradsUnassigned():any{

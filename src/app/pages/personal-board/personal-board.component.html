@@ -11,8 +11,9 @@
             <div class="board-column" *ngFor="let column of board.columns">
 
                 <div class="column-title">
-                    {{ column.name }}
+                    {{ column.name }}<button (click)="openDialog()">+</button>
                 </div>
+
 
                 <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
