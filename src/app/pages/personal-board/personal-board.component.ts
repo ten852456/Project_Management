@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
 
 
+
 @Component({
   selector: 'app-personal-board',
   templateUrl: './personal-board.component.html',
@@ -30,7 +31,7 @@ export class PersonalBoardComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.getCards();
   }
 
@@ -45,6 +46,8 @@ export class PersonalBoardComponent implements OnInit {
       });
     });
   }
+
+
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
