@@ -24,14 +24,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCommonModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
+
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
@@ -39,6 +40,8 @@ import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.c
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 import { MemberComponent } from './pages/member/member.component';
 import { MemberDialogComponent } from './pages/member/member-dialog/member-dialog.component';
+import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
+import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -53,7 +56,9 @@ import { MemberDialogComponent } from './pages/member/member-dialog/member-dialo
     PersonalBoardComponent, 
     MemberComponent, 
     MemberDialogComponent,
+    CardDialogComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -80,10 +85,11 @@ import { MemberDialogComponent } from './pages/member/member-dialog/member-dialo
     MatSortModule,
     Ng2SearchPipeModule,
     MatCommonModule,
+    DragDropModule,
   ],
-  providers: [ 
+  providers: [
     MatDatepickerModule,
-    MatNativeDateModule, 
+    MatNativeDateModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

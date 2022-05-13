@@ -6,7 +6,7 @@
 
 <mat-dialog-content>
     <main class="form-signin">
-        <form class="example-form" [formGroup]="form" (submit)="addTask()">
+        <form class="example-form" [formGroup]="form">
             <mat-form-field appearance="outline" style="padding-top: 30px;">
                 <mat-label>Task title</mat-label>
                 <input formControlName="title" type="text" class="form-control" matInput placeholder="Task title">
@@ -25,19 +25,17 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Estimated days</mat-label>
-                <input formControlName="estimatedDays" type="text" class="form-control" matInput
-                    placeholder="Estimated days">
+                <input formControlName="estimatedDays" type="text" class="form-control" matInput placeholder="Estimated days">
             </mat-form-field><br>
 
             <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea formControlName="description" type="text" class="form-control" matInput
-                    placeholder="Description"></textarea>
+                <textarea formControlName="description" type="text" class="form-control" matInput placeholder="Description"></textarea>
             </mat-form-field><br>
         </form>
     </main>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-raised-button class="create" (click)="addTask()"> Create </button>
+    <button mat-raised-button class="create" type="submit" (click)="addTask()"> Create </button>
 </mat-dialog-actions>

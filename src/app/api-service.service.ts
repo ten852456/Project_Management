@@ -18,5 +18,9 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.Url + 'project' + future);
   }
 
+  getCrad(future: string): Observable<any[]> {
+    return this.http.get<any[]>(this.Url + 'card' + future);
+  }
+
   constructor(private http: HttpClient) { }
 }

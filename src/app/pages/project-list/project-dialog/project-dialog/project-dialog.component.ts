@@ -26,7 +26,7 @@ export class ProjectDialogComponent implements OnInit {
   addProject() {
     this.http.post<any>(this.projectListUrl, this.form.getRawValue(), {withCredentials: true})
         .subscribe((res: any) => {});
-    window.location.reload();
+    // window.location.reload();
   }
 
 }
