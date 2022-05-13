@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8080/api/login', this.form.getRawValue(), {withCredentials: true})
       .subscribe((res: any) => {
         TokenInterceptorService.accessToken = res.access_token,console.log(1);
-
+        localStorage.setItem("refreshToken",res.refresh_token);
         this.router.navigate(['/home']);
       },
       (error : HttpErrorResponse)=>{

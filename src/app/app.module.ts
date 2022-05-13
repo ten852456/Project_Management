@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +29,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
-
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -48,7 +46,6 @@ import { ProjectDialogComponent } from './pages/project-list/project-dialog/proj
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,

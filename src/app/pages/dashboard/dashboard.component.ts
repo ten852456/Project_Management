@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
 import {Router} from '@angular/router';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  personalboard:boolean = true;
+  personalboard:boolean = false;
   dashboard:boolean = false;
   spentTime:boolean = false;
   projectList:boolean = false;
@@ -25,22 +24,41 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.countProjectList();
-
+    this.checkToken();
   }
   countProjectList(){
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
-
     })
   }
-  showproject(){
-    if (this.showPL = false)
-    this.showPL = true
-    else this.showPL = false;
+  checkToken(){
+    if (localStorage.getItem("refreshToken")!=null){
+      var refresh_token = ""
+      refresh_token = localStorage.getItem("refreshToken")!;
+      let body = new URLSearchParams();
+      body.set('grant_type', 'refresh_token');
+      body.set('refresh_token', refresh_token);
+
+
+      let options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      };
+      this.http.post('http://localhost:8080/api/login', body.toString(), options).subscribe((res: any) => {
+          console.log(res)
+          TokenInterceptorService.accessToken = res.access_token;
+          localStorage.setItem("refreshToken",res.refresh_token)
+        })
+        this.personalboard = true;
+    }
+    else {
+      this.personalboard = true;
+      this.countProjectList();
+    }
   }
+
+
 
 
   gotoDashboard(){
@@ -99,4 +117,5 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
 
   }
+
 }
