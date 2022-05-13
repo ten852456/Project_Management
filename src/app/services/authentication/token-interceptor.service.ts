@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpErrorResponse, HttpClient
+  HttpInterceptor, HttpErrorResponse, HttpClient, HttpHeaders
 } from '@angular/common/http';
-import {catchError, Observable, switchMap, throwError} from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
@@ -25,10 +25,22 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(catchError((err: HttpErrorResponse) => {
       if (err.status === 401 && !this.refresh) {
         this.refresh = true;
+        var refresh_token = ""
+        refresh_token = localStorage.getItem("refreshToken")!;
+        let body = new URLSearchParams();
+        body.set('grant_type', 'refresh_token');
+        body.set('refresh_token', refresh_token);
 
-        return this.http.post('http://localhost:8080/api/refresh', {}, {withCredentials: true}).pipe(
+
+        let options = {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        };
+
+        return this.http.post('http://localhost:8080/api/oauth/access_token', body.toString(), options).pipe(
           switchMap((res: any) => {
-            TokenInterceptorService.accessToken = res.token;
+            console.log(res);
+            TokenInterceptorService.accessToken = res.access_token;
+            localStorage.setItem("refreshToken",res.refresh_token);
 
             return next.handle(request.clone({
               setHeaders: {
@@ -41,5 +53,8 @@ export class TokenInterceptorService implements HttpInterceptor {
       this.refresh = false;
       return throwError(() => err);
     }));
+  }
+  refresh_token(arg0: string, refresh_token: any) {
+    throw new Error('Method not implemented.');
   }
 }

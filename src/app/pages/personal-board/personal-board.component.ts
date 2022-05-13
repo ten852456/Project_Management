@@ -4,7 +4,7 @@ import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { MatDialog } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
 
 
@@ -25,6 +25,7 @@ export class PersonalBoardComponent implements OnInit {
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
+    private router :Router,
   ) {
 
   }
