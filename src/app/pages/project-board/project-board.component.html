@@ -1,18 +1,8 @@
-<button (click)="replacStatus()">save</button>
-
-<form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> search </mat-label>
-        <input matInput [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
-        <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-</form>
-
 <div class="board">
 
-    <!-- <div class="board-bar">
+    <div class="board-bar">
         <p class="board-name">{{ board.name }}</p>
-    </div> -->
+    </div>
 
     <div class="board-wrapper">
 
@@ -20,7 +10,7 @@
             <div class="board-column" *ngFor="let column of board.columns">
 
                 <div class="column-title">
-                    {{ column.name }}<button (click)="openDialog()">+</button>
+                    {{ column.name }}
                 </div>
 
 
