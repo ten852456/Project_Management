@@ -66,7 +66,7 @@
                 <app-project-list></app-project-list>
             </div>
             <div *ngIf="project">
-                <app-not-found></app-not-found>
+                <app-project-board [id]="id"></app-project-board>
             </div>
             <div *ngIf="manageTime">
                 <app-manage-time></app-manage-time>
