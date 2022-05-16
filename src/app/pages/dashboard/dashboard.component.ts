@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   spentTime:boolean = false;
   projectList:boolean = false;
   project:boolean = false;
+  manageTime:boolean = false;
 
   constructor(
     private router: Router
@@ -25,24 +26,35 @@ export class DashboardComponent implements OnInit {
     this.spentTime = false;
     this.project = false;
     this.projectList = false;
+    this.manageTime = false;
   }
   gotoSpentTime(){
     this.personalboard = false;
     this.spentTime = true;
     this.project = false;
     this.projectList = false;
+    this.manageTime = false;
   }
   gotoProjectList(){
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
     this.projectList = true;
+    this.manageTime = false;
   }  
   gotoProject(){
     this.personalboard = false;
     this.spentTime = false;
     this.project = true;
     this.projectList = false;
+    this.manageTime = false;
+  }
+  gotoManageTime(){
+    this.personalboard = false;
+    this.spentTime = false;
+    this.project = false;
+    this.projectList = false;
+    this.manageTime = true;
   }
 
 

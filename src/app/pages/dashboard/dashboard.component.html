@@ -34,6 +34,11 @@
         &nbsp;Projects
       </button>
 
+            <button mat-button class="menu-button" style="float: left;" (click)="gotoManageTime()">
+        <mat-icon>alarm</mat-icon>
+        &nbsp;Manage Time
+      </button>
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -50,6 +55,9 @@
             </div>
             <div *ngIf="project">
                 <app-not-found></app-not-found>
+            </div>
+            <div *ngIf="manageTime">
+                <app-manage-time></app-manage-time>
             </div>
         </div>
     </mat-sidenav-content>

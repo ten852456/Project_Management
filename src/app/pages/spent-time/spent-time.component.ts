@@ -1,20 +1,24 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { MatDatepicker } from "@angular/material/datepicker";
-import { SpentTimeService } from './spent-time.service';
+import { ApiServiceService } from 'src/app/api-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 
 export interface testCard {
+  project: any;
   title: string;
   specs: number;
   implement: number;
   fixingSpecs: number;
   fixingImplement: number;
+  id: number;
 }
 
 export interface testProject {
+  id: number;
   title: string;
+  test: testCard[];
 }
 
 @Component({
@@ -35,6 +39,7 @@ export class SpentTimeComponent<D> implements OnInit{
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   testCards: testCard[]=[];
+  testProjects: testProject[] = [];
 
   sumSpecs !: number;
   sumImplement !: number;
@@ -48,8 +53,9 @@ export class SpentTimeComponent<D> implements OnInit{
   });
   
   displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
-   
-  constructor(private spentTimeService : SpentTimeService) { }
+  queryCard= '?__repotable=true&__user=userId';
+  queryProject= '?__user=userId&active=true';
+  constructor(private api: ApiServiceService,) { }
 
   ngOnInit(): void {
     this.showTable();
@@ -57,10 +63,36 @@ export class SpentTimeComponent<D> implements OnInit{
   
   showTable():void {
      this.check =1;
+     this.api.getCard(this.queryCard).subscribe((resp: any) => {
+      this.testCards = resp.data,
+      this.api.getProject(this.queryProject).subscribe((resp: any) => {
+        this.testProjects = resp.data,
+        this.mapTestProject()
+      });
+
+    });
+  }
+
+  mapTestProject(): void {
+
+    for (var i = 0; i < this.testProjects.length; i++) {
+      if (this.testProjects[i].test == undefined) {
+        this.testProjects[i].test = [];
+      }
+     
+    }
+    for (var i = 0; i < this.testProjects.length; i++) {
+      for (var j = 0; j < this.testCards.length; j++) {
+        if (this.testCards[j].project.id == this.testProjects[i].id) {
+          this.testProjects[i].test.push(this.testCards[j]);
+        }
+      }
+    }
+
   }
 
   showDailyTable(): void {
-    this.spentTimeService.getCard().subscribe((resp: any) => {this.testCards = resp.data
+    this.api.getCard(this.queryCard).subscribe((resp: any) => {this.testCards = resp.data
       // ดูโครงสร้างของ json ทั้งหมดผ่าน console
       // ดู status code ได้ค่า 200
      });    
@@ -86,22 +118,13 @@ export class SpentTimeComponent<D> implements OnInit{
     this.check = 2;
     const [start, end] = this.calculateDateRange();
     this.picker.select(start);
-    this.picker.select(end);
+    //this.picker.select(end);
     this.picker.close();
   }
   
   showProjectTable(): void {
 
   }
-
-  private get today(): D {
-    const today = this.dateAdapter.getValidDateOrNull(new Date());
-    if (today === null) {
-      throw new Error('date creation failed');
-    }
-    return today;
-  }
-
   private calculateDateRange(): [start: D, end: D] {
     const today = this.today;
     return this.calculateWeek(today);
@@ -115,5 +138,15 @@ export class SpentTimeComponent<D> implements OnInit{
     console.log(end);
     return [start, end];
   }
+
+  private get today(): D {
+    const today = this.dateAdapter.getValidDateOrNull(new Date());
+    if (today === null) {
+      throw new Error('date creation failed');
+    }
+    return today;
+  }
+
+ 
 
 }

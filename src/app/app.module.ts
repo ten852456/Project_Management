@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +43,6 @@ import { PersonalBoardComponent } from './pages/personal-board/personal-board.co
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,

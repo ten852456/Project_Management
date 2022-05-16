@@ -1,7 +1,7 @@
 <div class="group">
 
     <div class="dailyPage" *ngIf = "this.check == 1">
-        <mat-form-field appearance="fill" style="position: absolute;">
+        <mat-form-field appearance="outline" style="position: absolute;">
             <mat-label>Choose a date</mat-label>
             <input matInput [matDatepicker]="datepicker" [value]="selectedValue">
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -15,18 +15,18 @@
                 <mat-button-toggle value="underline" (click)="showProjectTable()">Project</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
-        <div>
-            <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
-
+        <div *ngFor = "let testProject of testProjects">
+            <table mat-table [dataSource]="testProject.test" class="mat-elevation-z8">
+    
                 <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
+              The actual rendered columns are set as a property on the row definition" -->
+    
                 <!-- Position Column -->
                 <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef >kk </th>
+                    <th mat-header-cell *matHeaderCellDef >{{testProject.title}}</th>
                     <td mat-cell *matCellDef="let element"> {{element.title}} </td>
                 </ng-container>
-
+    
                 <!-- Name Column -->
                 <ng-container matColumnDef="specs">
                     <th mat-header-cell *matHeaderCellDef> Specs </th>
@@ -36,7 +36,7 @@
                         </mat-form-field>
                     </td>
                 </ng-container>
-
+    
                 <!-- Weight Column -->
                 <ng-container matColumnDef="implement">
                     <th mat-header-cell *matHeaderCellDef> Implement </th>
@@ -46,7 +46,7 @@
                         </mat-form-field>
                     </td>
                 </ng-container>
-
+    
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="fixingSpecs">
                     <th mat-header-cell *matHeaderCellDef> Fix Specs </th>
@@ -56,7 +56,7 @@
                         </mat-form-field>
                     </td>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="fixingImplement">
                     <th mat-header-cell *matHeaderCellDef> Fix Implement </th>
                     <td mat-cell *matCellDef="let element">
@@ -65,7 +65,7 @@
                         </mat-form-field>
                     </td>
                 </ng-container>
-
+    
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;  "></tr>
             </table>
@@ -91,22 +91,78 @@
             </mat-button-toggle-group>
         </div>
 
-        <table mat-table [dataSource]="testCards" class="mat-elevation-z8">
+        <div *ngFor ="let testProject of testProjects">
+            <table mat-table [dataSource]="testProject.test" class="mat-elevation-z8">
+    
+                <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+    
+                <!-- Position Column -->
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef > {{testProject.title}}</th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.title}} 
+                    </td>
+                </ng-container>
+    
+                <!-- Name Column -->
+                <ng-container matColumnDef="specs">
+                    <th mat-header-cell *matHeaderCellDef> Specs </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.specs}}
+                    </td>
+                </ng-container>
+    
+                <!-- Weight Column -->
+                <ng-container matColumnDef="implement">
+                    <th mat-header-cell *matHeaderCellDef> Implement </th>
+                    <td mat-cell *matCellDef="let element">           
+                        {{element.implement}}       
+                    </td>
+                </ng-container>
+    
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="fixingSpecs">
+                    <th mat-header-cell *matHeaderCellDef> Fix Specs </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.fixingSpecs}}
+                    </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="fixingImplement">
+                    <th mat-header-cell *matHeaderCellDef> Fix Implement </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.fixingImplement}}
+                    </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;  "></tr>
+                
+            </table>
+            </div>
+    </div>
+
+    <div class="projectPage" *ngIf = "check == 3" >
+        <div *ngFor ="let testProject of testProjects">
+        <table mat-table [dataSource]="testProject.test" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
             <!-- Position Column -->
             <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef > Test1</th>
-                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                <th mat-header-cell *matHeaderCellDef > {{testProject.title}}</th>
+                <td mat-cell *matCellDef="let element"> 
+                    {{element.title}}
+                </td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="specs">
                 <th mat-header-cell *matHeaderCellDef> Specs </th>
                 <td mat-cell *matCellDef="let element">
-                        {{element.specs}}
+                    {{element.specs}}
                 </td>
             </ng-container>
 
@@ -114,9 +170,7 @@
             <ng-container matColumnDef="implement">
                 <th mat-header-cell *matHeaderCellDef> Implement </th>
                 <td mat-cell *matCellDef="let element">
-                    
-                       {{element.implement}}
-                  
+                    {{element.implement}}
                 </td>
             </ng-container>
 
@@ -139,5 +193,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;  "></tr>
             
         </table>
+        </div>
     </div>
 </div>
