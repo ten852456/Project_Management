@@ -38,11 +38,11 @@ export class PersonalBoardComponent implements OnInit {
   }
 
   getCards() {
-    this.api.getCrad('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCrad('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCrad('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCrad('?status=DONE').subscribe((res:any) => {this.done =  res.data,
-            this.api.getCrad('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE').subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });

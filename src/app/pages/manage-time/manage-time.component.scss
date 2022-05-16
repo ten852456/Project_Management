@@ -18,6 +18,11 @@
 .mat-header-row {
     background-color: hsla(234, 51%, 50%, 0.308);
     color: black;
+    text-align: center !important;
+}
+.mat-footer-row{
+    background-color: hsla(48, 76%, 56%, 0.336);
+
 }
 
 .group {
@@ -32,7 +37,7 @@ table {
 }
 
 .mat-sort-header-container {
-    justify-content: center;
+    justify-content: center!important;
 }
 
 .mat-header-cell {
