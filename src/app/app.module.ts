@@ -40,22 +40,9 @@ import { MemberComponent } from './pages/member/member.component';
 import { MemberDialogComponent } from './pages/member/member-dialog/member-dialog.component';
 import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
 import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
+import { ProjectBoardComponent } from './pages/project-board/project-board.component';
 @NgModule({
-  declarations: [
-    AppComponent, 
-    NotFoundComponent, 
-    DashboardComponent, 
-    ProjectListComponent, 
-    SpentTimeComponent, 
-    ProjectDialogComponent, 
-    LoginComponent, 
-    ManageTimeComponent, 
-    TaskDialogComponent, 
-    PersonalBoardComponent, 
-    MemberComponent, 
-    MemberDialogComponent,
-    CardDialogComponent,
-  ],
+  declarations: [AppComponent, NotFoundComponent, DashboardComponent, ProjectListComponent, SpentTimeComponent, ProjectDialogComponent, LoginComponent, ManageTimeComponent, TaskDialogComponent, PersonalBoardComponent, MemberComponent, CardDialogComponent, ProjectBoardComponent],
 
   imports: [
     BrowserModule,

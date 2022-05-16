@@ -37,8 +37,7 @@
             </button>
             <div>
                 <div *ngFor="let d of data">
-                    <button class="nav-link" mat-button class="menu-button"
-                        (click)="gotoProject(d.title)">{{d.title}}</button>
+                    <button class="nav-link" mat-button class="menu-button" (click)="gotoProject(d.id)">{{d.title}}</button>
                 </div>
             </div>
 
@@ -65,7 +64,7 @@
                 <app-project-list></app-project-list>
             </div>
             <div *ngIf="project">
-                <app-not-found></app-not-found>
+                <app-project-board [id]="id"></app-project-board>
             </div>
             <div *ngIf="manageTime">
                 <app-manage-time></app-manage-time>
