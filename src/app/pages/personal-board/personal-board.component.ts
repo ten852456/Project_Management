@@ -22,6 +22,8 @@ export class PersonalBoardComponent implements OnInit {
   completed!:any;
   board!: Board;
 
+  searchText: any;
+
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
