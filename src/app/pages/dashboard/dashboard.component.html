@@ -1,12 +1,12 @@
 <mat-toolbar>
     <mat-toolbar-row>
         <button mat-icon-button>
-      <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
-    </button> ProjectManagement
+            <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
+        </button> ProjectManagement
         <span class="example-spacer"></span>
         <button mat-icon-button class="example-icon" (click)="logout()">
-      <mat-icon class='material-icons-outlined'>logout</mat-icon>
-    </button>
+            <mat-icon class='material-icons-outlined'>logout</mat-icon>
+        </button>
     </mat-toolbar-row>
 
 </mat-toolbar>
@@ -14,25 +14,43 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened="true">
         <mat-nav-list>
-            <button mat-button class="menu-button" style="float: left;" (click)="gotoPersonalboard()">
-        <mat-icon>person</mat-icon>
-        &nbsp;Personal Board
-      </button>
+            <button mat-button class="personalboard" style="float: left;" (click)="gotoDashboard()">
+                <mat-icon>person</mat-icon>
+                &nbsp;Personal Board
+            </button>
 
-            <button mat-button class="menu-button" style="float: left;" (click)="gotoSpentTime()">
-        <mat-icon>alarm_add</mat-icon>
-        &nbsp;Spent Time
-      </button>
+            <button mat-button class="spenttime" style="float: left;" (click)="gotoSpentTime()">
+                <mat-icon>alarm_add</mat-icon>
+                &nbsp;Spent Time
+            </button>
 
-            <button mat-button class="menu-button" style="float: left;" (click)="gotoProjectList()">
-        <mat-icon>list</mat-icon>
-        &nbsp;Project List
-      </button>
+            <button mat-button class="projectlist" style="float: left;" (click)="gotoProjectList()">
+                <mat-icon>list</mat-icon>
+                &nbsp;Project List
+            </button>
 
-            <button mat-button class="menu-button" style="float: left;" (click)="gotoProject()">
-        <mat-icon>file_copy</mat-icon>
-        &nbsp;Projects
-      </button>
+
+            <button mat-button class="menu-button" style="float: left;" (click)="countProjectList()">
+                <mat-icon>file_copy</mat-icon>
+                &nbsp;Projects
+                <mat-icon style="font-size: 38px;" [inline]="true">arrow_drop_down</mat-icon>
+            </button>
+            <div>
+                <div *ngFor="let d of data">
+                    <button class="nav-link" mat-button class="menu-button"
+                        (click)="gotoProject(d.title)">{{d.title}}</button>
+                </div>
+            </div>
+
+            <button mat-button class="managetime" (click)="gotoManageTime()">
+                <mat-icon>alarm</mat-icon>
+                &nbsp;Manage Time
+            </button>
+
+            <button mat-button class="member" (click)="gotoMember()">
+                <mat-icon>group</mat-icon>
+                &nbsp;Member
+            </button>
 
             <button mat-button class="menu-button" style="float: left;" (click)="gotoManageTime()">
         <mat-icon>alarm</mat-icon>
@@ -43,7 +61,6 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <div>
-
             <div *ngIf="personalboard">
                 <app-personal-board></app-personal-board>
             </div>
@@ -58,6 +75,9 @@
             </div>
             <div *ngIf="manageTime">
                 <app-manage-time></app-manage-time>
+            </div>
+            <div *ngIf="member">
+                <app-member></app-member>
             </div>
         </div>
     </mat-sidenav-content>

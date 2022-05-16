@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { MatDatepicker } from "@angular/material/datepicker";
 import { ApiServiceService } from 'src/app/api-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
 import { DateAdapter } from '@angular/material/core';
-import { MatDateRangePicker } from '@angular/material/datepicker';
+
 
 export interface testCard {
   project: any;
@@ -25,16 +25,22 @@ export interface testProject {
   selector: 'app-spent-time',
   templateUrl: './spent-time.component.html',
   styleUrls: ['./spent-time.component.scss'],
+  providers: [
+    {
+      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+      useClass: SpentTimeComponent,
+    },
+  ],
 })
 
-export class SpentTimeComponent<D> implements OnInit{
+export class SpentTimeComponent<D> {
 
   @ViewChild('datepickerFooter', { static: false })
   datepickerFooter!: ElementRef;
   @ViewChild('datepicker', { static: false })
   datepicker!: MatDatepicker<any>;
-  private dateAdapter!: DateAdapter<D>;
-  private picker!: MatDateRangePicker<D>
+  @ViewChild('picker', { static: false })
+  picker!: MatDateRangePicker<any>;
 
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
@@ -47,15 +53,41 @@ export class SpentTimeComponent<D> implements OnInit{
   sumFixingImplement !: number;
   check !: number;
 
+  displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
   
-  displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
   queryCard= '?__repotable=true&__user=userId';
   queryProject= '?__user=userId&active=true';
-  constructor(private api: ApiServiceService,) { }
+
+   
+  constructor(private _dateAdapter: DateAdapter<D>,
+    private api: ApiServiceService) { }
+
+  private get today() : D {
+    const date = this._dateAdapter.getValidDateOrNull(new Date());
+    if (date === null) {
+      throw new Error('date creation failed');
+    }
+    return date;
+  }
+
+  selectionFinished(date: D): [start: D, end: D] {
+    return this._createWeeklyRange(date);
+  }
+  createPreview(activeDate: D): [start: D, end: D] {
+    return this._createWeeklyRange(activeDate);
+  }
+
+  private _createWeeklyRange(date: D) : [start: D, end: D] {
+      const datestart = this._dateAdapter.getFirstDayOfWeek() - this._dateAdapter.getDayOfWeek(date);
+      const start = this._dateAdapter.addCalendarDays(date, datestart);
+      const end = this._dateAdapter.addCalendarDays(start, 6);
+      return [start, end];
+  }
 
   ngOnInit(): void {
     this.showTable();
@@ -116,7 +148,9 @@ export class SpentTimeComponent<D> implements OnInit{
 
   showWeeklyTable(): void {
     this.check = 2;
-    const [start, end] = this.calculateDateRange();
+    
+    const date = this.today;
+    const [start, end] = this.selectionFinished(date);
     this.picker.select(start);
     //this.picker.select(end);
     this.picker.close();
@@ -125,28 +159,5 @@ export class SpentTimeComponent<D> implements OnInit{
   showProjectTable(): void {
 
   }
-  private calculateDateRange(): [start: D, end: D] {
-    const today = this.today;
-    return this.calculateWeek(today);
-  }
-
-  private calculateWeek(forDay: D): [start: D, end: D] {
-    const deltaStart = this.dateAdapter.getFirstDayOfWeek() - this.dateAdapter.getDayOfWeek(forDay);
-    const start = this.dateAdapter.addCalendarDays(forDay, deltaStart);
-    const end = this.dateAdapter.addCalendarDays(start, 6);
-    console.log(start);
-    console.log(end);
-    return [start, end];
-  }
-
-  private get today(): D {
-    const today = this.dateAdapter.getValidDateOrNull(new Date());
-    if (today === null) {
-      throw new Error('date creation failed');
-    }
-    return today;
-  }
-
- 
 
 }

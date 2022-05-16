@@ -1,1 +1,29 @@
-<p>personal-board works!</p>
+<button (click)="replacStatus()">save</button>
+<div class="board">
+
+    <div class="board-bar">
+        <p class="board-name">{{ board.name }}</p>
+    </div>
+
+    <div class="board-wrapper">
+
+        <div class="board-columns" cdkDropListGroup>
+            <div class="board-column" *ngFor="let column of board.columns">
+
+                <div class="column-title">
+                    {{ column.name }}<button (click)="openDialog()">+</button>
+                </div>
+
+
+                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
+                    <div class="task" *ngFor="let item of column.cards" cdkDrag>
+                        {{ item.title }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
