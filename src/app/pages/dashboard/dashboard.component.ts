@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 @Component({
   selector: 'app-dashboard',

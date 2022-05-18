@@ -18,6 +18,7 @@
     // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
     min-width: 0;
     min-height: 0;
+    padding-top: 15px;
     .board-bar {
         background: rgba(gray, 0.5);
         padding: 8px 15px;
@@ -106,6 +107,7 @@
 }
 
 .example-form {
+    padding-top: 20px;
     padding-left: 40px;
     position: absolute;
 }

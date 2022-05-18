@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
@@ -82,24 +82,24 @@ export class PersonalBoardComponent implements OnInit {
     this.dialog.open(CardDialogComponent, {width: '50%'});
   }
 
-  // getCradsUnassigned():any{
-  //   this.api.getCrad('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data});
+  // getcardsUnassigned():any{
+  //   this.api.getcard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data});
   // }
 
-  // getCradsTodo():any{
-  //   this.api.getCrad('?status=TODO').subscribe((res:any) => {this.todo =  res.data});
+  // getcardsTodo():any{
+  //   this.api.getcard('?status=TODO').subscribe((res:any) => {this.todo =  res.data});
   // }
 
-  // getCradsDoing():any{
-  //   this.api.getCrad('?status=DOING').subscribe((res:any) => {this.doing =  res.data});
+  // getcardsDoing():any{
+  //   this.api.getcard('?status=DOING').subscribe((res:any) => {this.doing =  res.data});
   // }
 
-  // getCradsDone():any{
-  //   this.api.getCrad('?status=DONE').subscribe((res:any) => {this.done =  res.data});
+  // getcardsDone():any{
+  //   this.api.getcard('?status=DONE').subscribe((res:any) => {this.done =  res.data});
   // }
 
-  // getCradsCompleted():any{
-  //   this.api.getCrad('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data});
+  // getcardsCompleted():any{
+  //   this.api.getcard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data});
   // }
 
 

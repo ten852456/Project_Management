@@ -1,1 +1,18 @@
-<p>member-dialog works!</p>
+
+<mat-dialog-content>
+    <form [formGroup]="form" (submit)="addMember()" class="example-form" align="end">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput placeholder="Add name here...">
+        </mat-form-field>
+   
+        <mat-form-field appearance="outline" style="padding-bottom: 10px;">
+            <mat-label>Username</mat-label>
+            <input formControlName="username" matInput placeholder="Add username here...">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" (click)="addMember()" mat-dialog-close> Finish </button>
+</mat-dialog-actions>
