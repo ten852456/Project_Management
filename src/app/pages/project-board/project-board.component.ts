@@ -21,6 +21,8 @@ export class ProjectBoardComponent implements OnInit {
   completed!:any;
   board!: Board;
 
+  searchText: any;
+
   constructor(
     private api: ApiServiceService,
   ) { }
