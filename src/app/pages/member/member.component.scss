@@ -1,5 +1,6 @@
 h1 {
     padding: 35px;
+    padding-bottom: 0%;
     text-align: center;
 }
 
@@ -8,4 +9,23 @@ h1 {
     position: absolute;
     left: 93%;
     top: 20px;
+    padding-bottom: 0%;
+}
+
+.admin {
+    padding-left: 50px;
+    .icon-admin {
+        position: absolute;
+        padding-top: 6px;
+        opacity: 70%;
+    }
+}
+
+.user {
+    padding-left: 50px;
+    .icon-user {
+        position: absolute;
+        padding-top: 6px;
+        opacity: 70%;
+    }
 }

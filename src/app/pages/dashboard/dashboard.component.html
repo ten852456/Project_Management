@@ -46,7 +46,7 @@
             </button>
 
             <button mat-button class="member" (click)="gotoMember()">
-                <mat-icon>group</mat-icon>
+                <mat-icon>assignment_ind</mat-icon>
                 &nbsp;Member
             </button>
         </mat-nav-list>
@@ -69,7 +69,7 @@
                 <app-manage-time></app-manage-time>
             </div>
             <div *ngIf="member">
-                <app-member></app-member>
+                <app-member [members]="nameMember.data"></app-member>
             </div>
         </div>
     </mat-sidenav-content>

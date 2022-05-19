@@ -3,7 +3,7 @@
     <form [formGroup]="form" (submit)="addMember()" class="example-form" align="end">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input formControlName="name" matInput placeholder="Add name here...">
+            <input formControlName="displayName" matInput placeholder="Add name here...">
         </mat-form-field>
    
         <mat-form-field appearance="outline" style="padding-bottom: 10px;">
@@ -11,6 +11,13 @@
             <input formControlName="username" matInput placeholder="Add username here...">
         </mat-form-field>
     </form>
+
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectRole">
+        <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">
+            {{role}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <div>Role is: {{selectRole}}</div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

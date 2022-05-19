@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class MemberDialogComponent implements OnInit {
 
   form!: FormGroup;
+  selectRole: string | undefined;
+  roles: string[] = ['System Admin', 'User'];
 
   private userListUrl = environment.userListUrl;
 
@@ -18,6 +20,7 @@ export class MemberDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      displayName: '',
       username: '',
     });
   }

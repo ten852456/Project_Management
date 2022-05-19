@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  private userListUrl = environment.userListUrl;
+  nameMember: any;
+
   personalboard:boolean = false;
   dashboard:boolean = false;
   spentTime:boolean = false;
@@ -106,6 +111,7 @@ export class DashboardComponent implements OnInit {
     this.member = false;
   }
   gotoMember() {
+    this.getMember();
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
@@ -119,6 +125,11 @@ export class DashboardComponent implements OnInit {
     TokenInterceptorService.accessToken = '';
     this.router.navigate(['/login']);
 
+  }
+
+  getMember(): void {
+    this.http.get<any[]>(this.userListUrl)
+    .subscribe((nameMember) => this.nameMember = nameMember);
   }
 
 }
