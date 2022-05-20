@@ -26,7 +26,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       if (err.status === 401 && !this.refresh) {
         this.refresh = true;
         var refresh_token = ""
-        refresh_token = localStorage.getItem("refreshToken")!;
+        refresh_token = sessionStorage.getItem("refreshToken")!;
         let body = new URLSearchParams();
         body.set('grant_type', 'refresh_token');
         body.set('refresh_token', refresh_token);
@@ -40,7 +40,7 @@ export class TokenInterceptorService implements HttpInterceptor {
           switchMap((res: any) => {
             console.log(res);
             TokenInterceptorService.accessToken = res.access_token;
-            localStorage.setItem("refreshToken",res.refresh_token);
+            sessionStorage.setItem("refreshToken",res.refresh_token);
 
             return next.handle(request.clone({
               setHeaders: {

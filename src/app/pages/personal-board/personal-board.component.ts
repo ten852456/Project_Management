@@ -59,6 +59,7 @@ export class PersonalBoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      this.replacStatus();
     }
   }
 
@@ -76,6 +77,14 @@ export class PersonalBoardComponent implements OnInit {
     this.board.columns.forEach(column =>  {
         column.cards.forEach(x => x.status = column.status)
    });
+  }
+
+  show():void {
+    console.log(this.board.columns);
+    this.board.columns.forEach(column =>  {
+      column.cards.forEach(x => this.api.updateCard(x).subscribe(res => console.log(res)))
+    });
+
   }
 
   openDialog() {
