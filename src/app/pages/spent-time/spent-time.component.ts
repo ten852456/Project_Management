@@ -3,6 +3,9 @@ import { ApiServiceService } from 'src/app/api-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
 import { DateAdapter } from '@angular/material/core';
+import { Card, Project } from '../manage-time/manage-time.component';
+
+
 
 
 export interface testCard {
@@ -19,6 +22,26 @@ export interface testProject {
   id: number;
   title: string;
   test: testCard[];
+}
+
+export interface user {
+  id: number;
+  displayName: string;
+  userName: string;
+  roles: string[];
+}
+export interface dailyCard {
+  spentDate: string;
+  id: number;
+  s1Hours: number;
+  s2Hours: number;
+  s3Hours: number;
+  s4Hours: number;
+  card: Card;
+  project: Project;
+  user: Card;
+  sumHours: number;
+
 }
 
 @Component({
@@ -45,7 +68,9 @@ export class SpentTimeComponent<D> {
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   testCards: testCard[]=[];
+  users: user[] =[];
   testProjects: testProject[] = [];
+  dailyCards: dailyCard[]= [];
 
   sumSpecs !: number;
   sumImplement !: number;
@@ -66,7 +91,9 @@ export class SpentTimeComponent<D> {
    
   constructor(
     private _dateAdapter: DateAdapter<D>,
-    private api: ApiServiceService
+    private api: ApiServiceService,
+
+   
   ) { }
 
   private get today() : D {
@@ -156,10 +183,19 @@ export class SpentTimeComponent<D> {
     this.picker.select(start);
     this.picker.select(end);
     this.picker.close();
+    this.api.getDailyCardSpentTime('?max='+ 99 + '&__template=dailyCardSpentTime.list&user=2&spentDate_between='+ [start,end]).subscribe((resp:any) => this.dailyCards = resp.data);
+    
   }
   
   showProjectTable(): void {
+    this.check = 3;
+   
+ 
 
   }
+  user(): void {
+    this.api.getUser('?__template=user.list').subscribe((resp: any) => this.users = resp.data);
+  }
+
 
 }
