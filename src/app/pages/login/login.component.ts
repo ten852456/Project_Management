@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: 'u1',
+      username: 'sa',
       password: '1234'
     });
   }
@@ -30,7 +30,9 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8080/api/login', this.form.getRawValue(), {withCredentials: true})
       .subscribe((res: any) => {
         TokenInterceptorService.accessToken = res.access_token,console.log(1);
-        localStorage.setItem("refreshToken",res.refresh_token);
+        sessionStorage.setItem("refreshToken",res.refresh_token);
+        sessionStorage.setItem("username",res.username);
+        sessionStorage.setItem("role",res.roles);
         this.router.navigate(['/home']);
       },
       (error : HttpErrorResponse)=>{
