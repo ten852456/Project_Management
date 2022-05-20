@@ -41,9 +41,9 @@ export class DashboardComponent implements OnInit {
     })
   }
   checkToken(){
-    if (localStorage.getItem("refreshToken")!=null){
+    if (sessionStorage.getItem("refreshToken")!=null){
       var refresh_token = ""
-      refresh_token = localStorage.getItem("refreshToken")!;
+      refresh_token = sessionStorage.getItem("refreshToken")!;
       let body = new URLSearchParams();
       body.set('grant_type', 'refresh_token');
       body.set('refresh_token', refresh_token);
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
       this.http.post('http://localhost:8080/api/login', body.toString(), options).subscribe((res: any) => {
           console.log(res)
           TokenInterceptorService.accessToken = res.access_token;
-          localStorage.setItem("refreshToken",res.refresh_token)
+          sessionStorage.setItem("refreshToken",res.refresh_token)
         })
         this.personalboard = true;
     }
@@ -123,6 +123,8 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     TokenInterceptorService.accessToken = '';
+    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
 
   }
