@@ -132,7 +132,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   showTable(): void {
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.check = 1;
-    this.api.getDailyCardSpentTime().subscribe((resp: any) => { this.dailyCards = resp.data });
+    this.api.getDailyCardSpentTime('').subscribe((resp: any) => { this.dailyCards = resp.data });
   }
 
   mapProjects(): void {
