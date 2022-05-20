@@ -8,6 +8,7 @@ export const environment = {
   production: false,
   loginUrl: serverUrl + '/api/login',
   projectListUrl: serverUrl + '/api/project',
+  cardListUrl: serverUrl + '/api/card',
 };
 
 /*
