@@ -1,7 +1,13 @@
 .mat-button-toggle-group {
     float: right;
-    padding: 5px 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
+
+.mat-button-toggle-checked {
+    background-color: #2B92F9!important;
+    color: aliceblue !important;
+  }
 
 .mat-form-field {
     padding-right: 20px;
@@ -12,6 +18,11 @@
 .mat-header-row {
     background-color: hsla(234, 51%, 50%, 0.308);
     color: black;
+    text-align: center !important;
+}
+.mat-footer-row{
+    background-color: hsla(48, 76%, 56%, 0.336);
+
 }
 
 .group {
@@ -26,7 +37,7 @@ table {
 }
 
 .mat-sort-header-container {
-    justify-content: center;
+    justify-content: center!important;
 }
 
 .mat-header-cell {

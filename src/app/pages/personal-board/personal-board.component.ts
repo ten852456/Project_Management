@@ -23,6 +23,8 @@ export class PersonalBoardComponent implements OnInit {
   completed!:any;
   board!: Board;
 
+  searchText: any;
+
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
@@ -36,11 +38,11 @@ export class PersonalBoardComponent implements OnInit {
   }
 
   getCards() {
-    this.api.getCrad('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCrad('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCrad('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCrad('?status=DONE').subscribe((res:any) => {this.done =  res.data,
-            this.api.getCrad('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE').subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });
@@ -57,6 +59,7 @@ export class PersonalBoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      this.replacStatus();
     }
   }
 
@@ -74,6 +77,14 @@ export class PersonalBoardComponent implements OnInit {
     this.board.columns.forEach(column =>  {
         column.cards.forEach(x => x.status = column.status)
    });
+  }
+
+  show():void {
+    console.log(this.board.columns);
+    this.board.columns.forEach(column =>  {
+      column.cards.forEach(x => this.api.updateCard(x).subscribe(res => console.log(res)))
+    });
+
   }
 
   openDialog() {

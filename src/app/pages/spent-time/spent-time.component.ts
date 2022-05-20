@@ -1,19 +1,24 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
-import { SpentTimeService } from './spent-time.service';
-import { DateAdapter } from '@angular/material/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/api-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
+import { DateAdapter } from '@angular/material/core';
+
 
 export interface testCard {
+  project: any;
   title: string;
   specs: number;
   implement: number;
   fixingSpecs: number;
   fixingImplement: number;
+  id: number;
 }
 
 export interface testProject {
+  id: number;
   title: string;
+  test: testCard[];
 }
 
 @Component({
@@ -40,6 +45,7 @@ export class SpentTimeComponent<D> {
   selectedValue : Date | null = null;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   testCards: testCard[]=[];
+  testProjects: testProject[] = [];
 
   sumSpecs !: number;
   sumImplement !: number;
@@ -53,8 +59,13 @@ export class SpentTimeComponent<D> {
     start: new FormControl(),
     end: new FormControl(),
   });
+  
+  queryCard= '?__repotable=true&__user=userId';
+  queryProject= '?__user=userId&active=true';
+
    
-  constructor(private spentTimeService : SpentTimeService, private _dateAdapter: DateAdapter<D>) { }
+  constructor(private _dateAdapter: DateAdapter<D>,
+    private api: ApiServiceService) { }
 
   private get today() : D {
     const date = this._dateAdapter.getValidDateOrNull(new Date());
@@ -84,10 +95,36 @@ export class SpentTimeComponent<D> {
   
   showTable():void {
      this.check =1;
+     this.api.getCard(this.queryCard).subscribe((resp: any) => {
+      this.testCards = resp.data,
+      this.api.getProject(this.queryProject).subscribe((resp: any) => {
+        this.testProjects = resp.data,
+        this.mapTestProject()
+      });
+
+    });
+  }
+
+  mapTestProject(): void {
+
+    for (var i = 0; i < this.testProjects.length; i++) {
+      if (this.testProjects[i].test == undefined) {
+        this.testProjects[i].test = [];
+      }
+     
+    }
+    for (var i = 0; i < this.testProjects.length; i++) {
+      for (var j = 0; j < this.testCards.length; j++) {
+        if (this.testCards[j].project.id == this.testProjects[i].id) {
+          this.testProjects[i].test.push(this.testCards[j]);
+        }
+      }
+    }
+
   }
 
   showDailyTable(): void {
-    this.spentTimeService.getCard().subscribe((resp: any) => {this.testCards = resp.data
+    this.api.getCard(this.queryCard).subscribe((resp: any) => {this.testCards = resp.data
       // ดูโครงสร้างของ json ทั้งหมดผ่าน console
       // ดู status code ได้ค่า 200
      });    
@@ -115,7 +152,7 @@ export class SpentTimeComponent<D> {
     const date = this.today;
     const [start, end] = this.selectionFinished(date);
     this.picker.select(start);
-    this.picker.select(end);
+    //this.picker.select(end);
     this.picker.close();
   }
   

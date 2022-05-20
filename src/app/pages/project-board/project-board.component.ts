@@ -33,11 +33,11 @@ export class ProjectBoardComponent implements OnInit {
   }
 
   getCards() {
-    this.api.getCrad('?status=UNASSIGNED&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCrad('?status=TODO&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCrad('?status=DOING&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCrad('?status=DONE&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
-            this.api.getCrad('?status=COMPLETED&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });

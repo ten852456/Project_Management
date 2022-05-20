@@ -29,16 +29,14 @@
                 &nbsp;Project List
             </button>
 
-
             <button mat-button class="menu-button" style="float: left;" (click)="countProjectList()">
                 <mat-icon>file_copy</mat-icon>
                 &nbsp;Projects
-                <mat-icon style="font-size: 38px;" [inline]="true">arrow_drop_down</mat-icon>
+                <mat-icon class="project" style="font-size: 25px;" [inline]="true">keyboard_arrow_down</mat-icon>
             </button>
             <div>
                 <div *ngFor="let d of data">
-                    <button class="nav-link" mat-button class="menu-button"
-                        (click)="gotoProject(d.title)">{{d.title}}</button>
+                    <button class="nav-link" mat-button class="menu-button" (click)="gotoProject(d.id)">{{d.title}}</button>
                 </div>
             </div>
 
@@ -51,7 +49,6 @@
                 <mat-icon>group</mat-icon>
                 &nbsp;Member
             </button>
-
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
