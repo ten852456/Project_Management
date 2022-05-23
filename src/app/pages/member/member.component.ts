@@ -15,8 +15,8 @@ export class MemberComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addMember() {
-    this.dialog.open(MemberDialogComponent);
+  openDialog() {
+    this.dialog.open(MemberDialogComponent, {width: '50%'});
   }
 
 }

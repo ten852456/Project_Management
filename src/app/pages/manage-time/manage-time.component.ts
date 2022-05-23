@@ -1,11 +1,12 @@
-import { Component, AfterViewInit, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { MatDatepicker } from "@angular/material/datepicker";
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { __values } from 'tslib';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
+import { DateAdapter } from '@angular/material/core';
 
 export interface MemberList {
   userId: number;
@@ -50,17 +51,30 @@ export interface DailyCardSpentTime {
 @Component({
   selector: 'app-manage-time',
   templateUrl: './manage-time.component.html',
-  styleUrls: ['./manage-time.component.scss']
+  styleUrls: ['./manage-time.component.scss'],
+  providers: [
+    {
+      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+      useClass: ManageTimeComponent,
+    },
+  ],
 })
-export class ManageTimeComponent implements AfterViewInit {
+
+export class ManageTimeComponent<D> implements AfterViewInit {
 
   @ViewChild('datepickerFooter', { static: false })
   datepickerFooter!: ElementRef;
   @ViewChild('datepicker', { static: false })
   datepicker!: MatDatepicker<any>;
+  @ViewChild('picker', { static: false })
+  picker!: MatDateRangePicker<any>;
 
   displayedColumns: string[] = ['name', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
  
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   searchText: any;
   projects: Project[] = [];
@@ -69,8 +83,10 @@ export class ManageTimeComponent implements AfterViewInit {
 
   constructor(
     private api: ApiServiceService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private _dateAdapter: DateAdapter<D>
   ) { }
+
   check !: number;
   selectedValue: Date | null = null;
   @ViewChild(MatSort)
@@ -91,7 +107,27 @@ export class ManageTimeComponent implements AfterViewInit {
     }
   }
 
+  private get today() : D {
+    const date = this._dateAdapter.getValidDateOrNull(new Date());
+    if (date === null) {
+      throw new Error('date creation failed');
+    }
+    return date;
+  }
 
+  selectionFinished(date: D): [start: D, end: D] {
+    return this._createWeeklyRange(date);
+  }
+  createPreview(activeDate: D): [start: D, end: D] {
+    return this._createWeeklyRange(activeDate);
+  }
+
+  private _createWeeklyRange(date: D) : [start: D, end: D] {
+      const datestart = this._dateAdapter.getFirstDayOfWeek() - this._dateAdapter.getDayOfWeek(date);
+      const start = this._dateAdapter.addCalendarDays(date, datestart);
+      const end = this._dateAdapter.addCalendarDays(start, 6);
+      return [start, end];
+  }
 
   showTable(): void {
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
@@ -99,9 +135,6 @@ export class ManageTimeComponent implements AfterViewInit {
     this.api.getDailyCardSpentTime().subscribe((resp: any) => { this.dailyCards = resp.data });
   }
 
-  today() {
-    this.selectedValue = new Date();
-  }
   mapProjects(): void {
     this.projects.forEach((__values) =>
       __values.memberList.forEach((__values) => {
@@ -170,6 +203,12 @@ export class ManageTimeComponent implements AfterViewInit {
 
   showWeeklyTable(): void {
     console.log("week");
+
+    const date = this.today;
+    const [start, end] = this.selectionFinished(date);
+    this.picker.select(start);
+    this.picker.select(end);
+    this.picker.close();
   }
 
 

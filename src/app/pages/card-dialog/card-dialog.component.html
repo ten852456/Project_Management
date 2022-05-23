@@ -1,1 +1,49 @@
-<p>card-dialog works!</p>
+<h1 mat-dialog-title class="h3 mb-3 fw-normal">Card</h1>
+
+<mat-dialog-content>
+    <main class="form-signin">
+        <form class="example-form" [formGroup]="form">
+
+            <mat-dialog-actions align="end">
+                <button mat-dialog-title mat-mini-fab mat-dialog-close class="close"> x </button>
+            </mat-dialog-actions>
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
+                <mat-label>Card</mat-label>
+                <input formControlName="title" type="text" class="form-control" matInput placeholder="Card">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" type="text" class="form-control" matInput
+                    placeholder="Description"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>Point</mat-label>
+                <input formControlName="point" type="text" class="form-control" matInput placeholder="Point">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>DonePoint</mat-label>
+                <input formControlName="donePoint" type="text" class="form-control" matInput placeholder="DonePoint">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>EstimatedHours</mat-label>
+                <input formControlName="estimatedHours" type="text" class="form-control" matInput placeholder="EstimatedHours">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+            <h3>Images</h3>
+            <button mat-raised-button color="#2B92F9">+</button>
+            <br><br><br><br>
+
+        </form>
+    </main>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" type="submit" (click)="addCard()"> Create </button>
+</mat-dialog-actions>

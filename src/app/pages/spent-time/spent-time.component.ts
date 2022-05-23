@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
@@ -64,8 +64,10 @@ export class SpentTimeComponent<D> {
   queryProject= '?__user=userId&active=true';
 
    
-  constructor(private _dateAdapter: DateAdapter<D>,
-    private api: ApiServiceService) { }
+  constructor(
+    private _dateAdapter: DateAdapter<D>,
+    private api: ApiServiceService
+  ) { }
 
   private get today() : D {
     const date = this._dateAdapter.getValidDateOrNull(new Date());
@@ -152,7 +154,7 @@ export class SpentTimeComponent<D> {
     const date = this.today;
     const [start, end] = this.selectionFinished(date);
     this.picker.select(start);
-    //this.picker.select(end);
+    this.picker.select(end);
     this.picker.close();
   }
   
