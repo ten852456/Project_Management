@@ -13,7 +13,7 @@ import { ApiServiceService } from 'src/app/api-service.service';
 export class ProjectBoardComponent implements OnInit {
 
   @Input() id?: number;
-
+  @Input() title?: string;
   unassigned!:any;
   todo!:any;
   doing!:any;

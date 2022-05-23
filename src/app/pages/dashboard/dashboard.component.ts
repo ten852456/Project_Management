@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   data:any;
 
   id:number = 1;
+  title: string | undefined;
 
   constructor(
     private router: Router,
@@ -87,9 +88,9 @@ export class DashboardComponent implements OnInit {
     this.manageTime = false;
     this.member = false;
   }
-  gotoProject(id:number){
-    console.log(id);
+  gotoProject(id:number, title:string){
     this.id = id;
+    this.title = title;
     this.personalboard = false;
     this.spentTime = false;
     this.project = true;
