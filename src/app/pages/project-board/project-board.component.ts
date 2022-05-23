@@ -67,8 +67,8 @@ export class ProjectBoardComponent implements OnInit {
 
   replacStatus():void {
     this.board.columns.forEach(column =>  {
-        column.cards.forEach(x => x.status = column.status)
-   });
+      column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
+    });
   }
 
 
