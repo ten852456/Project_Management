@@ -6,6 +6,7 @@ import { ApiServiceService } from 'src/app/api-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -26,25 +27,31 @@ export class PersonalBoardComponent implements OnInit {
   searchText: any;
 
   uid = sessionStorage.getItem("uid");
+  data:any;
+
+  id: number | undefined;
+  title: string | undefined;
 
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
     private router :Router,
+    private http: HttpClient,
   ) {
 
   }
 
   ngOnInit(){
     this.getCards();
+    this.getProjectList();
   }
 
   getCards() {
-    this.api.getCard('?status=UNASSIGNED&__user=' + this.uid).subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCard('?status=TODO&__user=' + this.uid).subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCard('?status=DOING&__user=' + this.uid).subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCard('?status=DONE&__user=' + this.uid).subscribe((res:any) => {this.done =  res.data,
-            this.api.getCard('?status=COMPLETED&__user=' + this.uid).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });
@@ -94,6 +101,19 @@ export class PersonalBoardComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(CardDialogComponent, {width: '50%'});
+  }
+
+  selectProject(id:number, title:string){
+    this.id = id;
+    this.title = title;
+  }
+
+  getProjectList(){
+    this.http.get('http://localhost:8080/api/project')
+    .subscribe((res:any)=> {
+      this.data = res.data;
+      console.log(this.data);
+    })
   }
 
   // getcardsUnassigned():any{

@@ -7,6 +7,27 @@
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </form> -->
+<p class="app-name" style="margin: 40px;">{{title}}</p>
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> search </mat-label>
+        <input matInput [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</form>
+
+<form class="selector-form">
+    <mat-form-field appearance="fill">
+        <mat-label>Select Project</mat-label>
+        <mat-select>
+            <div *ngFor="let d of data">
+                <mat-option value="d.title" (click)="selectProject(d.id, d.title)" (click)="this.getCards()">{{d.title}}</mat-option>
+            </div>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<br><br><br><br><br>
 
 <div class="board">
 
@@ -27,7 +48,8 @@
                 </div>
 
 
-                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
+                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards"
+                    (cdkDropListDropped)="drop($event)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
                         {{ item.title }}
                     </div>

@@ -109,5 +109,17 @@
 .example-form {
     padding-top: 20px;
     padding-left: 40px;
-    position: absolute;
+    float: left;
+}
+
+.selector-form{
+    padding-top: 20px;
+    padding-left: 40px;
+    float: left;
+}
+
+.app-name {
+    font-size: 28px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
 }
