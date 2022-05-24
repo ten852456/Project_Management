@@ -32,9 +32,9 @@
             <button mat-button class="menu-button" style="float: left;" (click)="countProjectList()">
                 <mat-icon>file_copy</mat-icon>
                 &nbsp;Projects
-                <mat-icon class="project" style="font-size: 25px;" [inline]="true">keyboard_arrow_down</mat-icon>
+                <mat-icon class="project" style="font-size: 25px;" [inline]="true">{{icon}}</mat-icon>
             </button>
-            <div>
+            <div *ngIf="showProject == true">
                 <div *ngFor="let d of data">
                     <button class="nav-link" mat-button class="menu-button" (click)="gotoProject(d.id, d.title)">{{d.title}}</button>
                 </div>

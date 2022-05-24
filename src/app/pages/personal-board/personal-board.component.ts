@@ -30,7 +30,7 @@ export class PersonalBoardComponent implements OnInit {
   data:any;
 
   id: number | undefined;
-  title: string | undefined;
+  title = sessionStorage.getItem("username") + "'s Board";
 
   constructor(
     private api: ApiServiceService,
