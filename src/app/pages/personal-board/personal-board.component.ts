@@ -28,7 +28,7 @@ export class PersonalBoardComponent implements OnInit {
 
   data:any;
 
-  id:number = 1;
+  id: number | undefined;
   title: string | undefined;
 
   constructor(
@@ -46,11 +46,11 @@ export class PersonalBoardComponent implements OnInit {
   }
 
   getCards() {
-    this.api.getCard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCard('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCard('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCard('?status=DONE').subscribe((res:any) => {this.done =  res.data,
-            this.api.getCard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });
