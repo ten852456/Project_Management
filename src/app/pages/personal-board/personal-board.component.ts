@@ -25,6 +25,8 @@ export class PersonalBoardComponent implements OnInit {
 
   searchText: any;
 
+  uid = sessionStorage.getItem("uid");
+
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
@@ -38,11 +40,11 @@ export class PersonalBoardComponent implements OnInit {
   }
 
   getCards() {
-    this.api.getCard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
-      this.api.getCard('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
-        this.api.getCard('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
-          this.api.getCard('?status=DONE').subscribe((res:any) => {this.done =  res.data,
-            this.api.getCard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+    this.api.getCard('?status=UNASSIGNED&__user=' + this.uid).subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO&__user=' + this.uid).subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING&__user=' + this.uid).subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE&__user=' + this.uid).subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED&__user=' + this.uid).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });
