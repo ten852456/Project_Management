@@ -9,6 +9,7 @@ export const environment = {
   loginUrl: serverUrl + '/api/login',
   projectListUrl: serverUrl + '/api/project',
   userListUrl: serverUrl + '/api/user',
+  cardListUrl: serverUrl + '/api/card',
 };
 
 /*

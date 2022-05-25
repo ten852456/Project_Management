@@ -23,7 +23,11 @@ export class DashboardComponent implements OnInit {
   showPL:boolean = false;
   data:any;
 
+  icon = "keyboard_arrow_up";
+  showProject = false;
+
   id:number = 1;
+  title: string | undefined;
 
   constructor(
     private router: Router,
@@ -32,13 +36,21 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
-  }
-  countProjectList(){
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
     })
+  }
+  countProjectList(){
+
+    if(this.icon == "keyboard_arrow_up") {
+      this.icon = "keyboard_arrow_down"
+      this.showProject = true
+    } else {
+      this.icon = "keyboard_arrow_up"
+      this.showProject = false
+    }
   }
   checkToken(){
     if (sessionStorage.getItem("refreshToken")!=null){
@@ -92,9 +104,9 @@ export class DashboardComponent implements OnInit {
     this.manageTime = false;
     this.member = false;
   }
-  gotoProject(id:number){
-    console.log(id);
+  gotoProject(id:number, title:string){
     this.id = id;
+    this.title = title;
     this.personalboard = false;
     this.spentTime = false;
     this.project = true;
