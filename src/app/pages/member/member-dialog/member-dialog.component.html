@@ -1,6 +1,6 @@
 
 <mat-dialog-content>
-    <form [formGroup]="form" (submit)="addMember()" class="example-form" align="end">
+    <form [formGroup]="form" (submit)="addMember(form)" class="example-form" align="end">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
                 <div fromGroupName="profile">
@@ -17,13 +17,29 @@
     <pre>{{form?.value|json}}</pre>
 
     <!-- <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectRole">
-        <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">
-            {{role}}
-        </mat-radio-button>
+        <div fromGroupName="roles">
+            <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role" (selectionChange)="getRole(selectRole)">
+                {{role}}
+            </mat-radio-button>
+        </div>
     </mat-radio-group>
     <div>Role is: {{selectRole}}</div> -->
+
+    <!-- <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+        <mat-radio-button class="example-radio-button">System Admin</mat-radio-button>
+        <mat-radio-button class="example-radio-button">User</mat-radio-button>
+    </mat-radio-group> -->
+
+    <mat-form-field appearance="fill">
+        <mat-label>Role</mat-label>
+        <mat-select [(value)]="selected" formControlName="roles">
+            <mat-option value="roles=ROLE_USER, ROLE_SA">System Admin</mat-option>
+            <mat-option value="roles=ROLE_USER">User</mat-option>
+        </mat-select>
+    </mat-form-field>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-raised-button class="create" (click)="addMember()" mat-dialog-close> Finish </button>
+    <button mat-raised-button class="create" (click)="addMember(form)" mat-dialog-close> Finish </button>
 </mat-dialog-actions>
