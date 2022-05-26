@@ -16,7 +16,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./personal-board.component.scss']
 })
 export class PersonalBoardComponent implements OnInit {
-  selectedProject=false;
+  value = '';
+
   unassigned!:any;
   todo!:any;
   doing!:any;
@@ -28,6 +29,8 @@ export class PersonalBoardComponent implements OnInit {
 
   uid = sessionStorage.getItem("uid");
   data:any;
+
+  datatask:any;
 
   id: number | undefined;
   title = sessionStorage.getItem("username") + "'s Board";
@@ -44,6 +47,7 @@ export class PersonalBoardComponent implements OnInit {
   ngOnInit(){
     this.getCards();
     this.getProjectList();
+    this.getTask();
   }
 
   getCards() {
@@ -52,6 +56,18 @@ export class PersonalBoardComponent implements OnInit {
         this.api.getCard('?status=DOING&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
           this.api.getCard('?status=DONE&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
             this.api.getCard('?status=COMPLETED&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+          });
+        });
+      });
+    });
+  }
+
+  filterCards() {
+    this.api.getCard('?status=UNASSIGNED&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE&project=' + this.id).subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED&project=' + this.id).subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
           });
         });
       });
@@ -117,7 +133,13 @@ export class PersonalBoardComponent implements OnInit {
     })
   }
 
-
+  getTask(){
+    this.http.get('http://localhost:8080/api/task')
+    .subscribe((res:any)=> {
+      this.datatask = res.datatask;
+      console.log(this.datatask);
+    })
+  }
 
   // getcardsUnassigned():any{
   //   this.api.getcard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data});

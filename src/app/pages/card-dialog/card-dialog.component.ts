@@ -12,11 +12,16 @@ export class CardDialogComponent implements OnInit {
 
   form!: FormGroup;
 
+  data: any;
+  id: number | undefined;
+  title: string | undefined;
+
   private cardListUrl = environment.cardListUrl;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.getProjectList();
     this.form = this.formBuilder.group({
       donePoint: '',
       title: '',
@@ -24,21 +29,36 @@ export class CardDialogComponent implements OnInit {
       status: '',
       estimatedHours: '',
       description: '',
-      
 
-      // task: '',
-      // sprint: '',
-      // project: '',
+
+      task: {
+        id: 2
+      },
+      // project: { id: 2, displayText: 'testtext' },
       // todos: '',
       // comments: '',
       // assignments: '',
-
     });
   }
 
   addCard() {
-    this.http.post<any>(this.cardListUrl, this.form.getRawValue(), {withCredentials: true})
-        .subscribe((res: any) => {});
+    this.http.post<any>(this.cardListUrl, this.form.getRawValue(), { withCredentials: true })
+      .subscribe((res: any) => { });
+  }
+
+  getProjectList() {
+    this.http.get('http://localhost:8080/api/project')
+      .subscribe((res: any) => {
+        this.data = res.data;
+        console.log(this.data);
+      })
+  }
+
+  selectProject(id: number, title: string) {
+    this.id = id;
+    this.title = title;
+    console.log(this.id);
+    console.log(this.title);
   }
 
 }

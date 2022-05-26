@@ -38,7 +38,20 @@
 
             <h3>Images</h3>
             <button mat-raised-button color="#2B92F9">+</button>
-            <br><br><br><br>
+            <br><br>
+
+            <h3>Assigns</h3>
+            <form class="selector-form">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Project</mat-label>
+                    <mat-select>
+                        <div *ngFor="let d of data">
+                            <mat-option value="d.title" (click)="selectProject(d.id, d.title)">{{d.title}}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+            <br><br><br>
 
         </form>
     </main>
