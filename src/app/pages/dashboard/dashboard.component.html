@@ -8,7 +8,7 @@
             <div class="navbar">
                 <div class="project-bar">
                     <p style="padding: 5px; padding-left: 15%;">{{title}}</p>
-                    
+
                 </div>
             </div>
         </div>
@@ -50,6 +50,7 @@
                 </div>
             </div>
 
+
             <button mat-button class="managetime" (click)="gotoManageTime()">
                 <mat-icon>alarm</mat-icon>
                 &nbsp;Manage Time
@@ -80,6 +81,7 @@
             </div>
             <div *ngIf="member">
                 <app-member [members]="nameMember.data"></app-member>
+                <app-timeline></app-timeline>
             </div>
         </div>
     </mat-sidenav-content>

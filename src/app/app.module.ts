@@ -42,6 +42,7 @@ import { MemberDialogComponent } from './pages/member/member-dialog/member-dialo
 import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
 import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { ProjectBoardComponent } from './pages/project-board/project-board.component';
+import { TimelineComponent } from './pages/timeline/timeline.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -58,6 +59,7 @@ import { ProjectBoardComponent } from './pages/project-board/project-board.compo
     MemberDialogComponent,
     CardDialogComponent,
     ProjectBoardComponent,
+    TimelineComponent,
   ],
 
   imports: [
