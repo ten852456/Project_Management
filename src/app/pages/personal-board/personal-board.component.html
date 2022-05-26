@@ -7,7 +7,7 @@
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </form> -->
-<p class="app-name" style="margin: 40px;">{{title}}</p>
+<!-- <p class="app-name" style="margin: 40px;">{{title}}</p> -->
 <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> search </mat-label>
@@ -21,9 +21,28 @@
         <mat-label>Select Project</mat-label>
         <mat-select>
             <div *ngFor="let d of data">
-                <mat-option value="d.title" (click)="selectProject(d.id, d.title)" (click)="this.getCards()">{{d.title}}</mat-option>
+                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.id + d.title'" value="d.id + value" (click)="getTask()">{{d.id}} : {{d.title}}
+                </mat-option>
             </div>
         </mat-select>
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="this.getCards()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
+
+<form class="selector-form" *ngIf="value != ''">
+    <mat-form-field appearance="fill">
+        <mat-label>Select Task</mat-label>
+        <mat-select>
+            <div *ngFor="let d of datatask">
+                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.title'" value="value">{{d.title}}
+                </mat-option>
+            </div>
+        </mat-select>
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
     </mat-form-field>
 </form>
 
@@ -48,8 +67,7 @@
                 </div>
 
 
-                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards"
-                    (cdkDropListDropped)="drop($event)">
+                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
                         {{ item.title }}
                     </div>
@@ -63,3 +81,4 @@
 </div>
 
 <button mat-flat-button style="background-color: #2B92F9; color: #ffff; float: right; margin-right: 20px;" (click)="replacStatus()">save</button>
+<button (click)="getTask()">save</button>
