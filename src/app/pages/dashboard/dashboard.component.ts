@@ -36,14 +36,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
+  }
+
+  countProjectList(){
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
     })
-  }
-  countProjectList(){
-
     if(this.icon == "keyboard_arrow_up") {
       this.icon = "keyboard_arrow_down"
       this.showProject = true
@@ -123,7 +123,6 @@ export class DashboardComponent implements OnInit {
     this.member = false;
   }
   gotoMember() {
-    this.getMember();
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
@@ -141,9 +140,5 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getMember(): void {
-    this.http.get<any[]>(this.userListUrl)
-    .subscribe((nameMember) => this.nameMember = nameMember);
-  }
 
 }

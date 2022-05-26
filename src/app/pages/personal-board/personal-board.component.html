@@ -21,8 +21,7 @@
         <mat-label>Select Project</mat-label>
         <mat-select>
             <div *ngFor="let d of data">
-                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.id + d.title'"
-                    value="d.id + value" (click)="getTask()">{{d.id}} : {{d.title}}
+                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.id + d.title'" value="d.id + value" (click)="getTask()">{{d.id}} : {{d.title}}
                 </mat-option>
             </div>
         </mat-select>
@@ -37,8 +36,7 @@
         <mat-label>Select Task</mat-label>
         <mat-select>
             <div *ngFor="let d of datatask">
-                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.title'"
-                    value="value">{{d.title}}
+                <mat-option (click)="selectProject(d.id, d.title)" (click)="filterCards()" (click)="value='d.title'" value="value">{{d.title}}
                 </mat-option>
             </div>
         </mat-select>
@@ -69,8 +67,7 @@
                 </div>
 
 
-                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards"
-                    (cdkDropListDropped)="drop($event)">
+                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
                         {{ item.title }}
                     </div>
