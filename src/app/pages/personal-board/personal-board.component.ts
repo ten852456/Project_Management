@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./personal-board.component.scss']
 })
 export class PersonalBoardComponent implements OnInit {
+
   value = '';
 
 
@@ -29,7 +30,8 @@ export class PersonalBoardComponent implements OnInit {
 
   searchText: any;
 
-  uid = sessionStorage.getItem("uid");
+  // uid = sessionStorage.getItem("uid");
+  uid = 0;
 
   data:any;
 
@@ -41,19 +43,18 @@ export class PersonalBoardComponent implements OnInit {
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
-    private router :Router,
     private http: HttpClient,
   ) {
 
   }
 
   ngOnInit(){
-    this.getCards();
+    this.getPersonalCards();
     this.getProjectList();
     this.getTask();
   }
 
-  getCards() {
+   getPersonalCards() {
     this.api.getCard('?status=UNASSIGNED&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
       this.api.getCard('?status=TODO&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
         this.api.getCard('?status=DOING&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
@@ -120,6 +121,8 @@ export class PersonalBoardComponent implements OnInit {
 
   openDialog(sendStatus:string) {
     this.dialog.open(CardDialogComponent, {width: '50%' , data:{status:sendStatus}});
+    this.dialog.afterAllClosed
+    .subscribe(() => this.getPersonalCards());
   }
 
   selectProject(id:number, title:string){

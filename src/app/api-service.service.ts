@@ -19,8 +19,9 @@ export class ApiServiceService {
   }
 
   getProjectMember(future: string): Observable<any[]> {
-    return this.http.get<any[]>(this.Url + 'project' + future);
+    return this.http.get<any[]>(this.Url + 'project' + future + '&__template=project.member');
   }
+
   getDailyCardSpentTime(): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'dailyCardSpentTime' );
   }
