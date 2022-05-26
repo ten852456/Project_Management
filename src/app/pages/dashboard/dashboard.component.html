@@ -40,6 +40,7 @@
                 </div>
             </div>
 
+
             <button mat-button class="managetime" (click)="gotoManageTime()">
                 <mat-icon>alarm</mat-icon>
                 &nbsp;Manage Time
@@ -69,7 +70,7 @@
                 <app-manage-time></app-manage-time>
             </div>
             <div *ngIf="member">
-                <app-member></app-member>
+                <app-timeline></app-timeline>
             </div>
         </div>
     </mat-sidenav-content>
