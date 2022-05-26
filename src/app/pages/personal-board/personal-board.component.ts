@@ -18,6 +18,8 @@ import { HttpClient } from '@angular/common/http';
 export class PersonalBoardComponent implements OnInit {
   value = '';
 
+
+
   unassigned!:any;
   todo!:any;
   doing!:any;
@@ -28,6 +30,7 @@ export class PersonalBoardComponent implements OnInit {
   searchText: any;
 
   uid = sessionStorage.getItem("uid");
+
   data:any;
 
   datatask:any;
@@ -115,8 +118,8 @@ export class PersonalBoardComponent implements OnInit {
   }
 
 
-  openDialog() {
-    this.dialog.open(CardDialogComponent, {width: '50%'});
+  openDialog(sendStatus:string) {
+    this.dialog.open(CardDialogComponent, {width: '50%' , data:{status:sendStatus}});
   }
 
   selectProject(id:number, title:string){
@@ -135,7 +138,7 @@ export class PersonalBoardComponent implements OnInit {
   getTask(){
     this.http.get('http://localhost:8080/api/task')
     .subscribe((res:any)=> {
-      this.datatask = res.datatask;
+      this.datatask = res.data;
       console.log(this.datatask);
     })
   }
