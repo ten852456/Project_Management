@@ -27,12 +27,13 @@ export class PersonalBoardComponent implements OnInit {
 
   searchText: any;
 
+  uid = sessionStorage.getItem("uid");
   data:any;
 
   datatask:any;
 
   id: number | undefined;
-  title: string | undefined;
+  title = sessionStorage.getItem("username") + "'s Board";
 
   constructor(
     private api: ApiServiceService,
@@ -83,7 +84,7 @@ export class PersonalBoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      this.replacStatus();
+      // this.replacStatus();
     }
   }
 
@@ -97,19 +98,22 @@ export class PersonalBoardComponent implements OnInit {
     ]);
   }
 
+  // test(event:any) {
+  //   this.api.updateCard(x.id, column.status).subscribe(res => console.log(res))
+  // }
+
+  // replacStatus():void {
+  //   this.board.columns.forEach(column =>  {
+  //       column.cards.forEach(x => x.status = column.status)
+  //  });
+  // }
+
   replacStatus():void {
     this.board.columns.forEach(column =>  {
-        column.cards.forEach(x => x.status = column.status)
-   });
-  }
-
-  show():void {
-    console.log(this.board.columns);
-    this.board.columns.forEach(column =>  {
-      column.cards.forEach(x => this.api.updateCard(x).subscribe(res => console.log(res)))
+      column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
     });
-
   }
+
 
   openDialog() {
     this.dialog.open(CardDialogComponent, {width: '50%'});

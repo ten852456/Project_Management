@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  private userListUrl = environment.userListUrl;
+  nameMember: any;
+
   personalboard:boolean = false;
   dashboard:boolean = false;
   spentTime:boolean = false;
@@ -17,6 +22,9 @@ export class DashboardComponent implements OnInit {
   member:boolean = false;
   showPL:boolean = false;
   data:any;
+
+  icon = "keyboard_arrow_up";
+  showProject = false;
 
   id:number = 1;
   title: string | undefined;
@@ -28,13 +36,21 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
-  }
-  countProjectList(){
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
     })
+  }
+  countProjectList(){
+
+    if(this.icon == "keyboard_arrow_up") {
+      this.icon = "keyboard_arrow_down"
+      this.showProject = true
+    } else {
+      this.icon = "keyboard_arrow_up"
+      this.showProject = false
+    }
   }
   checkToken(){
     if (sessionStorage.getItem("refreshToken")!=null){
@@ -107,6 +123,7 @@ export class DashboardComponent implements OnInit {
     this.member = false;
   }
   gotoMember() {
+    this.getMember();
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
@@ -122,6 +139,11 @@ export class DashboardComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/login']);
 
+  }
+
+  getMember(): void {
+    this.http.get<any[]>(this.userListUrl)
+    .subscribe((nameMember) => this.nameMember = nameMember);
   }
 
 }

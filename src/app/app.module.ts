@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCommonModule } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -85,6 +86,7 @@ import { ProjectBoardComponent } from './pages/project-board/project-board.compo
     Ng2SearchPipeModule,
     MatCommonModule,
     DragDropModule,
+    MatRadioModule,
   ],
   providers: [
     MatDatepickerModule,
