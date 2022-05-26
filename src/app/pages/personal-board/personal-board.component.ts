@@ -17,7 +17,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PersonalBoardComponent implements OnInit {
   value = '';
-
   unassigned!:any;
   todo!:any;
   doing!:any;
@@ -122,7 +121,6 @@ export class PersonalBoardComponent implements OnInit {
   selectProject(id:number, title:string){
     this.id = id;
     this.title = title;
-    this.selectedProject = true;
   }
 
   getProjectList(){

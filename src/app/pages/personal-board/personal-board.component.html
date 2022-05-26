@@ -46,16 +46,6 @@
     </mat-form-field>
 </form>
 
-<form class="selector-form" *ngIf="selectedProject">
-    <mat-form-field appearance="fill">
-        <mat-label>Select Sprint</mat-label>
-        <mat-select>
-            <div *ngFor="let d of data">
-                <mat-option value="d.title" (click)="selectProject(d.id, d.title)" (click)="this.getCards()">{{d.title}}</mat-option>
-            </div>
-        </mat-select>
-    </mat-form-field>
-</form>
 <br><br><br><br><br>
 
 <div class="board">
@@ -91,4 +81,3 @@
 </div>
 
 <button mat-flat-button style="background-color: #2B92F9; color: #ffff; float: right; margin-right: 20px;" (click)="replacStatus()">save</button>
-<button (click)="getTask()">save</button>
