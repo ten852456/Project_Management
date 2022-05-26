@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./personal-board.component.scss']
 })
 export class PersonalBoardComponent implements OnInit {
+  value = '';
 
   unassigned!:any;
   todo!:any;
@@ -27,6 +28,8 @@ export class PersonalBoardComponent implements OnInit {
   searchText: any;
 
   data:any;
+
+  datatask:any;
 
   id: number | undefined;
   title: string | undefined;
@@ -43,9 +46,22 @@ export class PersonalBoardComponent implements OnInit {
   ngOnInit(){
     this.getCards();
     this.getProjectList();
+    this.getTask();
   }
 
   getCards() {
+    this.api.getCard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data,
+      this.api.getCard('?status=TODO').subscribe((res:any) => {this.todo =  res.data,
+        this.api.getCard('?status=DOING').subscribe((res:any) => {this.doing =  res.data,
+          this.api.getCard('?status=DONE').subscribe((res:any) => {this.done =  res.data,
+            this.api.getCard('?status=COMPLETED').subscribe((res:any) => {this.completed =  res.data, this.setBoard()});
+          });
+        });
+      });
+    });
+  }
+
+  filterCards() {
     this.api.getCard('?status=UNASSIGNED&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
       this.api.getCard('?status=TODO&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
         this.api.getCard('?status=DOING&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
@@ -109,6 +125,14 @@ export class PersonalBoardComponent implements OnInit {
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
+    })
+  }
+
+  getTask(){
+    this.http.get('http://localhost:8080/api/task')
+    .subscribe((res:any)=> {
+      this.datatask = res.datatask;
+      console.log(this.datatask);
     })
   }
 
