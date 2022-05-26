@@ -30,23 +30,21 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
-import { TaskDialogComponent } from './pages/not-found/task-dialog/task-dialog.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
 import { MemberComponent } from './pages/member/member.component';
 import { MemberDialogComponent } from './pages/member/member-dialog/member-dialog.component';
 import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
 import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { ProjectBoardComponent } from './pages/project-board/project-board.component';
+import { TaskDialogComponent } from './pages/task-dialog/task-dialog.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 @NgModule({
   declarations: [
     AppComponent, 
-    NotFoundComponent, 
     DashboardComponent, 
     ProjectListComponent, 
     SpentTimeComponent, 

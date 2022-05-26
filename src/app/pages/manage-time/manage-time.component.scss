@@ -20,8 +20,17 @@
     color: black;
     text-align: center !important;
 }
-.mat-footer-row{
+
+.example-second-footer-row td{
+    background-color: hsla(17, 92%, 41%, 0.336);
+   text-align: right;
+    font-weight: bold;
+
+}
+.example-first-footer-row{
     background-color: hsla(48, 76%, 56%, 0.336);
+    font-weight: bold;
+    
 
 }
 
