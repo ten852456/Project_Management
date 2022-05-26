@@ -29,6 +29,10 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.Url + 'card' + future);
   }
 
+  getTask(future: string): Observable<any[]> {
+    return this.http.get<any[]>(this.Url + 'Task' + future);
+  }
+  
   updateCard(id:any, tostatus:any): Observable<any[]> {
     return this.http.post<any[]>(this.Url + 'custom/card/changeStatus/' + id + "?toStatus=" + tostatus, "");
   }

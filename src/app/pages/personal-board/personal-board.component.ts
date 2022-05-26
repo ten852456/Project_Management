@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./personal-board.component.scss']
 })
 export class PersonalBoardComponent implements OnInit {
-
+  selectedProject=false;
   unassigned!:any;
   todo!:any;
   doing!:any;
@@ -106,6 +106,7 @@ export class PersonalBoardComponent implements OnInit {
   selectProject(id:number, title:string){
     this.id = id;
     this.title = title;
+    this.selectedProject = true;
   }
 
   getProjectList(){
@@ -115,6 +116,8 @@ export class PersonalBoardComponent implements OnInit {
       console.log(this.data);
     })
   }
+
+
 
   // getcardsUnassigned():any{
   //   this.api.getcard('?status=UNASSIGNED').subscribe((res:any) => {this.unassigned =  res.data});

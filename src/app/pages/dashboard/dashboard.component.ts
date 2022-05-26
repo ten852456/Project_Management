@@ -31,14 +31,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
+  }
+
+  countProjectList(){
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
       console.log(this.data);
     })
-  }
-  countProjectList(){
-
     if(this.icon == "keyboard_arrow_up") {
       this.icon = "keyboard_arrow_down"
       this.showProject = true
@@ -134,5 +134,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
 
   }
+
+
 
 }

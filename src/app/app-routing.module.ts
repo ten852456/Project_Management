@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
@@ -34,14 +33,6 @@ const routes: Routes = [
   {
     path: 'manage-time',
     component: ManageTimeComponent,
-  },
-  {
-    path: 'help',
-    component: NotFoundComponent,
-  },
-  {
-    path: '**',
-    component: NotFoundComponent,
   },
   {
     path: 'personal-board',

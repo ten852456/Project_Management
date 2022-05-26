@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  data:any;
   form!: FormGroup;
   decode!:any;
   constructor(
