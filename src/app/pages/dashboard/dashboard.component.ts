@@ -123,7 +123,6 @@ export class DashboardComponent implements OnInit {
     this.member = false;
   }
   gotoMember() {
-    this.getMember();
     this.personalboard = false;
     this.spentTime = false;
     this.project = false;
