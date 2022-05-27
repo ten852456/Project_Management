@@ -1,36 +1,21 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { ApiServiceService } from 'src/app/api-service.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
 import { DateAdapter } from '@angular/material/core';
 import { Card, Project } from '../manage-time/manage-time.component';
+import { __values } from 'tslib';
+import { DatePipe } from '@angular/common';
 
 
 
 
-export interface testCard {
-  project: any;
-  title: string;
-  specs: number;
-  implement: number;
-  fixingSpecs: number;
-  fixingImplement: number;
-  id: number;
-}
-
-export interface testProject {
+export interface ProjectSpentTime {
   id: number;
   title: string;
-  test: testCard[];
+  dailyCards: DailyCard[];
 }
-
-export interface user {
-  id: number;
-  displayName: string;
-  userName: string;
-  roles: string[];
-}
-export interface dailyCard {
+export interface DailyCard {
   spentDate: string;
   id: number;
   s1Hours: number;
@@ -41,6 +26,10 @@ export interface dailyCard {
   project: Project;
   user: Card;
   sumHours: number;
+  sumSpecs: number;
+  sumImplement: number;
+  sumFixingSpecs: number;
+  sumFixingImplement: number;
 
 }
 
@@ -56,7 +45,7 @@ export interface dailyCard {
   ],
 })
 
-export class SpentTimeComponent<D> {
+export class SpentTimeComponent<D> implements OnInit {
 
   @ViewChild('datepickerFooter', { static: false })
   datepickerFooter!: ElementRef;
@@ -65,38 +54,101 @@ export class SpentTimeComponent<D> {
   @ViewChild('picker', { static: false })
   picker!: MatDateRangePicker<any>;
 
-  selectedValue : Date | null = null;
-  public results:any;// กำหนดตัวแปร เพื่อรับค่า
-  testCards: testCard[]=[];
-  users: user[] =[];
-  testProjects: testProject[] = [];
-  dailyCards: dailyCard[]= [];
 
-  sumSpecs !: number;
-  sumImplement !: number;
-  sumFixingSpecs !: number;
-  sumFixingImplement !: number;
-  check !: number;
+  
+  projects: ProjectSpentTime[] = [];
+  dailyCards: DailyCard[] = [];
+
+
 
   displayedColumns: string[] = ['title', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
+  pipe = new DatePipe('en-US');
+  selectedValue: any;
 
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
-  
-  queryCard= '?__repotable=true&__user=userId';
-  queryProject= '?__user=userId&active=true';
 
-   
+  queryCard = '?__repotable=true&__user=2';
+  queryProject = '?__user=2&active=true';
+  state: any;
+  showDailyTable: boolean = true;
+  showWeeklyTable: boolean = false;
+  showProjectTable: boolean = false;
+  stateChange: boolean = false;
+  form!: FormGroup;
+
+
   constructor(
     private _dateAdapter: DateAdapter<D>,
     private api: ApiServiceService,
+    private formBuilder: FormBuilder,
 
-   
+
+
   ) { }
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      id: '1',
+      s1Hours: '',
+      s2Hours: '',
+      s3Hours: '',
+      s4Hours: '',
+    });
+    this.api.getProject('?__user=2&active=true').subscribe((resp: any) => { this.projects = resp.data, this.mapTestProject() });
+    this.api.getDailyCardSpentTime('?max=' + 99 + '&user=2' + '&__template=dailyCardSpentTime.list&spentDate=' + this.selectedValue).subscribe((resp: any) => this.dailyCards = resp.data);
 
-  private get today() : D {
+  }
+  ngOnChanges(): void{
+    this.projectTable();
+    this.weeklyTable();
+
+  }
+  ngAfterViewInit(): void {
+    this.dailyTable();
+  }
+
+  submitHours(): void {
+    console.log(this.form.getRawValue());
+    let data = { 'list': [this.form.getRawValue()] };
+
+    this.api.updateDailyCardSpentTime(data).subscribe((res) => {
+      if (res) {
+        console.log(res);
+      }
+    });
+    this.stateChange = true;
+  }
+
+  async dailyTable(): Promise<void> {
+    this.state = "daily";
+    sessionStorage.setItem("spentTimeTableState", this.state);
+    this.getDailyTable();
+    this.showDailyTable = true;
+    this.showWeeklyTable = false;
+    this.showProjectTable = false;
+
+
+  }
+  async weeklyTable(): Promise<void> {
+    this.state = "weekly";
+    sessionStorage.setItem("spentTimeTableState", this.state);
+    this.getWeeklyTable();
+    this.showDailyTable = false;
+    this.showWeeklyTable = true;
+    this.showProjectTable = false;
+  }
+  async projectTable(): Promise<void> {
+    this.state = "project";
+    sessionStorage.setItem("spentTimeTableState", this.state);
+    this.getProjectTable();
+    this.showDailyTable = false;
+    this.showWeeklyTable = false;
+    this.showProjectTable = true;
+  }
+
+  private get today(): D {
     const date = this._dateAdapter.getValidDateOrNull(new Date());
     if (date === null) {
       throw new Error('date creation failed');
@@ -111,91 +163,56 @@ export class SpentTimeComponent<D> {
     return this._createWeeklyRange(activeDate);
   }
 
-  private _createWeeklyRange(date: D) : [start: D, end: D] {
-      const datestart = this._dateAdapter.getFirstDayOfWeek() - this._dateAdapter.getDayOfWeek(date);
-      const start = this._dateAdapter.addCalendarDays(date, datestart);
-      const end = this._dateAdapter.addCalendarDays(start, 6);
-      return [start, end];
-  }
-
-  ngOnInit(): void {
-    this.showTable();
-  }
-  
-  showTable():void {
-     this.check =1;
-     this.api.getCard(this.queryCard).subscribe((resp: any) => {
-      this.testCards = resp.data,
-      this.api.getProject(this.queryProject).subscribe((resp: any) => {
-        this.testProjects = resp.data,
-        this.mapTestProject()
-      });
-
-    });
+  private _createWeeklyRange(date: D): [start: D, end: D] {
+    const datestart = this._dateAdapter.getFirstDayOfWeek() - this._dateAdapter.getDayOfWeek(date);
+    const start = this._dateAdapter.addCalendarDays(date, datestart);
+    const end = this._dateAdapter.addCalendarDays(start, 6);
+    return [start, end];
   }
 
   mapTestProject(): void {
-
-    for (var i = 0; i < this.testProjects.length; i++) {
-      if (this.testProjects[i].test == undefined) {
-        this.testProjects[i].test = [];
+    this.projects.forEach((p) => {
+      if (p.dailyCards == undefined) {
+        p.dailyCards = [];
       }
-     
-    }
-    for (var i = 0; i < this.testProjects.length; i++) {
-      for (var j = 0; j < this.testCards.length; j++) {
-        if (this.testCards[j].project.id == this.testProjects[i].id) {
-          this.testProjects[i].test.push(this.testCards[j]);
-        }
-      }
-    }
+      this.dailyCards.forEach((d) => {
 
+        if (d.project.id == p.id) {
+          p.dailyCards.push(d);
+        }     
+      })
+    });
   }
 
-  showDailyTable(): void {
-    this.api.getCard(this.queryCard).subscribe((resp: any) => {this.testCards = resp.data
-      // ดูโครงสร้างของ json ทั้งหมดผ่าน console
-      // ดู status code ได้ค่า 200
-     });    
-     this.check = 1;
-   
-     var i!: number;
-     for(i=0; i < this.testCards.length; i ++)
-     {
-       this.sumSpecs += this.testCards[i].specs;
-       this.sumImplement += this.testCards[i].implement;
-       this.sumFixingSpecs += this.testCards[i].fixingSpecs;
-       this.sumFixingImplement += this.testCards[i].fixingImplement;
-     }
-
-    this.selectedValue = new Date();
+  async getDailyTable(): Promise<void> {
+    this.selectedValue = this.pipe.transform(Date.now(), "yyyy-MM-dd");
     this.datepicker.close();
-    
-    /*console.log(this.results.data[0].project.displayText);
-    console.log(this.results.data[0].title);*/
+    this.api.getProject('?__user=2&active=true').subscribe((resp: any) => { this.projects = resp.data, this.mapTestProject() });
+    this.api.getDailyCardSpentTime('?max=' + 99 + '&user=2' + '&__template=dailyCardSpentTime.list&spentDate=' + this.selectedValue).subscribe((resp: any) => this.dailyCards = resp.data);
+
   }
 
-  showWeeklyTable(): void {
-    this.check = 2;
-    
+  async getWeeklyTable(): Promise<void> {
+
     const date = this.today;
     const [start, end] = this.selectionFinished(date);
     this.picker.select(start);
     this.picker.select(end);
     this.picker.close();
-    this.api.getDailyCardSpentTime('?max='+ 99 + '&__template=dailyCardSpentTime.list&user=2&spentDate_between='+ [start,end]).subscribe((resp:any) => this.dailyCards = resp.data);
-    
-  }
-  
-  showProjectTable(): void {
-    this.check = 3;
-   
- 
+    let startToString = String(start);
+    let endToString = String(end);
+    let startDate = this.pipe.transform(startToString, "YYYY-MM-DD");
+    let endDate = this.pipe.transform(endToString, "YYYY-MM-DD");
+    this.api.getProject('?__user=2&active=true').subscribe((resp: any) => { this.projects = resp.data, this.mapTestProject() });
+    this.api.getDailyCardSpentTime('?max=' + 99 + '&user=2' + '&__template=dailyCardSpentTime.list&spentDate_between=' + startDate + '&spentDate_between=' + endDate).subscribe((resp: any) => this.dailyCards = resp.data);
 
   }
-  user(): void {
-    this.api.getUser('?__template=user.list').subscribe((resp: any) => this.users = resp.data);
+
+  async getProjectTable(): Promise<void> {
+    this.api.getProject('?__user=2&active=true').subscribe((resp: any) => { this.projects = resp.data, this.mapTestProject() });
+    this.api.getDailyCardSpentTime('?max=' + 99 + '&user=2&__template=dailyCardSpentTime.list').subscribe((resp: any) => this.dailyCards = resp.data);
+
+
+
   }
-
-
 }

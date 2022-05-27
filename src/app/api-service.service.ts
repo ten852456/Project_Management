@@ -35,6 +35,10 @@ export class ApiServiceService {
   updateCard(data:any): Observable<any[]> {
     return this.http.put<any[]>(this.Url + 'card', data );
   }
+  updateDailyCardSpentTime(data:{}): Observable<any[]>{
+    return this.http.post<any[]>(this.Url + 'custom/dailyCardSpentTime/batchUpdate', data );
+
+  }
 
 
   constructor(private http: HttpClient) { }
