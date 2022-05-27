@@ -22,7 +22,7 @@ export class MemberDialogComponent implements OnInit {
   username: string | undefined;
   roles: string | undefined;
   profile: string | undefined;
-  displayName = "";
+  displayName: string = "";
 
   // selectRole: string | undefined;
   // roles: string[] = ['System Admin', 'User'];
@@ -69,10 +69,10 @@ export class MemberDialogComponent implements OnInit {
 
   selectRole(roles: string) {
       if(roles=='SA') {
-        this.form.patchValue({roles: 'ROLE_USER, ROLE_SA'});
+        this.form.patchValue({roles: ['ROLE_USER', 'ROLE_SA']});
       }
       else if(roles=='USER') {
-        this.form.patchValue({roles: 'ROLE_USER'});
+        this.form.patchValue({roles: ['ROLE_USER']});
       }
       console.log(this.displayName);
   }
