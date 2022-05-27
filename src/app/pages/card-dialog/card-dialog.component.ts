@@ -17,12 +17,16 @@ export class CardDialogComponent implements OnInit {
   status:any;
 
   projectList: any;
+  taskList: any;
+
   id!: number;
   title: string | undefined;
   description: string | undefined;
   point: number | undefined;
   donePoint:number | undefined;
   estimated:number | undefined;
+
+  projectid!: number;
 
   private cardListUrl = environment.cardListUrl;
 
@@ -36,6 +40,7 @@ export class CardDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProjectList();
+    this.getTaskList();
     this.form = this.formBuilder.group({
       donePoint: '',
       title: '',
@@ -64,13 +69,21 @@ export class CardDialogComponent implements OnInit {
       })
   }
 
+  getTaskList() {
+    this.http.get('http://localhost:8080/api/task')
+      .subscribe((res: any) => {
+        this.taskList = res.data;
+        console.log(this.taskList);
+      })
+  }
+
 
   replacStatus(id:any):void {
     this.api.updateCard(id, this.data.status).subscribe(res => console.log(res))
   }
 
 
-  selectProject(id: number, title: string) {
+  selectTask(id: number) {
     this.form = this.formBuilder.group({
       donePoint: this.donePoint,
       title: this.title,
@@ -82,6 +95,10 @@ export class CardDialogComponent implements OnInit {
         id: id
       },
     });
+  }
+
+  selectProject(projectid:number){
+    this.projectid = projectid;
   }
 
 }

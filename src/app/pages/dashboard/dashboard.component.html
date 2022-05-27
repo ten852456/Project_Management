@@ -70,6 +70,7 @@
                 <app-manage-time></app-manage-time>
             </div>
             <div *ngIf="member">
+                <app-member [members]="nameMember.data"></app-member>
                 <app-timeline></app-timeline>
             </div>
         </div>

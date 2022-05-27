@@ -48,9 +48,10 @@ export class PersonalBoardComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.getCards();
+    // this.getCards();
     this.getProjectList();
     this.getTask();
+    this.filterCards()
   }
 
   getCards() {
