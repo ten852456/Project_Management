@@ -38,7 +38,7 @@ export class MemberDialogComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       username: '',
-      roles: '',
+      roles: [],
       profile: {
         displayName: '',
       }
@@ -74,7 +74,6 @@ export class MemberDialogComponent implements OnInit {
       else if(roles=='USER') {
         this.form.patchValue({roles: ['ROLE_USER']});
       }
-      console.log(this.displayName);
   }
   read(display: any){
     this.displayName += display.data;
