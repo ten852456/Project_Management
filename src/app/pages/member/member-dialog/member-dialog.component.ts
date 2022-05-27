@@ -18,10 +18,10 @@ export class MemberDialogComponent implements OnInit {
   // })
 
   form!: FormGroup;
-  username: string | undefined;
-  roles: string | undefined;
-  profile: string | undefined;
-  displayName: string | undefined;
+  username: string = '';
+  roles: string = '';
+  profile: string = '';
+  displayName: string = '';
 
   // selectRole: string | undefined;
   // roles: string[] = ['System Admin', 'User'];
@@ -52,43 +52,19 @@ export class MemberDialogComponent implements OnInit {
     // })
   }
 
-  addMember() {
-    // this.form = this.getForm(data);
+  addMember(name: string) {
+    this.form.patchValue({profile: {displayName: name}});
     this.http.post<any>(this.userListUrl, this.form.getRawValue(), {withCredentials: true})
         .subscribe((res: any) => {});
     // window.location.reload();
   }
 
-  addDisplayName(name: string) {
-    this.form.patchValue({profile: {displayName: name}});
-  }
-
-  // getForm(data: any) {
-  //   data=data || {  username:null,
-  //                   roles: null,
-  //                   profile:{
-  //                     displayName:null,
-  //                   }
-  //                }
-  //   return new FormGroup({
-  //       username: new FormControl(data.username, Validators.required),
-  //       roles: new FormControl(data.roles, Validators.required),
-  //       profile: new FormGroup({
-  //           displayName: new FormControl(data.profile.displayName),
-  //        })
-  //    })
+  // addName(name: string) {
+  //   this.form.patchValue({profile: {displayName: name}});
+  //   this.addMember();
   // }
 
   selectRole(roles: string) {
-  //   this.form = this.formBuilder.group({
-  //     username: this.username,
-  //     roles: roles,
-  //     profile: {
-  //       displayName: this.displayName,
-  //     },
-  //   });
-  
-  //  this.form.patchValue({roles: roles});
       if(roles=='SA') {
         this.form.patchValue({roles: 'ROLE_USER, ROLE_SA'});
       }
