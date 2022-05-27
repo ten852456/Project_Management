@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/api-service.service';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-card-dialog',

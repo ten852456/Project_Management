@@ -1,16 +1,14 @@
 
 <mat-dialog-content>
-    <form [formGroup]="form" (submit)="addMember(form)" class="example-form" align="end">
+    <form [formGroup]="form" class="example-form" align="end">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-                <div fromGroupName="profile">
-                    <input formControlName="displayName" matInput placeholder="Add name here...">
-                </div>
+                    <input formControlName="displayName" [(ngModel)]="displayName" type="text" matInput placeholder="Add name here..." (input)="read($event)">
         </mat-form-field>
    
         <mat-form-field appearance="outline" style="padding-bottom: 10px;">
             <mat-label>Username</mat-label>
-            <input formControlName="username" matInput placeholder="Add username here...">
+            <input formControlName="username" [(ngModel)]="username" type="text" matInput placeholder="Add username here...">
         </mat-form-field>
     </form>
 
@@ -32,14 +30,14 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Role</mat-label>
-        <mat-select [(value)]="selected" formControlName="roles">
-            <mat-option value="roles=ROLE_USER, ROLE_SA">System Admin</mat-option>
-            <mat-option value="roles=ROLE_USER">User</mat-option>
+        <mat-select formControlName="roles">
+            <mat-option (click)="selectRole('SA')">System Admin</mat-option>
+            <mat-option (click)="selectRole('USER')">User</mat-option>
         </mat-select>
     </mat-form-field>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-raised-button class="create" (click)="addMember(form)" mat-dialog-close> Finish </button>
+    <button mat-raised-button class="create" type="submit" (click)="addMember()" mat-dialog-close> Finish </button>
 </mat-dialog-actions>
