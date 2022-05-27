@@ -19,13 +19,15 @@ export class ApiServiceService {
   }
 
   getProjectMember(future: string): Observable<any[]> {
-    return this.http.get<any[]>(this.Url + 'project' + future);
+    return this.http.get<any[]>(this.Url + 'project' + future + '&__template=project.member');
   }
-  getDailyCardSpentTime(future: string): Observable<any[]> {
-    return this.http.get<any[]>(this.Url + 'dailyCardSpentTime'+ future );
-  }
+  
   getUser(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'user' + future );
+  }
+
+  getDailyCardSpentTime(): Observable<any[]> {
+    return this.http.get<any[]>(this.Url + 'dailyCardSpentTime' );
   }
 
   getCard(future: string): Observable<any[]> {

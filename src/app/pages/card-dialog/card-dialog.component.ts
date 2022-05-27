@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/api-service.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-card-dialog',
@@ -56,6 +57,9 @@ export class CardDialogComponent implements OnInit {
     });
   }
 
+
+
+
   addCard() {
     this.http.post<any>(this.cardListUrl, this.form.getRawValue(), { withCredentials: true })
       .subscribe((res: any) => this.replacStatus(res.data.id));
@@ -79,7 +83,7 @@ export class CardDialogComponent implements OnInit {
 
 
   replacStatus(id:any):void {
-    this.api.updateCard(id, this.data.status).subscribe(res => console.log(res))
+    this.api.updateCard(id, this.data.status).subscribe(() => this.dialogRef.close());
   }
 
 
