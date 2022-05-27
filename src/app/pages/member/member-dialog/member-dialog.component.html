@@ -3,9 +3,7 @@
     <form [formGroup]="form" class="example-form" align="end">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-                <div fromGroupName="profile">
-                    <input formControlName="displayName" [(ngModel)]="displayName" type="text" matInput placeholder="Add name here...">
-                </div>
+                    <input formControlName="displayName" [(ngModel)]="displayName" type="text" matInput placeholder="Add name here..." (input)="read($event)">
         </mat-form-field>
    
         <mat-form-field appearance="outline" style="padding-bottom: 10px;">
