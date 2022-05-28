@@ -113,12 +113,12 @@ export class PersonalBoardComponent implements OnInit {
   // }
 
   replacStatus(column:any):void {
-    column.cards.forEach((x:any) => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
-
-
-    // this.board.columns.forEach(column =>  {
-    //   column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
-    // });
+    column.cards.forEach((x:any) => {
+      if(x.status != column.status) {
+        this.api.updateCard(x.id, column.status).subscribe(res => console.log(res));
+        x.status = column.status;
+      }
+    } )
   }
 
 
