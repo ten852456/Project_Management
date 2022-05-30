@@ -2,9 +2,11 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { __values } from 'tslib';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY } from "@angular/material/datepicker";
+import { MatDatepicker, MatDateRangePicker, MAT_DATE_RANGE_SELECTION_STRATEGY ,MatDatepickerInputEvent} from "@angular/material/datepicker";
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute,  Router } from '@angular/router';
+
 
 export interface MemberList {
   userId: number;
@@ -15,6 +17,7 @@ export interface MemberList {
   s3: number;
   s4: number;
   sumHours: number;
+  sum:number;
 }
 
 export interface Project {
@@ -27,6 +30,8 @@ export interface Project {
   sumImplement: number;
   sumFixingSpecs: number;
   sumFixingImplement: number;
+  sum:number;
+  
 }
 export interface Card {
   id: number;
@@ -68,7 +73,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   @ViewChild('picker', { static: false })
   picker!: MatDateRangePicker<any>;
 
-  displayedColumns: string[] = ['name', 'specs', 'implement', 'fixingSpecs', 'fixingImplement'];
+  displayedColumns: string[] = ['name', 'specs', 'implement', 'fixingSpecs', 'fixingImplement', 'sumOfEachMember'];
   pipe = new DatePipe('en-US');
   selectedValue :any;
 
@@ -83,23 +88,37 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   dailyCards: DailyCardSpentTime[] = [];
   queryMember = '?__template=project.member&completed=false';
   state: any;
-  showDailyTable: boolean =false;
+  showDailyTable: boolean =true;
   showWeeklyTable: boolean =false;
   showProjectTable: boolean =false;
 
   constructor(
     private api: ApiServiceService,
-    private _dateAdapter: DateAdapter<D>
-  ) { }
+    private _dateAdapter: DateAdapter<D>,
+    private route: ActivatedRoute,
+    private router:Router,
+  ) {this.router.navigate(['manage-time'],{relativeTo: this.route}) }
 
   check !: number;
+  selectedDate: any;
 
 
 
   ngAfterViewInit() {
     this.dailyTable();
   }
+ addEvent(event: MatDatepickerInputEvent<Date>){
+    this.selectedDate = this.pipe.transform(event.value, 'yyyy-MM-dd');
+    
+  }
+
+ async showTable(): Promise<any>{
+    console.log(this.selectedDate);
+    this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
+    this.api.getDailyCardSpentTime('?spentDate='+this.selectedDate).subscribe((resp: any) => { this.dailyCards = resp.data});
  
+ 
+  }
  async dailyTable(): Promise<any>{
     this.state = "daily";
     sessionStorage.setItem("tableState",this.state);
@@ -158,6 +177,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
           __values.s3 = 0;
           __values.s4 = 0;
           __values.sumHours = 0;
+          __values.sum =0;
         }
       }
       )
@@ -173,6 +193,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
             __member.s3 = __values.s3Hours;
             __member.s4 = __values.s4Hours;
             __member.sumHours = __values.sumHours;
+            __member.sum = __member.s1 + __member.s2 + __member.s3 + __member.s4;
 
           }
         })
@@ -184,6 +205,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
       __values.sumFixingSpecs = 0;
       __values.sumFixingImplement = 0;
       __values.sumHours = 0;
+      __values.sum = 0;
       __values.memberList.forEach((__member) => {
 
         __values.sumSpecs += __member.s1;
@@ -191,6 +213,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
         __values.sumFixingSpecs += __member.s3;
         __values.sumFixingImplement += __member.s4;
         __values.sumHours += __member.sumHours;
+        __values.sum += __member.sum;
       }
       )
     });
@@ -207,9 +230,10 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   }
 
   async getDailyTable(): Promise<any>{
+    
     this.selectedValue = this.pipe.transform(Date.now(), 'yyyy-MM-dd');
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
-    this.api.getDailyCardSpentTime('?spentDate='+this.selectedValue.toString().substring(0, 10)).subscribe((resp: any) => { this.dailyCards = resp.data; });
+    this.api.getDailyCardSpentTime('?spentDate='+this.selectedValue).subscribe((resp: any) => { this.dailyCards = resp.data; });
     this.datepicker.close();
   }
   async getWeeklyTable(): Promise<any> {
@@ -222,7 +246,6 @@ export class ManageTimeComponent<D> implements AfterViewInit {
     let endToStringe = String(end);
     let startDate = this.pipe.transform(startToString, "yyyy-MM-dd");
     let endDate = this.pipe.transform(endToStringe, "yyyy-MM-dd");
-
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.api.getDailyCardSpentTime('?spentDate_between='+startDate+'&spentDate_between='+endDate).subscribe((resp: any) => { this.dailyCards = resp.data });
   }
