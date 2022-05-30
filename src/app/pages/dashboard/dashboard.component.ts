@@ -34,6 +34,10 @@ export class DashboardComponent implements OnInit {
     this.getProject();
   }
 
+  addProjects(newItem:any) {
+    this.data = newItem;
+  }
+
 
   getProject(): void {
     this.http.get('http://localhost:8080/api/project')

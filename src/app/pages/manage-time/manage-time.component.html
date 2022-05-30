@@ -2,24 +2,23 @@
     <div class="DailyPage" *ngIf="showDailyTable">
         <mat-form-field appearance="outline" style="position: absolute;">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="datepicker" [value]="selectedValue" (dateInput)="addEvent($event)" >
-            <mat-datepicker-toggle matSuffix [for]="datepicker" >
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="selectedValue" (dateInput)="addEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="datepicker">
                 <mat-icon matDatepickerToggleIcon>
                     calendar_month
                 </mat-icon>
 
             </mat-datepicker-toggle>
 
-          
+
             <mat-datepicker #datepicker>
                 <mat-datepicker-actions>
                     <button mat-button matDatepickerCancel>Cancel</button>
-                    <button mat-raised-button color="primary" matDatepickerApply
-                        (click)="showTable()">Apply</button>
+                    <button mat-raised-button color="primary" matDatepickerApply (click)="showTable()">Apply</button>
                 </mat-datepicker-actions>
             </mat-datepicker>
         </mat-form-field>
-      
+
 
         <div class="datepicker-footer" #datepickerFooter>
             <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
@@ -184,7 +183,7 @@
         </div>
     </div>
     <div class="projectPage" *ngIf="showProjectTable">
-        
+
         <div class="datepicker-footer" #datepickerFooter>
             <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
                 <mat-button-toggle value="bold" (click)="dailyTable()">Daily</mat-button-toggle>

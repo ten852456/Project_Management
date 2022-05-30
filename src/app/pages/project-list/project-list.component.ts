@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -13,9 +13,13 @@ import { ApiServiceService } from 'src/app/api-service.service';
 })
 export class ProjectListComponent implements OnInit {
 
+  @Output() data = new EventEmitter<any>();
+
 
   searchText: any;
   projects:any;
+  allProjects:any;
+
   displayedColumns: string[] = ['title', 'completed', 'dueDate', 'Drive'];
   selected = '?completed=false';
 
@@ -36,12 +40,16 @@ export class ProjectListComponent implements OnInit {
   openDialog() {
     this.dialog.open(ProjectDialogComponent, {width: '50%'});
     this.dialog.afterAllClosed
-    .subscribe(() => this.getProjects());
+    .subscribe(() => {this.getProjects(),this.getAllProjects()});
   }
 
 
   getProjects():any{
     this.api.getProject(this.selected).subscribe((res:any) =>{this.projects = res.data,this.getMembers()});
+  }
+
+  getAllProjects():any{
+    this.api.getProject("").subscribe((res:any) =>{this.allProjects = res.data,this.data.emit(this.allProjects);});
   }
 
   getMembers():any {

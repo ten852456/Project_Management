@@ -61,7 +61,7 @@
                 <app-spent-time></app-spent-time>
             </div>
             <div *ngIf="projectList">
-                <app-project-list></app-project-list>
+                <app-project-list (data)="addProjects($event)"></app-project-list>
             </div>
             <div *ngIf="project">
                 <app-project-board [id]="id" [title]="title"></app-project-board>
