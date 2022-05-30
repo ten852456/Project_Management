@@ -42,23 +42,26 @@ import { CardDialogComponent } from './pages/card-dialog/card-dialog.component';
 import { ProjectDialogComponent } from './pages/project-list/project-dialog/project-dialog/project-dialog.component';
 import { ProjectBoardComponent } from './pages/project-board/project-board.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
+import { CardDetailComponent } from './pages/card-detail/card-detail.component';
+
 @NgModule({
   declarations: [
-    AppComponent, 
-    NotFoundComponent, 
-    DashboardComponent, 
-    ProjectListComponent, 
-    SpentTimeComponent, 
-    ProjectDialogComponent, 
-    LoginComponent, 
-    ManageTimeComponent, 
-    TaskDialogComponent, 
-    PersonalBoardComponent, 
-    MemberComponent, 
+    AppComponent,
+    NotFoundComponent,
+    DashboardComponent,
+    ProjectListComponent,
+    SpentTimeComponent,
+    ProjectDialogComponent,
+    LoginComponent,
+    ManageTimeComponent,
+    TaskDialogComponent,
+    PersonalBoardComponent,
+    MemberComponent,
     MemberDialogComponent,
     CardDialogComponent,
     ProjectBoardComponent,
     TimelineComponent,
+    CardDetailComponent,
   ],
 
   imports: [

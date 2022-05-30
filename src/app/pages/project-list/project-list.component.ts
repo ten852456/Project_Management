@@ -35,6 +35,8 @@ export class ProjectListComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(ProjectDialogComponent, {width: '50%'});
+    this.dialog.afterAllClosed
+    .subscribe(() => this.getProjects());
   }
 
 

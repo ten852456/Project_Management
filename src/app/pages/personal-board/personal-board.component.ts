@@ -4,9 +4,9 @@ import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
 import { HttpClient } from '@angular/common/http';
+import { CardDetailComponent } from '../card-detail/card-detail.component';
 
 
 
@@ -119,6 +119,11 @@ export class PersonalBoardComponent implements OnInit {
         x.status = column.status;
       }
     } )
+
+
+    // this.board.columns.forEach(column =>  {
+    //   column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
+    // });
   }
 
 
@@ -126,6 +131,12 @@ export class PersonalBoardComponent implements OnInit {
     this.dialog.open(CardDialogComponent, {width: '50%' , data:{status:sendStatus}});
     this.dialog.afterAllClosed
     .subscribe(() => this.getPersonalCards());
+  }
+
+  openDetail(id:any) {
+    this.dialog.open(CardDetailComponent, {width: '50%' , data:{id:id}});
+    // this.dialog.afterAllClosed
+    // .subscribe(() => this.getPersonalCards());
   }
 
   selectProject(id:number, title:string){

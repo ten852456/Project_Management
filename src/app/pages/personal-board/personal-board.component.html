@@ -70,7 +70,7 @@
                 <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event,column)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
                         {{ item.title }}
-                        <mat-icon>more_horiz</mat-icon>
+                        <mat-icon (click)="openDetail(item.id)" style="cursor: pointer;">more_horiz</mat-icon>
                     </div>
                 </div>
             </div>
