@@ -81,7 +81,7 @@ export class PersonalBoardComponent implements OnInit {
 
 
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>,column:any) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -89,7 +89,7 @@ export class PersonalBoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      // this.replacStatus();
+      this.replacStatus(column);
     }
   }
 
@@ -113,10 +113,13 @@ export class PersonalBoardComponent implements OnInit {
   //  });
   // }
 
-  replacStatus():void {
-    this.board.columns.forEach(column =>  {
-      column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
-    });
+  replacStatus(column:any):void {
+    column.cards.forEach((x:any) => {
+      if(x.status != column.status) {
+        this.api.updateCard(x.id, column.status).subscribe(res => console.log(res));
+        x.status = column.status;
+      }
+    } )
   }
 
 
