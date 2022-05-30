@@ -75,28 +75,26 @@ export class DashboardComponent implements OnInit {
 
 
   gotoDashboard(){
-    this.router.navigate(['personal-board'],{relativeTo: this.route});
+    this.router.navigate(['home/personal-board']);
   }
   gotoSpentTime() {
-    this.router.navigate(['spent-time'],{relativeTo: this.route});
+    this.router.navigate(['home/spent-time']);
 
   }
   gotoProjectList() {
-    this.router.navigate(['list'],{relativeTo: this.route});
+    this.router.navigate(['home/list']);
 
   }
   gotoProject(id:number, title:string){
-    this.router.navigate(['project/' + title],{relativeTo: this.route});
     this.id = id;
     this.title = title;
-
+    this.router.navigate(['home/project/'],{queryParams: {title: this.title, id: this.id}});
   }
   gotoManageTime() {
-    this.router.navigate(['manage-time'],{relativeTo: this.route});
+    this.router.navigate(['home/manage-time']);
   }
   gotoMember() {
-    this.router.navigate(['member'],{relativeTo: this.route});
-    this.getMember();
+    this.router.navigate(['home/member']);
   }
 
 
@@ -108,9 +106,5 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getMember(): void {
-    this.http.get<any[]>(this.userListUrl)
-    .subscribe((nameMember) => this.nameMember = nameMember);
-  }
 
 }

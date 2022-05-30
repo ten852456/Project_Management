@@ -4,6 +4,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-board',
@@ -12,8 +13,8 @@ import { ApiServiceService } from 'src/app/api-service.service';
 })
 export class ProjectBoardComponent implements OnInit {
 
-  @Input() id?: number;
-  @Input() title?: string;
+  id = this.route.snapshot.queryParamMap.get('id');
+  title = this.route.snapshot.queryParamMap.get('title');
   unassigned!:any;
   todo!:any;
   doing!:any;
@@ -27,14 +28,16 @@ export class ProjectBoardComponent implements OnInit {
 
   constructor(
     private api: ApiServiceService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.getCards();
   }
 
   ngOnChanges(): void {
-    this.getCards();
   }
+  
 
   getCards() {
     this.api.getCard('?status=UNASSIGNED&project=' + this.id + '&__user=' + this.uid).subscribe((res:any) => {this.unassigned =  res.data,
