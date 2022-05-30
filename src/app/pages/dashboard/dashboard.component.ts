@@ -36,14 +36,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
+    this.getProject();
   }
 
-  countProjectList(){
+
+  getProject(): void {
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
-      console.log(this.data);
     })
+  }
+
+  countProjectList(){
+
     if(this.icon == "keyboard_arrow_up") {
       this.icon = "keyboard_arrow_down"
       this.showProject = true
@@ -52,6 +57,8 @@ export class DashboardComponent implements OnInit {
       this.showProject = false
     }
   }
+
+
   checkToken(){
     if (sessionStorage.getItem("refreshToken")!=null){
       var refresh_token = ""
