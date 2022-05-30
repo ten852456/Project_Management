@@ -6,6 +6,9 @@ import { SpentTimeComponent } from './pages/spent-time/spent-time.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ManageTimeComponent } from './pages/manage-time/manage-time.component';
 import { PersonalBoardComponent } from './pages/personal-board/personal-board.component';
+import { Board } from './models/board.model';
+import { ProjectBoardComponent } from './pages/project-board/project-board.component';
+import { MemberComponent } from './pages/member/member.component';
 
 
 const routes: Routes = [
@@ -21,23 +24,37 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent,
-  },
-  {
-    path: 'list',
-    component: ProjectListComponent,
-  },
-  {
-    path: 'time',
-    component: SpentTimeComponent,
-  },
-  {
-    path: 'manage-time',
-    component: ManageTimeComponent,
-  },
-  {
-    path: 'personal-board',
-    component: PersonalBoardComponent,
-  },
+    children: [
+      {
+        path: 'personal-board',
+        component: PersonalBoardComponent
+      },
+      {
+        path: 'spent-time',
+        component: SpentTimeComponent
+      },
+      {
+        path: 'manage-time',
+        component: ManageTimeComponent
+      },
+      {
+        path: 'project',
+        component: ProjectBoardComponent,
+      },
+      {
+        path: 'project/:id',
+        component: ProjectBoardComponent,
+      },
+      {
+        path: 'member',
+        component: MemberComponent,
+      },
+      {
+        path: 'list',
+        component: ProjectListComponent,
+      },
+    ]
+  }
 ];
 
 @NgModule({
