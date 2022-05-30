@@ -5,6 +5,7 @@ import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-project-board',
@@ -29,9 +30,18 @@ export class ProjectBoardComponent implements OnInit {
   constructor(
     private api: ApiServiceService,
     private route: ActivatedRoute,
-  ) { }
+  ) { 
+    this.route.queryParamMap.subscribe(queryParams  => {
+      this.ngOnInit();
+      this.id = this.route.snapshot.queryParamMap.get('id');
+      this.title = this.route.snapshot.queryParamMap.get('title');
+
+  });
+  }
+  
 
   ngOnInit(): void {
+    console.log(this.id + '/' + this.title);
     this.getCards();
   }
 
