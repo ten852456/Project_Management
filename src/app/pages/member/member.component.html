@@ -3,3 +3,27 @@
 <button mat-fab class="add_member" (click)="openDialog()">
     <mat-icon>person_add</mat-icon>
 </button>
+
+<div mat-subheader><b>Admin</b></div>
+    <mat-list-item *ngFor="let member of members">
+        <div *ngIf="member.roles.length>1">
+            <mat-list class="admin">
+                <mat-icon mat-list-icon class="icon-admin">person</mat-icon>
+                <div mat-line style="padding-left: 40px;">{{member.profile.displayName}}</div>
+                <div mat-line style="padding-left: 40px;"> {{member.username}} </div><br>    
+            </mat-list>
+        </div>
+    </mat-list-item>  
+
+<mat-divider></mat-divider>
+
+<div mat-subheader><b>User</b></div>
+    <mat-list-item *ngFor="let member of members">
+        <div *ngIf="member.roles.length==1">
+            <mat-list class="user">
+                <mat-icon mat-list-icon class="icon-user">person</mat-icon>
+                <div mat-line style="padding-left: 40px;">{{member.profile.displayName}}</div>
+                <div mat-line style="padding-left: 40px;"> {{member.username}} </div><br>
+            </mat-list>
+        </div>
+    </mat-list-item>

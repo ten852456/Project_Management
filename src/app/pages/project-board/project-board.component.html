@@ -28,7 +28,7 @@
 
 
                 <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
-                    <div class="task" *ngFor="let item of column.cards" cdkDrag>
+                    <div class="task" *ngFor="let item of column.cards | filter:searchText" cdkDrag>
                         {{ item.title }}
                     </div>
                 </div>

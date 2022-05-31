@@ -2,7 +2,17 @@
     <mat-toolbar-row>
         <button mat-icon-button>
             <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
-        </button> ProjectManagement
+        </button> ProjectManagement 
+        
+        <div *ngIf="project">
+            <div class="navbar">
+                <div class="project-bar">
+                    <p style="padding: 5px; padding-left: 15%;">{{title}}</p>
+
+                </div>
+            </div>
+        </div>
+
         <span class="example-spacer"></span>
         <button mat-icon-button class="example-icon" (click)="logout()">
             <mat-icon class='material-icons-outlined'>logout</mat-icon>
@@ -47,13 +57,13 @@
             </button>
 
             <button mat-button class="member" (click)="gotoMember()">
-                <mat-icon>group</mat-icon>
+                <mat-icon>assignment_ind</mat-icon>
                 &nbsp;Member
             </button>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div>
+        <!-- <div>
             <div *ngIf="personalboard">
                 <app-personal-board></app-personal-board>
             </div>
@@ -70,8 +80,10 @@
                 <app-manage-time></app-manage-time>
             </div>
             <div *ngIf="member">
+                <app-member [members]="nameMember.data"></app-member>
                 <app-timeline></app-timeline>
             </div>
-        </div>
+        </div> -->
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

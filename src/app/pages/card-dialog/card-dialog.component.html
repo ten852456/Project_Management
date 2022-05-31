@@ -1,13 +1,12 @@
 <h1 mat-dialog-title class="h3 mb-3 fw-normal">Card</h1>
 
+<mat-dialog-actions align="end">
+    <button mat-dialog-title mat-mini-fab mat-dialog-close class="close"> x </button>
+</mat-dialog-actions>
+
 <mat-dialog-content>
     <main class="form-signin">
         <form class="example-form" [formGroup]="form">
-
-            <mat-dialog-actions align="end">
-                <button mat-dialog-title mat-mini-fab mat-dialog-close class="close"> x </button>
-            </mat-dialog-actions>
-
             <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
                 <mat-label>Card</mat-label>
                 <input formControlName="title" [(ngModel)]="title" type="text" class="form-control" matInput placeholder="Card">

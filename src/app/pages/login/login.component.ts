@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  data:any;
   form!: FormGroup;
   decode!:any;
   constructor(
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("refreshToken",res.refresh_token);
         sessionStorage.setItem("username",res.username);
         sessionStorage.setItem("role",res.roles);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/personal-board']);
       },
       (error : HttpErrorResponse)=>{
         alert("Error! Incorrect username or password")
