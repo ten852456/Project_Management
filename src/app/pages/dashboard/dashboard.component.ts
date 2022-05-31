@@ -32,19 +32,18 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkToken();
-    this.getProject();
+  }
+
+  addProjects(newItem:any) {
+    this.data = newItem;
   }
 
 
-  getProject(): void {
+  countProjectList(): void {
     this.http.get('http://localhost:8080/api/project')
     .subscribe((res:any)=> {
       this.data = res.data;
     })
-  }
-
-  countProjectList(){
-
     if(this.icon == "keyboard_arrow_up") {
       this.icon = "keyboard_arrow_down"
       this.showProject = true

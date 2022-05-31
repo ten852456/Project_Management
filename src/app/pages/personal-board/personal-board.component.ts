@@ -116,7 +116,7 @@ export class PersonalBoardComponent implements OnInit {
   replacStatus(column:any):void {
     column.cards.forEach((x:any) => {
       if(x.status != column.status) {
-        this.api.updateCard(x.id, column.status).subscribe(res => console.log(res));
+        this.api.updateStatusCard(x.id, column.status).subscribe(res => console.log(res));
         x.status = column.status;
       }
     } )
@@ -136,8 +136,8 @@ export class PersonalBoardComponent implements OnInit {
 
   openDetail(id:any) {
     this.dialog.open(CardDetailComponent, {width: '50%' , data:{id:id}});
-    // this.dialog.afterAllClosed
-    // .subscribe(() => this.getPersonalCards());
+    this.dialog.afterAllClosed
+    .subscribe(() => this.getPersonalCards());
   }
 
   selectProject(id:number, title:string){

@@ -31,7 +31,7 @@ export interface Project {
   sumFixingSpecs: number;
   sumFixingImplement: number;
   sum:number;
-  
+
 }
 export interface Card {
   id: number;
@@ -97,7 +97,9 @@ export class ManageTimeComponent<D> implements AfterViewInit {
     private _dateAdapter: DateAdapter<D>,
     private route: ActivatedRoute,
     private router:Router,
-  ) {this.router.navigate(['manage-time'],{relativeTo: this.route}) }
+  ) {
+    // this.router.navigate(['manage-time'],{relativeTo: this.route})
+  }
 
   check !: number;
   selectedDate: any;
@@ -107,17 +109,18 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   ngAfterViewInit() {
     this.dailyTable();
   }
+
  addEvent(event: MatDatepickerInputEvent<Date>){
     this.selectedDate = this.pipe.transform(event.value, 'yyyy-MM-dd');
-    
+
   }
 
  async showTable(): Promise<any>{
     console.log(this.selectedDate);
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.api.getDailyCardSpentTime('?spentDate='+this.selectedDate).subscribe((resp: any) => { this.dailyCards = resp.data});
- 
- 
+
+
   }
  async dailyTable(): Promise<any>{
     this.state = "daily";
@@ -126,7 +129,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
     this.showDailyTable = true;
     this.showWeeklyTable = false;
     this.showProjectTable = false;
-    
+
   }
   async weeklyTable(): Promise<any> {
     this.state = "weekly";
@@ -135,7 +138,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
     this.showDailyTable = false;
     this.showWeeklyTable = true;
     this.showProjectTable = false;
-    
+
   }
   async projectTable(): Promise<any> {
     this.state = "project";
@@ -144,7 +147,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
     this.showDailyTable = false;
     this.showWeeklyTable = false;
     this.showProjectTable = true;
-    
+
   }
   private get today(): D {
     const date = this._dateAdapter.getValidDateOrNull(new Date());
@@ -230,7 +233,7 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   }
 
   async getDailyTable(): Promise<any>{
-    
+
     this.selectedValue = this.pipe.transform(Date.now(), 'yyyy-MM-dd');
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.api.getDailyCardSpentTime('?spentDate='+this.selectedValue).subscribe((resp: any) => { this.dailyCards = resp.data; });

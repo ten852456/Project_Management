@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/api-service.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-card-dialog',
@@ -82,7 +82,7 @@ export class CardDialogComponent implements OnInit {
 
 
   replacStatus(id:any):void {
-    this.api.updateCard(id, this.data.status).subscribe(() => this.dialogRef.close());
+    this.api.updateStatusCard(id, this.data.status).subscribe(() => this.dialogRef.close());
   }
 
 

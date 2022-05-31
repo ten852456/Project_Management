@@ -6,6 +6,9 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiServiceService {
+  updateStatusCard(id: any, status: any) {
+    throw new Error('Method not implemented.');
+  }
 
   private taskUrl = 'http://localhost:8080/api/task';
   private Url = 'http://localhost:8080/api/';
@@ -32,18 +35,21 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.Url + 'card' + future);
   }
 
+  updateStatusCard(id:any, tostatus:any): Observable<any[]> {
+    return this.http.post<any[]>(this.Url + 'custom/card/changeStatus/' + id + "?toStatus=" + tostatus, "");
+  }
   getTask(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'Task' + future);
   }
-  
-  updateCard(id:any, tostatus:any): Observable<any[]> {
-    return this.http.post<any[]>(this.Url + 'custom/card/changeStatus/' + id + "?toStatus=" + tostatus, "");
+
+  updateCard(id:any,data:any): Observable<any[]> {
+    return this.http.put<any[]>(this.Url + 'card/' + id, data);
   }
 
   updateDailyCardSpentTime(data:{}): Observable<any[]>{
     return this.http.post<any[]>(this.Url + 'custom/dailyCardSpentTime/batchUpdate', data );
   }
 
-
   constructor(private http: HttpClient) { }
+
 }
