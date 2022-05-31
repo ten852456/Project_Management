@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/authentication/token-interceptor.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -13,13 +13,8 @@ export class DashboardComponent implements OnInit {
   private userListUrl = environment.userListUrl;
   nameMember: any;
 
-  personalboard:boolean = false;
-  dashboard:boolean = false;
-  spentTime:boolean = false;
-  projectList:boolean = false;
+
   project:boolean = false;
-  manageTime:boolean = false;
-  member:boolean = false;
   showPL:boolean = false;
   data:any;
 
@@ -32,6 +27,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -76,10 +72,8 @@ export class DashboardComponent implements OnInit {
           TokenInterceptorService.accessToken = res.access_token;
           sessionStorage.setItem("refreshToken",res.refresh_token)
         })
-        this.personalboard = true;
     }
     else {
-      this.personalboard = true;
       this.countProjectList();
     }
   }
@@ -88,55 +82,26 @@ export class DashboardComponent implements OnInit {
 
 
   gotoDashboard(){
-    this.personalboard = true;
-    this.spentTime = false;
-    this.project = false;
-    this.projectList = false;
-    this.manageTime = false;
-    this.member = false;
+    this.router.navigate(['home/personal-board']);
   }
   gotoSpentTime() {
-    this.personalboard = false;
-    this.spentTime = true;
-    this.project = false;
-    this.projectList = false;
-    this.manageTime = false;
-    this.member = false;
+    this.router.navigate(['home/spent-time']);
+
   }
   gotoProjectList() {
-    this.personalboard = false;
-    this.spentTime = false;
-    this.project = false;
-    this.projectList = true;
-    this.manageTime = false;
-    this.member = false;
+    this.router.navigate(['home/list']);
+
   }
   gotoProject(id:number, title:string){
     this.id = id;
     this.title = title;
-    this.personalboard = false;
-    this.spentTime = false;
-    this.project = true;
-    this.projectList = false;
-    this.manageTime = false;
-    this.member = false;
+    this.router.navigate(['home/project/'],{queryParams: {title: this.title, id: this.id}});
   }
   gotoManageTime() {
-    this.personalboard = false;
-    this.spentTime = false;
-    this.project = false;
-    this.projectList = false;
-    this.manageTime = true;
-    this.member = false;
+    this.router.navigate(['home/manage-time']);
   }
   gotoMember() {
-    this.getMember();
-    this.personalboard = false;
-    this.spentTime = false;
-    this.project = false;
-    this.projectList = false;
-    this.manageTime = false;
-    this.member = true;
+    this.router.navigate(['home/member']);
   }
 
 
@@ -148,9 +113,5 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getMember(): void {
-    this.http.get<any[]>(this.userListUrl)
-    .subscribe((nameMember) => this.nameMember = nameMember);
-  }
 
 }
