@@ -14,30 +14,20 @@
 </form>
 
 <div class="board">
-
-
-
     <div class="board-wrapper">
-
         <div class="board-columns" cdkDropListGroup>
             <div class="board-column" *ngFor="let column of board.columns">
-
                 <div class="column-title">
                     {{ column.name }}
                 </div>
-
-
                 <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
                     <div class="task" *ngFor="let item of column.cards | filter:searchText" cdkDrag>
                         {{ item.title }}
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 <button mat-flat-button style="background-color: #2B92F9; color: #ffff; float: right; margin-right: 20px;" (click)="replacStatus()">save</button>

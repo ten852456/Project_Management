@@ -25,6 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCommonModule } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -87,6 +88,7 @@ import { TimelineComponent } from './pages/timeline/timeline.component';
     MatCommonModule,
     DragDropModule,
     MatRadioModule,
+    MatCardModule,
   ],
   providers: [
     MatDatepickerModule,

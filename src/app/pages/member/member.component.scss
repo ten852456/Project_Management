@@ -17,7 +17,26 @@ h1 {
     .icon-admin {
         position: absolute;
         padding-top: 6px;
+        padding-left: 15px;
         opacity: 70%;
+        font-size: 30px;
+    }
+    .name {
+        padding-left: 70px;
+        font-size: 15px;
+        font-weight: 450;
+    }
+    .username {
+        padding-left: 70px;
+    }
+    .delete {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+        color: #F94449;
+    }
+    mat-card-content {
+        margin-bottom: 0%;
     }
 }
 
@@ -26,6 +45,29 @@ h1 {
     .icon-user {
         position: absolute;
         padding-top: 6px;
+        padding-left: 15px;
         opacity: 70%;
+        font-size: 30px;
     }
+    .name {
+        padding-left: 70px;
+        font-size: 15px;
+        font-weight: 450;
+    }
+    .username {
+        padding-left: 70px;
+    }
+    .delete {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+        color: #F94449;
+    }
+    mat-card-content {
+        margin-bottom: 0%;
+    }
+}
+
+mat-divider {
+    margin-top: 40px;
 }

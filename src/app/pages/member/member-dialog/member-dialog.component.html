@@ -12,22 +12,6 @@
         </mat-form-field>
     </form>
 
-    <pre>{{form?.value|json}}</pre>
-
-    <!-- <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectRole">
-        <div fromGroupName="roles">
-            <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role" (selectionChange)="getRole(selectRole)">
-                {{role}}
-            </mat-radio-button>
-        </div>
-    </mat-radio-group>
-    <div>Role is: {{selectRole}}</div> -->
-
-    <!-- <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-        <mat-radio-button class="example-radio-button">System Admin</mat-radio-button>
-        <mat-radio-button class="example-radio-button">User</mat-radio-button>
-    </mat-radio-group> -->
-
     <mat-form-field appearance="fill">
         <mat-label>Role</mat-label>
         <mat-select formControlName="roles">

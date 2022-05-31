@@ -1,16 +1,17 @@
-<h1>MEMBER</h1>
-
 <button mat-fab class="add_member" (click)="openDialog()">
     <mat-icon>person_add</mat-icon>
 </button>
 
-<div mat-subheader><b>Admin</b></div>
+<div mat-subheader style="padding-top: 20px;"><b>Admin</b></div>
     <mat-list-item *ngFor="let member of members">
         <div *ngIf="member.roles.length>1">
             <mat-list class="admin">
-                <mat-icon mat-list-icon class="icon-admin">person</mat-icon>
-                <div mat-line style="padding-left: 40px;">{{member.profile.displayName}}</div>
-                <div mat-line style="padding-left: 40px;"> {{member.username}} </div><br>    
+                <mat-card style="width: 87%; margin-bottom: 10px;">
+                    <mat-icon mat-list-icon class="icon-admin">person</mat-icon>
+                    <mat-card-content class="name">{{member.profile.displayName}}</mat-card-content>
+                    <mat-card-content class="username">{{member.username}}</mat-card-content>
+                    <a class="delete"><mat-icon>delete_forever</mat-icon></a>
+                </mat-card>    
             </mat-list>
         </div>
     </mat-list-item>  
@@ -21,9 +22,12 @@
     <mat-list-item *ngFor="let member of members">
         <div *ngIf="member.roles.length==1">
             <mat-list class="user">
-                <mat-icon mat-list-icon class="icon-user">person</mat-icon>
-                <div mat-line style="padding-left: 40px;">{{member.profile.displayName}}</div>
-                <div mat-line style="padding-left: 40px;"> {{member.username}} </div><br>
+                <mat-card style="width: 87%; margin-bottom: 10px;">
+                    <mat-icon mat-list-icon class="icon-user">person</mat-icon>
+                    <mat-card-content class="name">{{member.profile.displayName}}</mat-card-content>
+                    <mat-card-content class="username">{{member.username}}</mat-card-content>
+                    <a class="delete"><mat-icon>delete_forever</mat-icon></a>
+                </mat-card>    
             </mat-list>
         </div>
     </mat-list-item>
