@@ -70,7 +70,7 @@ export class CardDialogComponent implements OnInit {
 
 
   replacStatus(id:any):void {
-    this.api.updateCard(id, this.data.status).subscribe(() => this.dialogRef.close());
+    this.api.updateStatusCard(id, this.data.status).subscribe(() => this.dialogRef.close());
   }
 
 

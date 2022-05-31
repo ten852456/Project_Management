@@ -1,1 +1,29 @@
-{{card.title}}
+<h1 mat-dialog-title class="h3 mb-3 fw-normal">{{card.title}}</h1>
+
+<mat-dialog-content>
+    <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Card" [(ngModel)]="card.title">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style=" width: 100%;">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="description" [(ngModel)]="card.description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="padding-right: 5%; width: 30%;">
+        <mat-label>Point</mat-label>
+        <input [(ngModel)]="card.point" type="number" matInput placeholder="Point">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="padding-right: 5%; width: 30%;">
+        <mat-label>DonePoint</mat-label>
+        <input [(ngModel)]="card.donePoint" type="number" matInput placeholder="DonePoint">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 30%;">
+        <mat-label>EstimatedHours</mat-label>
+        <input [(ngModel)]="card.estimatedHours" type="number" matInput placeholder="EstimatedHours">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" type="submit" (click)="updateCard()"> OK </button>
+</mat-dialog-actions>

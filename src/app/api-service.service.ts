@@ -32,9 +32,14 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.Url + 'card' + future);
   }
 
-  updateCard(id:any, tostatus:any): Observable<any[]> {
+  updateStatusCard(id:any, tostatus:any): Observable<any[]> {
     return this.http.post<any[]>(this.Url + 'custom/card/changeStatus/' + id + "?toStatus=" + tostatus, "");
   }
+
+  updateCard(id:any,data:any): Observable<any[]> {
+    return this.http.put<any[]>(this.Url + 'card/' + id, data);
+  }
+
   updateDailyCardSpentTime(data:{}): Observable<any[]>{
     return this.http.post<any[]>(this.Url + 'custom/dailyCardSpentTime/batchUpdate', data );
 

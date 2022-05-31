@@ -25,5 +25,9 @@ export class CardDetailComponent implements OnInit {
     this.api.getCard("/" + this.data.id).subscribe((res:any) => this.card = res.data);
   }
 
+  updateCard() {
+    this.api.updateCard(this.card.id,this.card).subscribe(() => this.dialogRef.close());
+  }
+
 
 }
