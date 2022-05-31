@@ -18,7 +18,7 @@
     // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
     min-width: 0;
     min-height: 0;
-    padding-top: 15px;
+    padding-top: 5px;
     .board-bar {
         background: rgba(gray, 0.5);
         padding: 8px 15px;
@@ -35,7 +35,7 @@
         .board-columns {
             display: flex;
             flex-grow: 1;
-            padding-top: 40px;
+            padding-top: 5px;
             .board-column {
                 display: flex;
                 flex-direction: column;
@@ -112,7 +112,7 @@
     float: left;
 }
 
-.selector-form{
+.selector-form {
     padding-top: 20px;
     padding-left: 40px;
     float: left;

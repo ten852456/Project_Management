@@ -44,7 +44,18 @@
                     <mat-label>Select Project</mat-label>
                     <mat-select>
                         <div *ngFor="let d of projectList">
-                            <mat-option value="d.id" (click)="selectProject(d.id, d.title)">{{d.title}}</mat-option>
+                            <mat-option value="d.id">{{d.title}}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+            <form class="selector-form">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Task</mat-label>
+                    <mat-select>
+                        <div *ngFor="let d of taskList">
+                            <mat-option value="d.id" (click)="selectTask(d.id)">{{d.title}}</mat-option>
                         </div>
                     </mat-select>
                 </mat-form-field>

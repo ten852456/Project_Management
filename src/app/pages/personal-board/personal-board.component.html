@@ -25,13 +25,13 @@
                 </mat-option>
             </div>
         </mat-select>
-        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="this.getCards()">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="getPersonalCards()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
 </form>
 
-<form class="selector-form" *ngIf="value != ''">
+<!-- <form class="selector-form" *ngIf="value != ''">
     <mat-form-field appearance="fill">
         <mat-label>Select Task</mat-label>
         <mat-select>
@@ -44,7 +44,7 @@
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
-</form>
+</form> -->
 
 <br><br><br><br><br>
 
@@ -67,9 +67,10 @@
                 </div>
 
 
-                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)">
+                <div class="tasks-container" cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event,column)">
                     <div class="task" *ngFor="let item of column.cards" cdkDrag>
                         {{ item.title }}
+                        <mat-icon (click)="openDetail(item.id)" style="cursor: pointer;">more_horiz</mat-icon>
                     </div>
                 </div>
             </div>
@@ -80,4 +81,6 @@
 
 </div>
 
-<button mat-flat-button style="background-color: #2B92F9; color: #ffff; float: right; margin-right: 20px;" (click)="replacStatus()">save</button>
+
+<!-- <button mat-flat-button style="background-color: #2B92F9; color: #ffff; float: right; margin-right: 20px;" (click)="replacStatus()">save</button>
+<button (click)="getTask()">save</button> -->

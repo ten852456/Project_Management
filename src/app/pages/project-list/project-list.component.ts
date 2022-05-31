@@ -19,6 +19,8 @@ export class ProjectListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'completed', 'dueDate', 'Drive'];
   selected = '?completed=false';
 
+  member:any;
+
 
 
   constructor(
@@ -33,12 +35,19 @@ export class ProjectListComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(ProjectDialogComponent, {width: '50%'});
+    this.dialog.afterAllClosed
+    .subscribe(() => this.getProjects());
   }
 
 
   getProjects():any{
-    this.api.getProject(this.selected).subscribe((res:any) =>{this.projects = res.data});
+    this.api.getProject(this.selected).subscribe((res:any) =>{this.projects = res.data,this.getMembers()});
   }
+
+  getMembers():any {
+    this.api.getProjectMember(this.selected).subscribe((res:any) => {this.member = res.data});
+  }
+
 
 
   get sortByDueDate() {

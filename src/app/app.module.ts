@@ -43,6 +43,8 @@ import { ProjectDialogComponent } from './pages/project-list/project-dialog/proj
 import { ProjectBoardComponent } from './pages/project-board/project-board.component';
 import { TaskDialogComponent } from './pages/task-dialog/task-dialog.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
+import { CardDetailComponent } from './pages/card-detail/card-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -59,6 +61,7 @@ import { TimelineComponent } from './pages/timeline/timeline.component';
     CardDialogComponent,
     ProjectBoardComponent,
     TimelineComponent,
+    CardDetailComponent,
   ],
 
   imports: [

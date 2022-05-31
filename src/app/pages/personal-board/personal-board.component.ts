@@ -4,9 +4,9 @@ import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
 import { ApiServiceService } from 'src/app/api-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { CardDialogComponent } from 'src/app/pages/card-dialog/card-dialog.component';
 import { HttpClient } from '@angular/common/http';
+import { CardDetailComponent } from '../card-detail/card-detail.component';
 
 
 
@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./personal-board.component.scss']
 })
 export class PersonalBoardComponent implements OnInit {
+
   value = '';
 
 
@@ -29,7 +30,8 @@ export class PersonalBoardComponent implements OnInit {
 
   searchText: any;
 
-  uid = sessionStorage.getItem("uid");
+  // uid = sessionStorage.getItem("uid");
+  uid = 0;
 
   data:any;
 
@@ -41,19 +43,19 @@ export class PersonalBoardComponent implements OnInit {
   constructor(
     private api: ApiServiceService,
     public dialog: MatDialog,
-    private router :Router,
     private http: HttpClient,
   ) {
 
   }
 
   ngOnInit(){
-    this.getCards();
+    this.getPersonalCards();
     this.getProjectList();
     this.getTask();
+    this.filterCards()
   }
 
-  getCards() {
+   getPersonalCards() {
     this.api.getCard('?status=UNASSIGNED&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.unassigned =  res.data,
       this.api.getCard('?status=TODO&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.todo =  res.data,
         this.api.getCard('?status=DOING&__user=' + this.uid + '&project=' + this.id).subscribe((res:any) => {this.doing =  res.data,
@@ -79,7 +81,7 @@ export class PersonalBoardComponent implements OnInit {
 
 
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>,column:any) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -87,7 +89,7 @@ export class PersonalBoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      // this.replacStatus();
+      this.replacStatus(column);
     }
   }
 
@@ -111,15 +113,31 @@ export class PersonalBoardComponent implements OnInit {
   //  });
   // }
 
-  replacStatus():void {
-    this.board.columns.forEach(column =>  {
-      column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
-    });
+  replacStatus(column:any):void {
+    column.cards.forEach((x:any) => {
+      if(x.status != column.status) {
+        this.api.updateCard(x.id, column.status).subscribe(res => console.log(res));
+        x.status = column.status;
+      }
+    } )
+
+
+    // this.board.columns.forEach(column =>  {
+    //   column.cards.forEach(x => this.api.updateCard(x.id, column.status).subscribe(res => console.log(res)))
+    // });
   }
 
 
   openDialog(sendStatus:string) {
     this.dialog.open(CardDialogComponent, {width: '50%' , data:{status:sendStatus}});
+    this.dialog.afterAllClosed
+    .subscribe(() => this.getPersonalCards());
+  }
+
+  openDetail(id:any) {
+    this.dialog.open(CardDetailComponent, {width: '50%' , data:{id:id}});
+    // this.dialog.afterAllClosed
+    // .subscribe(() => this.getPersonalCards());
   }
 
   selectProject(id:number, title:string){
