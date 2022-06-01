@@ -3,6 +3,7 @@ import { TokenInterceptorService } from 'src/app/services/authentication/token-i
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -28,22 +29,21 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.checkToken();
   }
 
-  addProjects(newItem:any) {
-    this.data = newItem;
+  dialogClosed() {
+    this.dialog.afterAllClosed
+    .subscribe(() => {this.getProjects()});
   }
 
 
   countProjectList(): void {
-    this.http.get('http://localhost:8080/api/project')
-    .subscribe((res:any)=> {
-      this.data = res.data;
-    })
+    this.getProjects()
     if(this.icon == "keyboard_arrow_up") {
       this.icon = "keyboard_arrow_down"
       this.showProject = true
@@ -51,6 +51,13 @@ export class DashboardComponent implements OnInit {
       this.icon = "keyboard_arrow_up"
       this.showProject = false
     }
+  }
+
+  getProjects() {
+    this.http.get('http://localhost:8080/api/project')
+    .subscribe((res:any)=> {
+      this.data = res.data;
+    })
   }
 
 
