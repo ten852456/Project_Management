@@ -28,7 +28,7 @@
 
 }
 .example-first-footer-row{
-    background-color: hsla(48, 76%, 56%, 0.336);
+    background-color: hsla(230, 60%, 72%, 0.267);
     font-weight: bold;
     
 
@@ -51,4 +51,9 @@ table {
 
 .mat-header-cell {
     text-align: center !important;
+    font-size: 15px;
+    color: black;
+}
+.mat-column{
+    flex: 0 0 25px;
 }

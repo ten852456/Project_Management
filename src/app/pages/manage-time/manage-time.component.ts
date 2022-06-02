@@ -107,16 +107,14 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   ngAfterViewInit() {
     this.dailyTable();
   }
- addEvent(event: MatDatepickerInputEvent<Date>){
-    this.selectedDate = this.pipe.transform(event.value, 'yyyy-MM-dd');
-    
+  addEvent(event: MatDatepickerInputEvent<Date>){
+    this.selectedDate = this.pipe.transform(event.value, 'yyyy-MM-dd');  
   }
 
- async showTable(): Promise<any>{
+ showTable(){
     console.log(this.selectedDate);
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.api.getDailyCardSpentTime('?spentDate='+this.selectedDate).subscribe((resp: any) => { this.dailyCards = resp.data});
- 
  
   }
  async dailyTable(): Promise<any>{
@@ -200,6 +198,11 @@ export class ManageTimeComponent<D> implements AfterViewInit {
         )}})
     });
     this.projects.forEach((__values) => {
+      let s1 =0 ;
+      let s2 = 0;
+      let s3 = 0;
+      let s4 = 0;
+      let sum = 0;
       __values.sumSpecs = 0;
       __values.sumImplement = 0;
       __values.sumFixingSpecs = 0;
@@ -215,6 +218,8 @@ export class ManageTimeComponent<D> implements AfterViewInit {
         __values.sumHours += __member.sumHours;
         __values.sum += __member.sum;
       }
+      
+
       )
     });
     this.projects.forEach((p) => {
@@ -230,7 +235,6 @@ export class ManageTimeComponent<D> implements AfterViewInit {
   }
 
   async getDailyTable(): Promise<any>{
-    
     this.selectedValue = this.pipe.transform(Date.now(), 'yyyy-MM-dd');
     this.api.getProject(this.queryMember).subscribe((resp: any) => { this.projects = resp.data, this.mapProjects() });
     this.api.getDailyCardSpentTime('?spentDate='+this.selectedValue).subscribe((resp: any) => { this.dailyCards = resp.data; });
