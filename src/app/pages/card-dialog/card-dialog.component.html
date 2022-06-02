@@ -9,27 +9,32 @@
         <form class="example-form" [formGroup]="form">
             <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
                 <mat-label>Card</mat-label>
-                <input formControlName="title" [(ngModel)]="title" type="text" class="form-control" matInput placeholder="Card">
+                <input formControlName="title" [(ngModel)]="title" type="text" class="form-control" matInput
+                    placeholder="Card">
             </mat-form-field><br>
 
             <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Description</mat-label>
-                <textarea formControlName="description" [(ngModel)]="description" type="text" class="form-control" matInput placeholder="Description"></textarea>
+                <textarea formControlName="description" [(ngModel)]="description" type="text" class="form-control"
+                    matInput placeholder="Description"></textarea>
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
                 <mat-label>Point</mat-label>
-                <input formControlName="point" [(ngModel)]="point" type="text" class="form-control" matInput placeholder="Point">
+                <input formControlName="point" [(ngModel)]="point" type="text" class="form-control" matInput
+                    placeholder="Point">
             </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
                 <mat-label>DonePoint</mat-label>
-                <input formControlName="donePoint" [(ngModel)]="donePoint" type="text" class="form-control" matInput placeholder="DonePoint">
+                <input formControlName="donePoint" [(ngModel)]="donePoint" type="text" class="form-control" matInput
+                    placeholder="DonePoint">
             </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
                 <mat-label>EstimatedHours</mat-label>
-                <input formControlName="estimatedHours" [(ngModel)]="estimated" type="text" class="form-control" matInput placeholder="EstimatedHours">
+                <input formControlName="estimatedHours" [(ngModel)]="estimated" type="text" class="form-control"
+                    matInput placeholder="EstimatedHours">
             </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
@@ -39,14 +44,24 @@
             <br><br>
 
             <h3>Assigns</h3>
+
             <form class="selector-form">
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Project</mat-label>
-                    <mat-select>
-                        <div *ngFor="let d of projectList">
-                            <mat-option value="d.id">{{d.title}}</mat-option>
-                        </div>
-                    </mat-select>
+                <mat-form-field class="demo-full-width" appearance="fill">
+                    <mat-label>Projects</mat-label>
+                    <select matNativeControl>
+                        <option value="">--Select Projects--</option>
+                        <option value="d.id" *ngFor="let d of projectList">{{d.title}}</option>
+                    </select>
+                </mat-form-field>
+            </form>
+
+            <form class="selector-form">
+                <mat-form-field class="demo-full-width" appearance="fill">
+                    <mat-label>Tasks</mat-label>
+                    <select matNativeControl>
+                        <option value="">--Select Tasks--</option>
+                        <option value="d.id" *ngFor="let d of taskList" (click)="selectTask(d.id)">{{d.id}} : {{d.title}}</option>
+                    </select>
                 </mat-form-field>
             </form>
 
@@ -54,13 +69,19 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Select Task</mat-label>
                     <mat-select>
-                        <div *ngFor="let d of taskList">
-                            <mat-option value="d.id" (click)="selectTask(d.id)">{{d.title}}</mat-option>
-                        </div>
+                        <!-- <div *ngFor="let d of taskList"> -->
+                            <mat-option value="d.id" *ngFor="let d of taskList" (click)="selectTask(d.id)">{{d.title}}</mat-option>
+                        <!-- </div> -->
                     </mat-select>
                 </mat-form-field>
             </form>
-            <br><br><br>
+
+            <!-- <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Comment</mat-label>
+                <textarea formControlName="comments" [(ngModel)]="comments" type="text" class="form-control" matInput
+                    placeholder="Comment"></textarea>
+            </mat-form-field>
+            <br><br><br> -->
 
         </form>
     </main>

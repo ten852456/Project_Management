@@ -1,1 +1,74 @@
-{{card.title}}
+<h1 mat-dialog-title class="h3 mb-3 fw-normal">Card</h1>
+
+<mat-dialog-actions align="end">
+    <button mat-dialog-title mat-mini-fab mat-dialog-close class="close"> x </button>
+</mat-dialog-actions>
+
+
+<mat-dialog-content>
+    <main class="form-signin">
+        <form class="example-form" [formGroup]="form">
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
+                <mat-label>Card</mat-label>
+                <input formControlName="title" [(ngModel)]="title" type="text" class="form-control" matInput placeholder="Card" value="{{card.title}}">
+            </mat-form-field><br>
+
+            <!-- <mat-form-field appearance="outline" style="padding-top: 30px; width: 100%;">
+                <mat-label>Card</mat-label>
+                <input formControlName="title" [(ngModel)]="title" type="text" class="form-control" matInput
+                    placeholder="Card">
+            </mat-form-field><br> -->
+
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" [(ngModel)]="description" type="text" class="form-control" matInput placeholder="Description"
+                    value="{{card.description}}"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>Point</mat-label>
+                <input formControlName="point" [(ngModel)]="point" type="text" class="form-control" matInput placeholder="Point" value="{{card.point}}">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>DonePoint</mat-label>
+                <input formControlName="donePoint" [(ngModel)]="donePoint" type="text" class="form-control" matInput placeholder="DonePoint" value="{{card.donePoint}}">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <mat-form-field appearance="outline" style="padding-top: 30px; width: 30%;">
+                <mat-label>EstimatedHours</mat-label>
+                <input formControlName="estimatedHours" [(ngModel)]="estimated" type="text" class="form-control" matInput placeholder="EstimatedHours"
+                    value="{{card.estimatedHours}}">
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <h3>Images</h3>
+            <button mat-raised-button color="#2B92F9">+</button>
+            <br><br>
+
+            <mat-form-field class="demo-full-width" appearance="fill">
+                <mat-label>Projects</mat-label>
+                <select matNativeControl>
+                    <option value="{{card.project.displayText}}" selected>{{card.project.displayText}}</option>
+                    <option value="d.id" *ngFor="let d of projectList">{{d.title}}</option>
+                </select>
+            </mat-form-field>
+
+            <mat-form-field class="demo-full-width" appearance="fill">
+                <mat-label>Tasks</mat-label>
+                <select matNativeControl>
+                    <option value="{{card.task.displayText}}" selected>{{card.task.displayText}}</option>
+                    <option value="d.id" *ngFor="let d of taskList">{{d.title}}</option>
+                </select>
+            </mat-form-field>
+        </form>
+    </main>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button class="delete-card" (click)="deleteCard()"> Delete </button>
+</mat-dialog-actions>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" (click)="addForm()" (click)="saveCard()"> Save </button>
+</mat-dialog-actions>

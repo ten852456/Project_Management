@@ -28,6 +28,8 @@ export class CardDialogComponent implements OnInit {
 
   projectid!: number;
 
+  comments: string | undefined;
+
   private cardListUrl = environment.cardListUrl;
 
   constructor(
@@ -48,11 +50,16 @@ export class CardDialogComponent implements OnInit {
       status: '',
       estimatedHours: '',
       description: '',
+      // comments: '',
 
 
       task: {
         id: ''
       },
+
+      // assignments: {
+      //   id: 2
+      // },
     });
   }
 
@@ -97,6 +104,11 @@ export class CardDialogComponent implements OnInit {
       task: {
         id: id
       },
+
+      // assignments: {
+      //   id: 2
+      // },
+      // comments: this.comments,
     });
   }
 
