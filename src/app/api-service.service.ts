@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiServiceService {
-  updateStatusCard(id: any, status: any) {
+  getMember(arg0: string) {
     throw new Error('Method not implemented.');
   }
 
@@ -24,9 +24,11 @@ export class ApiServiceService {
   getProjectMember(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'project' + future + '&__template=project.member');
   }
+
   getDailyCardSpentTime(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'dailyCardSpentTime'+ future );
   }
+  
   getUser(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'user' + future );
   }
@@ -38,6 +40,7 @@ export class ApiServiceService {
   updateStatusCard(id:any, tostatus:any): Observable<any[]> {
     return this.http.post<any[]>(this.Url + 'custom/card/changeStatus/' + id + "?toStatus=" + tostatus, "");
   }
+
   getTask(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'Task' + future);
   }

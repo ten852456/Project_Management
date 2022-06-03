@@ -26,6 +26,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -44,6 +45,7 @@ import { ProjectBoardComponent } from './pages/project-board/project-board.compo
 import { TaskDialogComponent } from './pages/task-dialog/task-dialog.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 import { CardDetailComponent } from './pages/card-detail/card-detail.component';
+import { MemberDetailComponent } from './pages/member/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { CardDetailComponent } from './pages/card-detail/card-detail.component';
     ProjectBoardComponent,
     TimelineComponent,
     CardDetailComponent,
+    MemberDetailComponent,
   ],
 
   imports: [
@@ -92,6 +95,7 @@ import { CardDetailComponent } from './pages/card-detail/card-detail.component';
     DragDropModule,
     MatRadioModule,
     MatCardModule,
+    MatSnackBarModule,
   ],
   providers: [
     MatDatepickerModule,

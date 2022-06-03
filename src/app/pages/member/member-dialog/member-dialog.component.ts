@@ -46,7 +46,7 @@ export class MemberDialogComponent implements OnInit {
 
     this.http.post<any>(this.userListUrl, this.form.getRawValue(), {withCredentials: true})
         .subscribe((res: any) => {});
-    // window.location.reload();
+    window.location.reload();
   }
 
   selectRole(roles: string) {
@@ -57,7 +57,9 @@ export class MemberDialogComponent implements OnInit {
         this.form.patchValue({roles: ['ROLE_USER']});
       }
   }
+
   read(display: any){
     this.displayName += display.data;
   }
+  
 }

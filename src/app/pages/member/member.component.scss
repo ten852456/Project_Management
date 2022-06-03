@@ -13,7 +13,7 @@ h1 {
 }
 
 .admin {
-    padding-left: 50px;
+    padding-left: 60px;
     .icon-admin {
         position: absolute;
         padding-top: 6px;
@@ -22,18 +22,19 @@ h1 {
         font-size: 30px;
     }
     .name {
-        padding-left: 70px;
+        padding-left: 80px;
         font-size: 15px;
         font-weight: 450;
     }
     .username {
-        padding-left: 70px;
+        padding-left: 80px;
     }
     .delete {
         position: absolute;
         right: 20px;
         top: 25px;
         color: #F94449;
+        opacity: 80%;
     }
     mat-card-content {
         margin-bottom: 0%;
@@ -41,7 +42,7 @@ h1 {
 }
 
 .user {
-    padding-left: 50px;
+    padding-left: 60px;
     .icon-user {
         position: absolute;
         padding-top: 6px;
@@ -50,18 +51,19 @@ h1 {
         font-size: 30px;
     }
     .name {
-        padding-left: 70px;
+        padding-left: 80px;
         font-size: 15px;
         font-weight: 450;
     }
     .username {
-        padding-left: 70px;
+        padding-left: 80px;
     }
     .delete {
         position: absolute;
         right: 20px;
         top: 25px;
         color: #F94449;
+        opacity: 80%;
     }
     mat-card-content {
         margin-bottom: 0%;
@@ -70,4 +72,8 @@ h1 {
 
 mat-divider {
     margin-top: 40px;
+}
+
+mat-card:hover {
+    background-color: #F0EEF0;
 }

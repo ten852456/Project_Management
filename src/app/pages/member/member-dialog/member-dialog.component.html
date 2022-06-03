@@ -1,6 +1,8 @@
+<!-- <mat-dialog-content>
+    <mat-icon>person</mat-icon>
+</mat-dialog-content> -->
 
-<mat-dialog-content>
-    <form [formGroup]="form" class="example-form" align="end">
+<mat-dialog-content class="example-form" align="end">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
                     <input formControlName="displayName" [(ngModel)]="displayName" type="text" matInput placeholder="Add name here..." (input)="read($event)">
@@ -10,15 +12,14 @@
             <mat-label>Username</mat-label>
             <input formControlName="username" [(ngModel)]="username" type="text" matInput placeholder="Add username here...">
         </mat-form-field>
-    </form>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Role</mat-label>
-        <mat-select formControlName="roles">
-            <mat-option (click)="selectRole('SA')">System Admin</mat-option>
-            <mat-option (click)="selectRole('USER')">User</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="roles">
+                <mat-option (click)="selectRole('SA')">System Admin</mat-option>
+                <mat-option (click)="selectRole('USER')">User</mat-option>
+            </mat-select>
+        </mat-form-field>
 
 </mat-dialog-content>
 

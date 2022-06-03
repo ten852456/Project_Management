@@ -1,0 +1,23 @@
+<mat-dialog-content class="example-form" align="end">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="user.profile.displayName" type="text" matInput placeholder="Name">
+    </mat-form-field>
+   
+    <mat-form-field appearance="outline" style="padding-bottom: 10px;">
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]="user.username" type="text" matInput placeholder="Username">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="user.roles">
+            <mat-option>System Admin</mat-option>
+            <mat-option>User</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="create" type="submit" mat-dialog-close> Finish </button>
+</mat-dialog-actions>
