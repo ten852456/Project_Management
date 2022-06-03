@@ -2,16 +2,14 @@
     <div class="DailyPage" *ngIf="showDailyTable">
         <mat-form-field appearance="outline" style="position: absolute;">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="datepicker" [(ngModel)]="selectedValue" (dateInput)="addEvent($event)">
-            <mat-datepicker-toggle matSuffix [for]="datepicker">
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="selectedValue" (dateInput)="addEvent($event)" >
+            <mat-datepicker-toggle matSuffix [for]="datepicker" >
                 <mat-icon matDatepickerToggleIcon>
                     calendar_month
                 </mat-icon>
 
             </mat-datepicker-toggle>
-
-
-            <mat-datepicker #datepicker>
+        <mat-datepicker #datepicker>
                 <mat-datepicker-actions>
                     <button mat-button matDatepickerCancel>Cancel</button>
                     <button mat-raised-button color="primary" matDatepickerApply (click)="showTable()">Apply</button>
@@ -39,7 +37,7 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> {{project.displayText}} </th>
                     <td mat-cell *matCellDef="let element"> {{element.displayText}} </td>
-                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                    <td mat-footer-cell *matFooterCellDef>Projects Total </td>
                 </ng-container>
                 <ng-container matColumnDef="specs">
                     <th mat-header-cell *matHeaderCellDef> Specs </th>
@@ -71,7 +69,7 @@
                     <td mat-footer-cell *matFooterCellDef> {{project.sumFixingImplement}}</td>
                 </ng-container>
                 <ng-container matColumnDef="sumOfEachMember">
-                    <th mat-header-cell *matHeaderCellDef> sum </th>
+                    <th mat-header-cell *matHeaderCellDef> Summary </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.sum}}
                     </td>
@@ -79,20 +77,17 @@
                     <td mat-footer-cell *matFooterCellDef> {{project.sumHours}}</td>
 
                 </ng-container>
-                <ng-container matColumnDef="totalProjectHours">
-                    <td mat-footer-cell *matFooterCellDef colspan="6">
-                        Project total {{project.sumHours}}
-                    </td>
-                </ng-container>
+               
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
                 <tr mat-footer-row *matFooterRowDef="displayedColumns" class="example-first-footer-row"></tr>
-                <tr mat-footer-row *matFooterRowDef="['totalProjectHours']" class="example-second-footer-row"></tr>
+          
             </table>
             <br>
             <br>
         </div>
+      
     </div>
     <div class="weeklyPage" *ngIf="showWeeklyTable">
         <mat-form-field appearance="outline" style="position: absolute;">
@@ -101,7 +96,11 @@
                 <input matStartDate formControlName="start" placeholder="Start date" />
                 <input matEndDate formControlName="end" placeholder="End date" />
             </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>
+                    calendar_month
+                </mat-icon>
+            </mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
 
@@ -124,7 +123,7 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> {{project.displayText}} </th>
                     <td mat-cell *matCellDef="let element"> {{element.displayText}} </td>
-                    <td mat-footer-cell *matFooterCellDef> Total</td>
+                    <td mat-footer-cell *matFooterCellDef>Projects Total</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
                 <ng-container matColumnDef="specs">
@@ -159,7 +158,7 @@
                     <td mat-footer-cell *matFooterCellDef> {{project.sumFixingImplement}}</td>
                 </ng-container>
                 <ng-container matColumnDef="sumOfEachMember">
-                    <th mat-header-cell *matHeaderCellDef> sum </th>
+                    <th mat-header-cell *matHeaderCellDef> Summary </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.sum}}
                     </td>
@@ -167,20 +166,17 @@
                     <td mat-footer-cell *matFooterCellDef> {{project.sumHours}}</td>
 
                 </ng-container>
-                <ng-container matColumnDef="totalProjectHours">
-                    <td mat-footer-cell *matFooterCellDef colspan="6">
-                        Project total {{project.sumHours}}
-                    </td>
-                </ng-container>
+              
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
                 <tr mat-footer-row *matFooterRowDef="displayedColumns" class="example-first-footer-row"></tr>
-                <tr mat-footer-row *matFooterRowDef="['totalProjectHours']" class="example-second-footer-row"></tr>
+              
             </table>
             <br>
             <br>
         </div>
+       
     </div>
     <div class="projectPage" *ngIf="showProjectTable">
 
@@ -202,7 +198,7 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> {{project.displayText}} </th>
                     <td mat-cell *matCellDef="let element"> {{element.displayText}} </td>
-                    <td mat-footer-cell *matFooterCellDef> Total</td>
+                    <td mat-footer-cell *matFooterCellDef>Projects Total</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
                 <ng-container matColumnDef="specs">
@@ -238,25 +234,23 @@
                     <td mat-footer-cell *matFooterCellDef> {{project.sumHours}}</td>
                 </ng-container>
                 <ng-container matColumnDef="sumOfEachMember">
-                    <th mat-header-cell *matHeaderCellDef> sum </th>
+                    <th mat-header-cell *matHeaderCellDef> Summary </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.sum}}
                     </td>
                     <td mat-footer-cell *matFooterCellDef> {{project.sum}}</td>
                 </ng-container>
-                <ng-container matColumnDef="totalProjectHours">
-                    <td mat-footer-cell *matFooterCellDef colspan="6">
-                        Project total {{project.sumHours}}
-                    </td>
-                </ng-container>
+             
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
                 <tr mat-footer-row *matFooterRowDef="displayedColumns" class="example-first-footer-row"></tr>
-                <tr mat-footer-row *matFooterRowDef="['totalProjectHours']" class="example-second-footer-row"></tr>
+               
             </table>
             <br>
             <br>
         </div>
+       
+        
     </div>
 </div>
