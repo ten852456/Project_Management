@@ -25,4 +25,17 @@ export class MemberDetailComponent implements OnInit {
     this.api.getUser("/" + this.data.id).subscribe((res:any) => this.user = res.data);
   }
 
+  updateUser() {
+    this.api.updateUser(this.user.id,this.user).subscribe(() => this.dialogRef.close());
+  }
+
+  selectRole(roles: string) {
+    if(roles=='SA') {
+      this.user.patchValue({roles: ['ROLE_USER', 'ROLE_SA']});
+    }
+    else if(roles=='USER') {
+      this.user.patchValue({roles: ['ROLE_USER']});
+    }
+}
+
 }

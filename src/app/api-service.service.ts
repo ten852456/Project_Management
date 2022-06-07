@@ -33,6 +33,10 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.Url + 'user' + future );
   }
 
+  updateUser(id:any,data:any): Observable<any[]> {
+    return this.http.put<any[]>(this.Url + 'user/' + id, data );
+  }
+
   getCard(future: string): Observable<any[]> {
     return this.http.get<any[]>(this.Url + 'card' + future);
   }

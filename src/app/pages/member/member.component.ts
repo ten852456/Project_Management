@@ -39,7 +39,7 @@ export class MemberComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.open('Cannonball!!', 'Splash', {
+    this._snackBar.open('Confirm User Deletion', 'YES', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });

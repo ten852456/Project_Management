@@ -1,4 +1,4 @@
-<mat-dialog-content class="example-form" align="end">
+<mat-dialog-content class="example-form">
     <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <input [(ngModel)]="user.profile.displayName" type="text" matInput placeholder="Name">
@@ -12,12 +12,12 @@
     <mat-form-field appearance="fill">
         <mat-label>Role</mat-label>
         <mat-select [(ngModel)]="user.roles">
-            <mat-option>System Admin</mat-option>
-            <mat-option>User</mat-option>
+            <mat-option (click)="selectRole('SA')">System Admin</mat-option>
+            <mat-option (click)="selectRole('USER')">User</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-raised-button class="create" type="submit" mat-dialog-close> Finish </button>
+    <button mat-raised-button class="create" type="submit" mat-dialog-close (click)="updateUser()"> Finish </button>
 </mat-dialog-actions>
